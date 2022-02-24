@@ -1,0 +1,10 @@
+$light: #ffff;
+$gray: #e7e9eb;
+
+//CSS base
+@import './base/base';
+
+//Components
+@import './components/navbar';
+@import './components/sidebar';
+@import './components/dashboard';
