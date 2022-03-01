@@ -1,17 +1,21 @@
 .sidebar{
     width: 14rem;
-    height: calc(100vh - 52px); //Tamaño del navbar
-    border-right: 1px solid $gray;
+    height: auto; //Tamaño del navbar
+    background-color: $gray-strong;
     ul{
         list-style: none;
         padding: 1rem 2rem;
         li{
             margin-bottom: 1rem;
             a{
+                
                 text-decoration: none;
                 &.active{
-                    background-color: $gray;
+                    background-color: $black-selected;
                 }
+            }
+            a:hover{
+                background-color: $black-selected;
             }
         }
     }

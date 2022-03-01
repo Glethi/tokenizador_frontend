@@ -15,9 +15,8 @@ import { TokenC4Screen } from "../pages/tokens/TokenC4Screen";
 export const AppRouter = () => {
     return (
         <BrowserRouter>
-            
-            <div className="flex">
-            <Sidebar />
+        <div className="flex">
+        <Sidebar />
             <div className="content w-100">
             <Navbar />
                 <Routes>

@@ -1,5 +1,8 @@
 $light: #ffff;
 $gray: #e7e9eb;
+$gray-strong: #1e1e1e;
+$black-selected: #434957;
+$background: #f1ffef;
 
 //CSS base
 @import './base/base';
@@ -8,3 +11,5 @@ $gray: #e7e9eb;
 @import './components/navbar';
 @import './components/sidebar';
 @import './components/dashboard';
+@import './components/cards';
+@import './components/graphs';
