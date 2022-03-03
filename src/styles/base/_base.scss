@@ -5,9 +5,10 @@
     font-family: 'Rubik', sans-serif;
     margin: 0px;
     padding: 0px;
-    .dashboard{
-        background-color: $background;
-    }
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 

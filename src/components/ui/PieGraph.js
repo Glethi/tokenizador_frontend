@@ -12,7 +12,7 @@ const [dataPie, setDataPie] = useState({});
 
 useEffect(() => {
   async function loadData(){
-    const response = await getData();
+    const response = await getData('test');
     if(response.status === 200){
       setDataPie(response.data);
     }
@@ -25,7 +25,8 @@ const data = {
     labels:['Aceptadas', 'Rechazadas'],
     datasets:[{
         data:[dataPie.percenAccepted, dataPie.percenRejected],
-        backgroundColor:['#4CAF50 ', '#FF5252']
+        backgroundColor:['#4CAF50 ', '#FF5252'],
+        borderColor: ["green", "red"]
     }]
 };
 

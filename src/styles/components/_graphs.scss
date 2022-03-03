@@ -1,4 +1,4 @@
-.graphPie{
+.graphPie {
     //margin: 1rem;
     //padding: 1rem;
     canvas{
@@ -8,5 +8,26 @@
         margin-left: auto;
         display: block;
     }
-    
 }
+
+.graphBar{
+    canvas{
+        max-width: 900px;
+        max-height: 300px;       
+        margin-left: 10%;  
+        margin-right: 5%;
+        display: block;
+    }
+}
+
+.graphDonut{
+    
+    canvas{
+        max-width: 300px; 
+        max-height: 300px;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+}
+

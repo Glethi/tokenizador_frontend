@@ -10,7 +10,7 @@ const [data, setData] = useState({});
 
 useEffect(() => {
     async function loadData() {
-        const response = await getData();
+        const response = await getData('test');
         if(response.status == 200){
             setData(response.data); 
         }      

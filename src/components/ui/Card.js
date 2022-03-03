@@ -3,7 +3,7 @@ import * as Icons from "react-icons/bs";
 
 export const Card = ({title, tx, amount, color}) => {
   return (
-    <div className='card rounded'>
+    <div className='card'>
         <div className={"card-body bg-"+color+" bg-gradient"}   >
             <Icons.BsFillBarChartFill size={40}/> 
             <h4 className='card-title'>{title}</h4>

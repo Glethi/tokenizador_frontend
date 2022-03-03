@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export async function getData () {
+export async function getData (model) {
     try{
         const response = await axios({
-            url: 'http://localhost:8000/api/test',
+            url: "http://localhost:8000/api/"+model,
             method: 'GET'
         })
     return response;
