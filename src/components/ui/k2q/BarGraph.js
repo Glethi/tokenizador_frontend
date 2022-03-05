@@ -16,20 +16,28 @@ export const BarGraph = () => {
       loadData();
     }, [])
 
+    const tx_acepted = [], tx_rejected = [], label = [];
+    dataBar.map((e) =>{
+        label.push(e.TX_Description)
+        tx_acepted.push(e.TX_Accepted)
+        tx_rejected.push(e.TX_Rejected)
+    })
+
+
     const dataAccepted = {
         label: "TX's Aceptadas",
-        data: dataBar.TX_Accepted,
+        data: tx_acepted,
         backgroundColor:['#4CAF50'],
     };
 
     const dataRejected = {
         label: "TX's Rechazadas",
-        data: dataBar.TX_Rejected,
+        data: tx_rejected,
         backgroundColor:['#FF5252'],
     };
 
     const data = {
-        labels: dataBar.TX_Descriptions,
+        labels: label,
         datasets:[dataAccepted, dataRejected]
     };
 

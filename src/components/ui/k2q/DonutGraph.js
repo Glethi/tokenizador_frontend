@@ -8,7 +8,7 @@ Chart.register(ArcElement);
 
 export const PieGraphK2q = () => {
 
-const [dataPie, setDataPie] = useState({});
+const [dataPie, setDataPie] = useState([]);
 
 useEffect(() => {
   async function loadData(){
@@ -20,18 +20,25 @@ useEffect(() => {
   loadData();
 }, [])
 
+const labels = [], perceTX_A = [], perceTX_R = [];
+dataPie.map((e) => {
+  labels.push(e.TX_Description)
+  perceTX_A.push(e.percenTX_Accepted)
+  perceTX_R.push(e.percenTX_Rejected)
+})
+
 const dataAccepted = {
-    labels: dataPie.TX_Descriptions,
+    labels: labels,
     datasets:[{
-        data: dataPie.percenTX_Accepted,
+        data: perceTX_A,
         backgroundColor: ["#76FC7C", "#A3FFF4"],
         borderColor: ["#01FD0D", "#01FFE0"]
     }]
 };
 const dataRejected = {
-  labels: dataPie.TX_Descriptions,
+  labels: labels,
   datasets:[{
-      data: dataPie.percenTX_Rejected,
+      data: perceTX_R, 
       backgroundColor: ["#FB4E56", "#FCA656"],
       borderColor: ["#F9000C", "#FE7B00"]
   }]
