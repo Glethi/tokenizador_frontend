@@ -1,5 +1,5 @@
 import { Cards } from "../../components/ui/Cards";
-import { PieGraph } from "../../components/ui/PieGraph";
+import { DonutGraph } from "../../components/ui/DonutGraph";
 import * as Icons from "react-icons/bs";
 
 export const DashboardScreen = () => {
@@ -9,7 +9,7 @@ export const DashboardScreen = () => {
             <div className="dashboard-content">
                 <Cards />
                 <h2><Icons.BsPercent/> de Aprobación General</h2>
-                <PieGraph />
+                <DonutGraph />
             </div>
         </div>  
     )

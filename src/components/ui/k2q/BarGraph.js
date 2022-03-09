@@ -7,13 +7,13 @@ export const BarGraph = () => {
     const [dataBar, setDataBar] = useState([]);
 
     useEffect(() => {
-      async function loadData(){
-          const response = await getData('kq2');
-          if(response.status === 200){
-              setDataBar(response.data);
-          }
-      }
-      loadData();
+    async function loadData(){
+        const response = await getData('kq2');
+        if(response.status === 200){
+            setDataBar(response.data);
+        }
+    }
+    loadData();
     }, [])
 
     const tx_acepted = [], tx_rejected = [], label = [];
@@ -27,13 +27,15 @@ export const BarGraph = () => {
     const dataAccepted = {
         label: "TX's Aceptadas",
         data: tx_acepted,
-        backgroundColor:['#4CAF50'],
+        backgroundColor:['green'],
+        borderRadius: 10,
     };
 
     const dataRejected = {
         label: "TX's Rechazadas",
         data: tx_rejected,
-        backgroundColor:['#FF5252'],
+        backgroundColor:['red'],
+        borderRadius: 10,
     };
 
     const data = {
@@ -45,13 +47,13 @@ export const BarGraph = () => {
         responsive: true,
     };
 
-  return (
-    <div className='graphBar w-100'>
-        <div className='col'>
-            <Bar
-            data={data} 
-            options={options}/>
+    return (
+        <div className='graphBar w-100'>
+            <div className='col'>
+                <Bar
+                data={data} 
+                options={options}/>
+            </div>
         </div>
-    </div>
-  )
+    )
 }

@@ -1,9 +1,7 @@
-.graphPie {
-    //margin: 1rem;
-    //padding: 1rem;
+.graphDonut-dashboard {
     canvas{
-        max-width: 600px;
-        max-height: 600px;
+        max-width: 500px;
+        max-height: 500px;
         margin-right: auto;
         margin-left: auto;
         display: block;
@@ -15,19 +13,17 @@
         max-width: 900px;
         max-height: 300px;       
         margin-left: 10%;  
-        margin-right: 5%;
+        margin-right: 5%;  
         display: block;
     }
 }
 
-.graphDonut{
-    
-    canvas{
-        max-width: 300px; 
-        max-height: 300px;
+.graphDonut, .graphDonut-CodeResp{
+    canvas{   
+        width: 500px;  
+        height: 500px;
         margin-right: auto;
         margin-left: auto;
-        display: block;
+        display: block; 
     }
 }
-

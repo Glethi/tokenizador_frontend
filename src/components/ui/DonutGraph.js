@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import {Pie} from 'react-chartjs-2';
+import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import { getData } from '../../services/dashService';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
 
-export const PieGraph = () => {
+export const DonutGraph = () => {
 
-const [dataPie, setDataPie] = useState({});
+const [dataDonut, setDataDonut] = useState({});
 
 useEffect(() => {
   async function loadData(){
     const response = await getData('test');
     if(response.status === 200){
-      setDataPie(response.data);
+      setDataDonut(response.data);
     }
   }
   loadData();
@@ -24,9 +24,9 @@ useEffect(() => {
 const data = {
     labels:['Aceptadas', 'Rechazadas'],
     datasets:[{
-        data:[dataPie.percenAccepted, dataPie.percenRejected],
-        backgroundColor:['#4CAF50 ', '#FF5252'],
-        borderColor: ["green", "red"]
+        data:[dataDonut.percenAccepted, dataDonut.percenRejected],
+        backgroundColor:['green', 'red'],
+        borderColor: "black"
     }]
 };
 
@@ -35,8 +35,8 @@ const options = {
 };
 
   return (
-    <div className='graphPie'> 
-        <Pie 
+    <div className='graphDonut-dashboard'> 
+        <Doughnut
         data={data}
         options={options}/>
     </div>

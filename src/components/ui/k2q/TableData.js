@@ -11,43 +11,58 @@ export const TableData = () => {
   const columns = [
     {
       name: 'ID Medio Acceso',
-      selector: row => row['ID'],
-      sortable: true
+      selector: 'ID',
+      sortable: true,
+      center: true
     },
     {
       name: 'KQ2 Medio Acceso',
-      selector: row => row['TX_Description'],
-      sortable: true
+      selector: 'TX_Description',
+      sortable: true,
+      center: true,
+      grow: 2
     },
     {
       name: 'TXs Aceptadas',
-      selector: row => row['TX_Accepted'],
-      sortable: true
+      selector: 'TX_Accepted',
+      sortable: true,
+      center: true,
+      style: {
+        backgroundColor: 'rgba(76, 175, 80)',
+      }
     },
     {
       name: 'Monto Aceptado',
-      selector: row => row['accepted_Amount'],
-      sortable: true
+      selector: 'accepted_Amount',
+      sortable: true,
+      center: true
     },
     {
       name: '% de Aceptación',
-      selector: row => row['percenTX_Accepted'],
-      sortable: true
+      selector: 'percenTX_Accepted',
+      sortable: true,
+      center: true
     },
     {
       name: 'TXs Rechazadas',
-      selector: row => row['TX_Rejected'],
-      sortable: true
+      selector: 'TX_Rejected',
+      sortable: true,
+      center: true,
+      style:{
+        backgroundColor: 'rgba(255, 82, 82)'
+      }
     },
     {
       name: 'Monto Rechazado',
-      selector: row => row['rejected_Amount'],
-      sortable: true
+      selector: 'rejected_Amount',
+      sortable: true,
+      center: true
     },
     {
       name: '% de Rechazo',
-      selector: row => row['percenTX_Rejected'],
-      sortable: true
+      selector: 'percenTX_Rejected',
+      sortable: true,
+      center: true
     },
   ]
 
@@ -61,21 +76,21 @@ export const TableData = () => {
     loadData();
   }, []) 
 
-const tableData = {
+  const tableData = {
     columns,
     data
   };
+
   
   return (
     <div className='tableData table-responsive table-striped table-bordered'>
        <DataTableExtensions
       {...tableData}
-      exportHeders = {true}
+      exportHeaders = {true} 
     >
       <DataTable
-        fixedHeader={true}
-        defaultSortField="id"
-        defaultSortAsc={false}
+        fixedHeader = {true}
+        fixedHeaderScrollHeight = "200px"
         pagination
         highlightOnHover
       />

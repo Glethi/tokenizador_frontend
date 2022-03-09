@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import { getData } from '../../../services/dashService';
+import { getRandomColor} from '../../../services/colors';
+import * as Icons from "react-icons/bs";
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
 
-export const PieGraphK2q = () => {
+export const DonutGraphK2q = () => {
 
 const [dataPie, setDataPie] = useState([]);
 
@@ -20,48 +22,78 @@ useEffect(() => {
   loadData();
 }, [])
 
-const labels = [], perceTX_A = [], perceTX_R = [];
+const labels = [], perceTX_A = [], perceTX_R = [], colorA = [], colorB = [];
 dataPie.map((e) => {
   labels.push(e.TX_Description)
   perceTX_A.push(e.percenTX_Accepted)
   perceTX_R.push(e.percenTX_Rejected)
+  colorA.push(getRandomColor())
+  colorB.push(getRandomColor())
 })
 
 const dataAccepted = {
     labels: labels,
     datasets:[{
         data: perceTX_A,
-        backgroundColor: ["#76FC7C", "#A3FFF4"],
-        borderColor: ["#01FD0D", "#01FFE0"]
+        backgroundColor: colorA,
+        borderColor: 'black'
     }]
 };
 const dataRejected = {
   labels: labels,
   datasets:[{
       data: perceTX_R, 
-      backgroundColor: ["#FB4E56", "#FCA656"],
-      borderColor: ["#F9000C", "#FE7B00"]
+      backgroundColor: colorB,
+      borderColor: 'black'
   }]
 };
 
-const options = {
-    responsive: true
+const optionsAccepted = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: '% de Aprobación',
+        color: 'black',
+        font:{
+            size: 20
+        }
+      },
+      legend: {
+          position: 'top',
+      }
+  }
+};
+
+const optionsRejected = {
+  responsive: true,
+  plugins: {
+    title: {
+      display: true,
+      text: '% de Rechazo',
+      color: 'black',
+      font:{
+        size: 20,
+      }
+    },
+    legend: {
+        position: 'top'
+    }
+}
 };
 
   return (
-    <div className='graphDonut row w-100'>
-      <div className='col'>
-        <h4>Aceptación</h4> 
+    <div className='graphDonut row'>
+      <div className='col'> 
           <Doughnut
           data={dataAccepted}
-          options={options}
+          options={optionsAccepted}
           />
       </div>
       <div className='col'>
-        <h4>Rechazo</h4>
           <Doughnut
           data={dataRejected} 
-          options={options}
+          options={optionsRejected}
           />
       </div>
     </div>
