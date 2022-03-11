@@ -2,18 +2,16 @@ $light: #ffff;
 $gray: #e7e9eb;
 $gray-strong: #1e1e1e;
 $black-selected: #434957;
-$background: #f1ffef;
-
+$background: #f1ffef; 
 //CSS base 
 @import './base/base';
- 
 //Components
 @import './components/navbar';
 @import './components/sidebar';
 @import './components/dashboard';
 @import './components/cards';
-@import './components/graphs';      
-
+@import './components/graphs';
 //Tokens
 @import './components/kq2'; 
 @import './components/codeResponse';
+@import './components/entrymode';

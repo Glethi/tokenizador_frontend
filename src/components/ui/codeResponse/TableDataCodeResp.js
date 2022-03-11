@@ -14,17 +14,19 @@ export const TableDataCodeResp = () => {
             selector: 'ID_CodeResponse',
             sortable: true,
             center: true,
+            wrap: true,
             conditionalCellStyles: [
                 {
                     when: row  => row.ID_CodeResponse <= '010',
                     style: {
-                        backgroundColor: 'rgba(76, 175, 80)',
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 },
                 {
                     when: row  => row.ID_CodeResponse > '010',
                     style: {
-                        backgroundColor: 'rgba(255, 82, 82)',
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
                     }
                 }
         ]
@@ -33,25 +35,41 @@ export const TableDataCodeResp = () => {
             name: 'Código Respuesta',
             selector: 'CodeResp_Description',
             sortable: true,
-            center: true
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.CodeResp_Description == 'Aprobada',
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.CodeResp_Description != 'Aprobada',
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'TXs',
             selector: 'CodeResp_TXS',
             sortable: true,
-            center: true
+            right: true
         },
         {
             name: 'Monto',
             selector: 'CodeResp_Amount',
             sortable: true,
-            center: true
+            right: true 
         },
         {
             name: 'Porcentaje %',
             selector: 'CodeResp_Percent',
             sortable: true,
-            center: true,
+            right: true,
         },
     ]
 

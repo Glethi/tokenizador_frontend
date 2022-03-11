@@ -6,63 +6,85 @@ import 'react-data-table-component-extensions/dist/index.css';
 
 export const TableData = () => {
 
-  const [data, setData] = useState([{}]);
+  const [data, setDataTable] = useState([{}]);
 
   const columns = [
     {
-      name: 'ID Medio Acceso',
+      name: 'ID',
       selector: 'ID',
       sortable: true,
-      center: true
+      center: true,
+      wrap: true
     },
     {
-      name: 'KQ2 Medio Acceso',
+      name: 'Descripción',
       selector: 'TX_Description',
       sortable: true,
       center: true,
-      grow: 2
+      wrap: true,
     },
     {
-      name: 'TXs Aceptadas',
+      name: 'Transacciones',
       selector: 'TX_Accepted',
       sortable: true,
-      center: true,
+      right: true,
+      wrap: true, 
       style: {
-        backgroundColor: 'rgba(76, 175, 80)',
+        backgroundColor: 'rgb(47, 164, 11)',
       }
     },
     {
-      name: 'Monto Aceptado',
+      name: 'Monto',
       selector: 'accepted_Amount',
       sortable: true,
-      center: true
-    },
-    {
-      name: '% de Aceptación',
-      selector: 'percenTX_Accepted',
-      sortable: true,
-      center: true
-    },
-    {
-      name: 'TXs Rechazadas',
-      selector: 'TX_Rejected',
-      sortable: true,
-      center: true,
-      style:{
-        backgroundColor: 'rgba(255, 82, 82)'
+      right: true,
+      wrap: true,
+      style: {
+        backgroundColor: 'rgb(100, 236, 57)',
       }
     },
     {
-      name: 'Monto Rechazado',
-      selector: 'rejected_Amount',
+      name: 'Porcentaje',
+      selector: 'percenTX_Accepted',
       sortable: true,
-      center: true
+      right: true,
+      wrap: true,
+      style: {
+        backgroundColor: 'rgb(47, 164, 11)',
+      }
     },
     {
-      name: '% de Rechazo',
+      name: 'Transacciones',
+      selector: 'TX_Rejected',
+      sortable: true,
+      right: true,
+      wrap: true,
+      style:{
+        backgroundColor: 'rgb(187, 1, 1)',
+        color: 'white'
+      }
+    },
+    {
+      name: 'Monto',
+      selector: 'rejected_Amount',
+      sortable: true,
+      right: true,
+      wrap: true,
+      style:{
+        backgroundColor: 'rgb(255, 27, 27)',
+        color: 'white'
+      }
+    },
+    {
+      name: 'Porcentaje',
       selector: 'percenTX_Rejected',
       sortable: true,
-      center: true
+      right: true,
+      wrap: true,
+      style:{
+        backgroundColor: 'rgb(187, 1, 1)',
+        color: 'white'
+      }
     },
   ]
 
@@ -70,11 +92,11 @@ export const TableData = () => {
     async function loadData(){
       const response = await getData('kq2');
       if(response.status === 200){
-        setData(response.data);
+        setDataTable(response.data);
       }
     }
     loadData();
-  }, []) 
+  }, [])
 
   const tableData = {
     columns,

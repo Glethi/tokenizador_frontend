@@ -3,7 +3,7 @@ import {Routes, Route, BrowserRouter} from "react-router-dom";
 import { Navbar } from "../components/ui/Navbar";
 import { Sidebar } from "../components/ui/Sidebar";
 import { DashboardScreen } from "../pages/main/DashboardScreen";
-import { CodigoRespuestaScreen } from "../pages/tokens/CodigoRespuestaScreen";
+import { CodeResponseScreen } from "../pages/tokens/CodeResponseScreen";
 import { EntryModeScreen } from "../pages/tokens/EntryModeScreen";
 import { Kq2Screen } from "../pages/tokens/Kq2Screen";
 import { TokenB2Screen } from "../pages/tokens/TokenB2Screen";
@@ -22,7 +22,7 @@ export const AppRouter = () => {
                 <Routes>
                     <Route path="/" element={<DashboardScreen />}/>
                     <Route path="/kq2" element={<Kq2Screen />} />
-                    <Route path="/codigorespuesta" element={<CodigoRespuestaScreen />}/>
+                    <Route path="/codigorespuesta" element={<CodeResponseScreen />}/>
                     <Route path="/entrymode" element={<EntryModeScreen/>} />
                     <Route path="/tokenc4" element={<TokenC4Screen/>} />
                     <Route path="/tokenc0" element={<TokenC0Screen/>} />

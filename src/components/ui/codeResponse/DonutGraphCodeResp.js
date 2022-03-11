@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2';
-import { Alignment } from 'react-data-table-component';
-import { getRandomColor } from '../../../services/colors';
 import { getData } from '../../../services/dashService';
 
 export const DonutGraphCodeResp = () => {
@@ -18,42 +16,82 @@ useEffect(() => {
     loadData();
 }, [])
 
-const labels = [], percenTX = [], color = [];
+const labels = [], percenTX = [], colorBack = [], colorBorder = [];
+var flag = 0;
 dataDonut.map((e) => {
-    labels.push(e.ID_CodeResponse +" "+e.CodeResp_Description)
+    labels.push(e.ID_CodeResponse +" - "+e.CodeResp_Description)
     percenTX.push(e.CodeResp_Percent)
-    color.push(getRandomColor())
+    if(e.ID_CodeResponse < '011'){
+        switch(flag){
+            case 0:{
+                colorBack.push('#3FFE03')
+                colorBorder.push('green')
+                flag = 1;
+                break;
+            }
+            case 1:{
+                colorBack.push('#2FA40B') 
+                colorBorder.push('green')
+                flag = 0;
+                break;
+            }
+        }
+        
+    }else{
+        switch(flag){
+            case 0:{
+                colorBack.push('#BB0101')
+                colorBorder.push('red')
+                flag = 1;
+                break;
+            }
+            case 1:{
+                colorBack.push('#FF2929')
+                colorBorder.push('red')
+                flag = 0;
+                break;
+            }
+        }
+    }
 })
 
 const data = {
     labels: labels,
     datasets: [{
         data: percenTX,
-        backgroundColor: color,
-        borderColor: 'black'
+        backgroundColor: colorBack,
+        borderColor: colorBorder
     }]
 }
 
 const options = {
     responsive: true,
     plugins: {
-        title: {
-          display: true,
-          text: '% de TXs Realizadas',
-          color: 'black',
-          font:{
-            size: 20
-            }
-        },
         legend: {
-            position: 'top',
+            align: 'start',
+            position: 'left',
+            title:{
+                display: true,
+                text: '% de Aprobación y Rechazo',
+                color: 'black',
+                font:{
+                    size: 25
+                }
+            },
+            labels:{
+                color: 'black',
+                boxWidth: 50,
+                font:{
+                    size: 17.5
+                }
+            }
         }
     }
 }
 
 return (
-    <div className='graphDonut-CodeResp'>
-        <div className='col'>
+    <div className='graphDonut-CodeResp row w-100'>
+        <div className='col p-3'>
             <Doughnut
             data = {data}
             options = {options}

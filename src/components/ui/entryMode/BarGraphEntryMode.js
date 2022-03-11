@@ -1,53 +1,54 @@
 import React, { useState, useEffect } from 'react'
-import {Bar} from 'react-chartjs-2';
 import { getData } from '../../../services/dashService';
+import { Bar } from 'react-chartjs-2';
 import numeral from 'numeral';
 
-export const BarGraph = () => {
+
+export const BarGraphEntryMode = () => {
 
     const [dataBar, setDataBar] = useState([]);
 
     useEffect(() => {
-    async function loadData(){
-        const response = await getData('kq2');
-        if(response.status === 200){
-            setDataBar(response.data);
-        }
-    }
-    loadData();
+      async function loadData(){
+          const response = await getData('entryMode');
+          if(response.status === 200){
+              setDataBar(response.data);
+          }
+      }
+      loadData();
     }, [])
-
-    const tx_acepted = [], tx_rejected = [], label = [], rejected_Amount = [], accepted_Amount =[];
-    dataBar.map((e) =>{
+    
+    const label = [], tx_acepted = [], tx_rejected = [], accepted_Amount = [], rejected_Amount = [];
+    dataBar.map((e) => {
         label.push(e.ID)
-        tx_acepted.push(numeral(e.TX_Accepted).value())
-        tx_rejected.push(numeral(e.TX_Rejected).value()) 
-        rejected_Amount.push(numeral(e.rejected_Amount).value()) 
-        accepted_Amount.push(numeral(e.accepted_Amount).value()) 
+        tx_acepted.push(numeral(e.accepted_TX).value())
+        tx_rejected.push(numeral(e.rejected_TX).value())
+        accepted_Amount.push(numeral(e.accepted_Amount).value())
+        rejected_Amount.push(numeral(e.rejected_Amount).value())
     })
 
-    //DATOS Y OPCIONES PARA GRÁFICO DE TRANSACCIONES
+    //DATOA Y OPCIONES PARA GRAFICOS DE TRANSACCIONES
     const dataTX_Accepted = {
         label: "TX's Aceptadas",
         data: tx_acepted,
-        backgroundColor:['#2FA40B'],
+        backgroundColor: ['#2FA40B']
     };
 
     const dataTX_Rejected = {
         label: "TX's Rechazadas",
         data: tx_rejected,
-        backgroundColor:['#FF0000'],
+        backgroundColor: ['#FF0000']
     };
 
     const dataTX = {
         labels: label,
-        datasets:[dataTX_Accepted, dataTX_Rejected]
+        datasets: [dataTX_Accepted, dataTX_Rejected]
     };
 
     const optionsTX = {
-        responsive: true,
-        plugins: {
-            legend: {
+        response: true,
+        plugins:{
+            legend:{
                 labels:{
                     color: 'black',
                     font: {
@@ -57,11 +58,11 @@ export const BarGraph = () => {
             },
             title:{
                 display: true,
-                text: 'Transacciones Aceptadas y Rechazadas por Medio Acceso',
+                text: 'Transacciones Aceptadas y Rechazadas por Entry Mode',
                 align: 'end',
                 color: 'black',
-                font:{
-                    size: 20,
+                font: {
+                    size: 20
                 }
             }
         },
@@ -69,7 +70,7 @@ export const BarGraph = () => {
             x:{
                 ticks:{
                     color: 'black',
-                    font:{
+                    font: {
                         size: 15
                     }
                 }
@@ -85,28 +86,27 @@ export const BarGraph = () => {
         }
     };
 
-    //DATOS Y OPCIONES PARA GRÁFICO DE MONTO
     const dataAmount_Accepted = {
         label: "Monto Aceptado",
         data: accepted_Amount,
-        backgroundColor:['#2FA40B']
-    }
+        backgroundColor: ['#2FA40B']
+    };
 
     const dataAmount_Rejected = {
         label: "Monto Rechazado",
         data: rejected_Amount,
-        backgroundColor:['#FF0000']
+        backgroundColor: ['#FF0000']
     }
 
     const dataAmount = {
         labels: label,
-        datasets:[dataAmount_Accepted, dataAmount_Rejected]
+        datasets: [dataAmount_Accepted, dataAmount_Rejected]
     }
 
     const optionsAmount = {
-        responsive: true,
-        plugins: {
-            legend: {
+        response: true,
+        plugins:{
+            legend:{
                 labels:{
                     color: 'black',
                     font: {
@@ -116,11 +116,11 @@ export const BarGraph = () => {
             },
             title:{
                 display: true,
-                text: 'Monto Aceptado y Rechazado por Medio Acceso',
+                text: 'Monto Aceptado y Rechazado por Entry Mode',
                 align: 'end',
                 color: 'black',
-                font:{
-                    size: 20,
+                font: {
+                    size: 20
                 }
             }
         },
@@ -128,10 +128,10 @@ export const BarGraph = () => {
             x:{
                 ticks:{
                     color: 'black',
-                    font:{
+                    font: {
                         size: 15
-                    },
-                },
+                    }
+                }
             },
             y:{
                 ticks:{
@@ -146,16 +146,15 @@ export const BarGraph = () => {
 
     return (
         <div className='graphBar w-100'>
-            <div className='col p-3'>
-                <Bar
-                data={dataTX} 
-                options={optionsTX}/>
+            <div className='row p-2'>
+                <Bar 
+                data = {dataTX}
+                options = {optionsTX}/>
             </div>
-            <div className='col p-3'>
-                <Bar
-                data={dataAmount}
-                options={optionsAmount}
-                />
+            <div className='row p-2'>
+                <Bar 
+                data = {dataAmount}
+                options = {optionsAmount}/>
             </div>
         </div>
     )
