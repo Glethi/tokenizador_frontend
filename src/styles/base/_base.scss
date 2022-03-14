@@ -8,10 +8,16 @@
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    width: 8px;     
+    height: 8px;    
+    //display: none; 
 }
-
-
+::-webkit-scrollbar-thumb {
+    background: $gray-strong;
+}
+::-webkit-scrollbar-track {
+    background: #e1e1e1;
+}
 .flex{
     display: flex;
 }
