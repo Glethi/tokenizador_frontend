@@ -4,7 +4,7 @@ import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
 import { DataContext } from '../../../services/DataContext';
 
-export const FilterTableDataC4 = () => {
+export const FilterTableData = () => {
 
     //const [data, setData] = useState([{}]);
 
@@ -36,7 +36,7 @@ export const FilterTableDataC4 = () => {
             name: 'CODIGO_RESPUESTA',
             selector: 'Code_Response',
             sortable: true,
-            center: true,
+            right: true,
             wrap: true,
             conditionalCellStyles:[
                 {
@@ -59,34 +59,34 @@ export const FilterTableDataC4 = () => {
             selector: 'R',
             sortable: true,
             center: true,
-            wrap: true
+            wrap: true,
         },
         {
             name: 'NUM_SEC',
             selector: 'Number_Sec',
             sortable: true,
-            center: true,
+            right: true,
             wrap: true
         },
         {
             name: 'KQ2_ID_MEDIO_ACCESO',
             selector: 'ID_Access_Mode',
             sortable: true,
-            center: true,
+            right: true,
             wrap: true
         },
         {
             name: 'ENTRY_MODE',
             selector: 'entryMode',
             sortable: true,
-            center: true,
+            right: true,
             wrap: true
         },
         {
             name: 'MONTO',
             selector: 'amount',
             sortable: true,
-            center: true,
+            right: true,
             wrap: true
         },
     ]

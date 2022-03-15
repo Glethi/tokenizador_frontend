@@ -1,4 +1,4 @@
-.token-c4{
+.token-c0{
     text-align: center;
     background-color: $background;
     h2{
@@ -6,7 +6,6 @@
     }
     .tableData{
         max-width: 1130px;
-        max-height: 600px;
         margin-left: 1rem;
         margin-right: 1rem;
         background-color: $gray-strong;
@@ -32,7 +31,7 @@
         }
         select{
             margin: 0.5rem;
-            width: 10rem;
+            width: 20rem;
         }
-    }
+    }      
 }

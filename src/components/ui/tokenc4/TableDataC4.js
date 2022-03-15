@@ -299,8 +299,7 @@ export const TableDataC4 = () => {
                 fixedHeaderScrollHeight = "500px"
                 pagination
                 highlightOnHover
-                dense
-                />
+                dense/>
             </DataTableExtension>
         </div>
     )
