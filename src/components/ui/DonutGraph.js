@@ -31,7 +31,28 @@ const data = {
 };
 
 const options = {
-    responsive: true
+    responsive: true,
+    plugins: {
+      legend: {
+          align: 'start',
+          position: 'top',
+          title: {
+            display: true,
+            text: 'Transacciones',
+            color: 'black',
+            font:{
+                size: 25
+            }
+        },
+          labels:{
+              color: 'black',
+              boxWidth: 50,
+              font: {
+                  size: 17.5
+              }
+          }
+      }
+  }
 };
 
   return (

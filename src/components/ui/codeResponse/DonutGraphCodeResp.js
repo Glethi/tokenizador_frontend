@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { getData } from '../../../services/dashService';
+import randomColor from 'randomcolor';
 
 export const DonutGraphCodeResp = () => {
 
@@ -16,42 +17,20 @@ useEffect(() => {
     loadData();
 }, [])
 
-const labels = [], percenTX = [], colorBack = [], colorBorder = [];
-var flag = 0;
+const labels = [], percenTX = [], colorBack = [];
 dataDonut.map((e) => {
     labels.push(e.ID_CodeResponse +" - "+e.CodeResp_Description)
     percenTX.push(e.CodeResp_Percent)
     if(e.ID_CodeResponse < '011'){
-        switch(flag){
-            case 0:{
-                colorBack.push('#3FFE03')
-                colorBorder.push('green')
-                flag = 1;
-                break;
-            }
-            case 1:{
-                colorBack.push('#2FA40B') 
-                colorBorder.push('green')
-                flag = 0;
-                break;
-            }
-        }
-        
+        colorBack.push(randomColor({
+            hue: '#00FF23',
+            luminosity: 'dark'
+        }))
     }else{
-        switch(flag){
-            case 0:{
-                colorBack.push('#BB0101')
-                colorBorder.push('red')
-                flag = 1;
-                break;
-            }
-            case 1:{
-                colorBack.push('#FF2929')
-                colorBorder.push('red')
-                flag = 0;
-                break;
-            }
-        }
+        colorBack.push(randomColor({
+            hue: '#FF0000',
+            luminosity: 'bright'
+        }))
     }
 })
 
@@ -60,7 +39,7 @@ const data = {
     datasets: [{
         data: percenTX,
         backgroundColor: colorBack,
-        borderColor: colorBorder
+        borderColor: 'white'
     }]
 }
 

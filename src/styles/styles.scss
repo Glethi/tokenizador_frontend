@@ -5,7 +5,7 @@ $black-selected: #434957;
 $background: #f1ffef; 
 //CSS base 
 @import './base/base';
-//Components
+//Components 
 @import './components/navbar';
 @import './components/sidebar';
 @import './components/dashboard';
@@ -13,8 +13,10 @@ $background: #f1ffef;
 @import './components/graphs';
 //Tokens
 @import './components/kq2';
-@import './components/codeResponse';
+@import './components/codeResponse'; 
 @import './components/entrymode';
 @import './components/tokenc4';
-@import './components/tokenc0'; 
-@import './components/tokenb3'
+@import './components/tokenc0';  
+@import './components/tokenb3';
+@import './components/tokenb4';
+@import './components/tokenb2';

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import { getData } from '../../../services/dashService';
+import randomColor from 'randomcolor';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
@@ -9,6 +10,7 @@ Chart.register(ArcElement);
 export const DonutGraphK2q = () => {
 
 const [dataPie, setDataPie] = useState([]);
+
 
 useEffect(() => {
   async function loadData(){
@@ -31,16 +33,24 @@ const dataAccepted = {
     labels: label,
     datasets:[{
         data: perceTX_A,
-        backgroundColor: ['#2FA40B', '#3FFE03'],
-        borderColor: 'green'
+        backgroundColor: randomColor({
+          hue: '#00FF23', 
+          count: label.length,
+          luminosity: 'dark'
+        }),
+        borderColor: 'white'
     }]
 };
 const dataRejected = {
   labels: label,
   datasets:[{
       data: perceTX_R, 
-      backgroundColor: ['#BB0101', '#FF2929'],
-      borderColor: 'red'
+      backgroundColor: randomColor({
+        hue: '#FF0000',
+        count: label.length,
+        luminosity: 'bright'
+      }),
+      borderColor: 'white'
   }]
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getData } from '../../../services/dashService';
 import { Doughnut } from 'react-chartjs-2';
+import randomColor from 'randomcolor';
 
 export const DonutGraphEntryMode = () => {
 
@@ -28,8 +29,12 @@ export const DonutGraphEntryMode = () => {
         labels: label,
         datasets: [{
             data: percenTX_Accepted,
-            backgroundColor: ['#2FA40B', '#3FFE03'],
-            borderColor: 'green'
+            backgroundColor: randomColor({
+                hue: '#00FF23',
+                count: label.length,
+                luminosity: 'dark'
+            }),
+            borderColor: 'white'
         }]
     }
 
@@ -63,8 +68,12 @@ export const DonutGraphEntryMode = () => {
         labels: label,
         datasets: [{
             data: percenTX_Rejected,
-            backgroundColor: ['#BB0101', '#FF2929'],
-            borderColor: 'red'
+            backgroundColor: randomColor({
+                hue: '#FF0000',
+                count: label.length,
+                luminosity: 'bright'
+            }),
+            borderColor: 'white'
         }]
     }
 

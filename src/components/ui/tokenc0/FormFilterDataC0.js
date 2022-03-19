@@ -49,8 +49,14 @@ export const FormFilterDataC0 = () => {
         const response = await postData('tokenC0Filter', dataFilter)
         if(response.status === 200){
             setDat(response.data)
-            //console.log(response.data);
             console.log(dataFilter);
+        }
+    }
+
+    async function resetData(){
+        const response = await getData('tokenC4DataTable')
+        if(response.status === 200){
+            setDat(response.data)
         }
     }
 
@@ -111,6 +117,12 @@ export const FormFilterDataC0 = () => {
                         type='button'
                         onClick={sendData}>
                         Filtrar</button>
+                    </div>
+                    <div className='col'>
+                        <button className='button-reset'
+                        type = 'button'
+                        onClick={resetData}>
+                        Reset Tabla</button>
                     </div>
                 </div>
             </div>

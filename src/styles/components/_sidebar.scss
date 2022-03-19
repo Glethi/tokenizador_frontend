@@ -1,7 +1,8 @@
 .sidebar{
     width: 14rem; 
-    height: auto;
+    height: 100vh;
     background-color: $gray-strong;
+    position: fixed;
     ul{
         list-style: none;
         padding: 1rem 2rem; 

@@ -93,7 +93,7 @@ export const FormFilterDataC4 = () => {
   return (
         <form className='form'>
             <div className='row p-2 m-1'>
-                <div className='col m-2'>
+                <div className='col'>
                   <label>KC4_TERM_ATTEND_IND</label>
                     <select onChange={(ev) => {synChanges(ev.target.value, 'ID_Terminal_Attended')}}>
                         <option value={''}>Sin valor</option>
@@ -128,7 +128,7 @@ export const FormFilterDataC4 = () => {
                         }
                     </select>
                 </div>
-                    <div className='col m-2'>
+                    <div className='col'>
                       <label className='' for='ID_Cardholder_Presence'>KC4_CRDHLDR_PRESENT_IND</label>
                         <select onChange={(ev) => {synChanges(ev.target.value, 'ID_Cardholder_Presence')}}>
                             <option value={""}>Sin valor</option>
@@ -163,7 +163,7 @@ export const FormFilterDataC4 = () => {
                             }
                         </select>
                     </div>
-                  <div className='col m-2'>
+                  <div className='col'>
                       <label className='' for='ID_Status'>KC4_TXN_STAT_IND</label>
                         <select onChange={(ev) => {synChanges(ev.target.value, 'ID_Status')}}>
                             <option value={""}>Sin valor</option>
@@ -198,7 +198,7 @@ export const FormFilterDataC4 = () => {
                           }
                         </select>
                     </div>
-                    <div className='col m-2'>
+                    <div className='col'>
                       <label className='' for='Terminal_Activation_Cardholder'>KC4_CRDHLDR_ACTVT_TERM_IND</label>
                         <select onChange={(ev) => {synChanges(ev.target.value, 'Terminal_Activation_Cardholder')}}>
                             <option value={""}>Sin valor</option>
