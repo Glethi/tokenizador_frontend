@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getData } from '../../../services/dashService';
 import { Doughnut } from 'react-chartjs-2';
 import randomColor from 'randomcolor';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const DonutGraphEntryMode = () => {
 
     const [dataDonut, setDataDonut] = useState([]);
+    const { valFilterEntry } = useContext(FilterContext);
 
     useEffect(() => {
         async function loadData(){
             const response = await getData('entryMode');
-            if(response.status === 200){
+            if(response.status === 200 && valFilterEntry == 'allData'){
                 setDataDonut(response.data);
+            }else{
+                setDataDonut([response.data[valFilterEntry]])
             }
         }
         loadData();
-    }, [])
+    }, [valFilterEntry])
 
     const label = [], percenTX_Accepted = [], percenTX_Rejected = [];
     dataDonut.map((e) => {
@@ -43,13 +47,13 @@ export const DonutGraphEntryMode = () => {
         plugins: {
             legend:{
                 align: 'start',
-                position: 'left',
+                //position: 'left',
                 title: {
                     display: true,
                     text: '% de Aprobación',
                     color: 'green',
                     font:{
-                        size: 25
+                        size: 23
                     }
                 },
                 labels:{
@@ -82,13 +86,13 @@ export const DonutGraphEntryMode = () => {
         plugins: {
             legend: {
                 align: 'start',
-                position: 'left',
+                //position: 'left',
                 title: {
                     display: true,
                     text: '% de Rechazo',
                     color: 'red',
                     font:{
-                        size: 25
+                        size: 23
                     }
                 },
                 labels:{
@@ -103,13 +107,13 @@ export const DonutGraphEntryMode = () => {
     }
 
     return (
-        <div className='graphDonut row w-100'>
-            <div className='col p-3'>
+        <div className='graphDonut-entryMode row w-100'>
+            <div className='col p-4'>
                 <Doughnut 
                 data = {dataAccepted}
                 options = {optionsAccepted}/>
             </div>
-            <div className='col p-3'>
+            <div className='col p-4'>
                 <Doughnut 
                 data = {dataRejected}
                 options = {optionsRejected}/>

@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Bar } from 'react-chartjs-2';
 import {getData} from '../../../services/dashService';
 import numeral from 'numeral';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const BarGraphCodeResp = () => {
 
     const [dataBar, setDataBar] = useState([]);
+    const { valFilterCR } = useContext(FilterContext);
 
     useEffect(() => {
     async function loadData(){
         const response = await getData('codeResponse');
-        if(response.status === 200){
+        if(response.status === 200 && valFilterCR == 'allData'){
             setDataBar(response.data);
+        }else{
+            setDataBar([response.data[valFilterCR]])
         }
     }
     loadData();
-    }, [])
+    }, [valFilterCR])
 
     const label = [], tx = [], amount = [], color = [];
     dataBar.map((e) => {

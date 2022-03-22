@@ -3,8 +3,7 @@ import { Card } from './Card'
 import { getData } from '../../services/dashService'
 import numeral from 'numeral'
 
-export const Cards = () => {
-
+export const Cards = () => { 
 
 const [data, setData] = useState({});
 
@@ -24,21 +23,21 @@ const cards = [
         title: 'General',
         tx: numeral(data.totalTX).format('0,0'),
         amount: numeral(data.totalAmount).format('$0,0.00'),
-        color: 'primary'
+        color: 'primary',
     },
     {
         id: 2,
         title: 'Aprobadas',
         tx: numeral(data.totalTX_Accepted).format('0,0'),
         amount: numeral(data.totalAmount_Accepted).format('$0,0.00'),
-        color: 'success' 
+        color: 'success', 
     },
     {
         id: 3,
         title: 'Rechazadas',
         tx: numeral(data.totalTX_Rejected).format('0,0'),
         amount: numeral(data.totalAmount_Rejected).format('$0,0.00'),
-        color: 'danger' 
+        color: 'danger',
     }
 ]
 
@@ -52,7 +51,8 @@ return (
                         title={card.title}
                         tx={card.tx}
                         amount={card.amount}
-                        color={card.color}/>
+                        color={card.color}
+                        label={card.label}/>
                     </div>
                 ))
             }

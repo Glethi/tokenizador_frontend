@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { getData } from '../../../services/dashService';
 import { Bar } from 'react-chartjs-2';
 import numeral from 'numeral';
+import { FilterContext } from '../../../services/FilterContext';
 
 
 export const BarGraphEntryMode = () => {
 
     const [dataBar, setDataBar] = useState([]);
+    const { valFilterEntry } = useContext(FilterContext);
 
     useEffect(() => {
-      async function loadData(){
-          const response = await getData('entryMode');
-          if(response.status === 200){
-              setDataBar(response.data);
-          }
-      }
-      loadData();
-    }, [])
+        async function loadData(){
+            const response = await getData('entryMode');
+            if(response.status === 200 && valFilterEntry == 'allData'){
+                setDataBar(response.data);
+            }else{
+                setDataBar([response.data[valFilterEntry]])
+            }
+        }
+        loadData();
+    }, [valFilterEntry])
     
     const label = [], tx_acepted = [], tx_rejected = [], accepted_Amount = [], rejected_Amount = [];
     dataBar.map((e) => {
@@ -146,12 +150,12 @@ export const BarGraphEntryMode = () => {
 
     return (
         <div className='graphBar w-100'>
-            <div className='row p-2'>
+            <div className='col p-3'> 
                 <Bar 
                 data = {dataTX}
                 options = {optionsTX}/>
             </div>
-            <div className='row p-2'>
+            <div className='col p-3'>
                 <Bar 
                 data = {dataAmount}
                 options = {optionsAmount}/>

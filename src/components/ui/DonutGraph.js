@@ -26,7 +26,7 @@ const data = {
     datasets:[{
         data:[dataDonut.percenAccepted, dataDonut.percenRejected],
         backgroundColor:['green', 'red'],
-        borderColor: "black"
+        borderColor: 'white'
     }]
 };
 

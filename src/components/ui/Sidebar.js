@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import * as Icons from "react-icons/bs";
+import { BsBarChart, BsColumnsGap, BsTable } from "react-icons/bs";
 
 export const Sidebar = () =>{
     return (
@@ -12,7 +12,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => "" + (isActive ? 'active' : '')} 
                             to="/">
-                        <Icons.BsFillBarChartFill/> Dashboard  
+                        <BsColumnsGap size={20}/> Dashboard  
                         </NavLink>
                     </li>
                     <li>
@@ -20,7 +20,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => "" + (isActive ? 'active' : '')} 
                             to="/kq2">
-                        <Icons.BsFillBarChartFill /> Kq2 Medio Acceso  
+                        <BsBarChart size={20}/> Kq2 Medio Acceso  
                         </NavLink>
                     </li>
                     <li>
@@ -28,7 +28,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
                             to="/codigorespuesta">
-                        <Icons.BsFillBarChartFill /> Código Respuesta
+                        <BsBarChart size={20}/> Código Respuesta
                         </NavLink>
                     </li>
                     <li>
@@ -36,7 +36,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
                             to="/entrymode">
-                        <Icons.BsFillBarChartFill/> Entry Mode
+                        <BsBarChart size={20}/> Entry Mode
                         </NavLink>
                     </li>
                     <li>
@@ -44,7 +44,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
                             to="/tokenc4">
-                        <Icons.BsFillBarChartFill/> Token C4
+                        <BsTable size={20}/> Token C4
                         </NavLink>
                     </li>
                     <li>
@@ -52,7 +52,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
                             to="/tokenc0">
-                        <Icons.BsFillBarChartFill/> Token C0
+                        <BsTable size={20}/> Token C0
                         </NavLink>
                     </li>
                     <li>
@@ -60,7 +60,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => " " + (isActive ? 'active' : '')} 
                             to="/tokenb3">
-                        <Icons.BsFillBarChartFill/> Token B3
+                        <BsTable size={20}/> Token B3
                         </NavLink>
                     </li>
                     <li>
@@ -68,7 +68,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
                             to="/tokenb4">
-                    <Icons.BsFillBarChartFill/> Token B4
+                    <BsTable size={20}/> Token B4
                         </NavLink>
                     </li>
                     <li>
@@ -76,7 +76,7 @@ export const Sidebar = () =>{
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
                             activeClassName={({isActive}) => "" + (isActive ? 'active' : '')} 
                             to="/tokenb2">
-                    <Icons.BsFillBarChartFill/> Token B2
+                    <BsTable size={20}/>  Token B2
                         </NavLink>   
                     </li>
                 </ul>

@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 import { getData } from '../../../services/dashService';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const TableDataCodeResp = () => {
 
     const [data, setData] = useState([{}]);
+    const { valFilterCR } = useContext(FilterContext);
 
     const columns = [
         {
@@ -76,12 +78,14 @@ export const TableDataCodeResp = () => {
     useEffect(() => {
         async function loadData(){
             const response = await getData('codeResponse');
-            if(response.status === 200){
+            if(response.status === 200 && valFilterCR == 'allData'){
                 setData(response.data);
+            }else{
+                setData([response.data[valFilterCR]])
             }
         }
         loadData();
-    }, [])
+    }, [valFilterCR])
 
     const tableData = {
         columns,

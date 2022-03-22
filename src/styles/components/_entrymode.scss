@@ -1,11 +1,21 @@
 .entry-mode{
     text-align: center;
     background-color: $background;
+    align-items: center; 
     h2{
         padding: 2rem;
     }
+    .form{
+        width: 30vw;
+        margin-right: auto;
+        margin-left: auto;
+        select{
+            margin: 0.5rem;
+            width: 20vw;
+        }
+    }
     .tableData{
-        margin-left: 1rem;
+        margin-left: 1rem; 
         margin-right: 1rem;
         padding: 1rem;
         background-color: $gray-strong;

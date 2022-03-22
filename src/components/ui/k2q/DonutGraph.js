@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import { getData } from '../../../services/dashService';
 import randomColor from 'randomcolor';
+import { FilterContext } from '../../../services/FilterContext';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
@@ -10,17 +11,19 @@ Chart.register(ArcElement);
 export const DonutGraphK2q = () => {
 
 const [dataPie, setDataPie] = useState([]);
-
+const { valFilter } = useContext(FilterContext);
 
 useEffect(() => {
   async function loadData(){
     const response = await getData('kq2');
-    if(response.status === 200){
+    if(response.status === 200 && valFilter == 'allData'){
       setDataPie(response.data);
-    } 
+    }else{
+      setDataPie([response.data[valFilter]])
+    }
   }
   loadData();
-}, [])
+}, [valFilter])
 
 const label = [], perceTX_A = [], perceTX_R = [];
 dataPie.map((e) => {

@@ -1,15 +1,14 @@
 .sidebar{
-    width: 14rem; 
+    width: 15%; 
     height: 100vh;
     background-color: $gray-strong;
-    position: fixed;
+    position: fixed; 
     ul{
         list-style: none;
         padding: 1rem 2rem; 
         li{
             margin-bottom: 1rem;
-            a{
-                
+            a{ 
                 text-decoration: none;
                 &.active{
                     background-color: $black-selected;
@@ -21,4 +20,3 @@
         }
     }
 }
-

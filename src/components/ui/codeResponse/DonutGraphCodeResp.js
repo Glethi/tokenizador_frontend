@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import { getData } from '../../../services/dashService';
 import randomColor from 'randomcolor';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const DonutGraphCodeResp = () => {
 
 const [dataDonut, setDataDonut] = useState([]);
+const { valFilterCR } = useContext(FilterContext);
 
 useEffect(() => {
     async function loadData(){
         const response = await getData('codeResponse');
-        if(response.status === 200){
+        if(response.status === 200 && valFilterCR == 'allData'){
             setDataDonut(response.data);
+        }else{
+            setDataDonut([response.data[valFilterCR]])
         }
     }
     loadData();
-}, [])
+}, [valFilterCR])
 
 const labels = [], percenTX = [], colorBack = [];
 dataDonut.map((e) => {
@@ -54,7 +58,7 @@ const options = {
                 text: '% de Aprobación y Rechazo',
                 color: 'black',
                 font:{
-                    size: 25
+                    size: 20
                 }
             },
             labels:{

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
 
-*{
+*{ 
     box-sizing: border-box;
     font-family: 'Rubik', sans-serif;
     margin: 0px;
@@ -8,7 +8,8 @@
 }
 
 .content{
-    margin-left: 14rem;
+    width: 100%;
+    margin-left: 15%;
 }
 
 ::-webkit-scrollbar {
@@ -23,5 +24,5 @@
     background: #e1e1e1;
 }
 .flex{
-    display: flex;
+    display: flex; 
 }

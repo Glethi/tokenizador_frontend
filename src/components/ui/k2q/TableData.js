@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { getData } from '../../../services/dashService';
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const TableData = () => {
 
   const [data, setDataTable] = useState([{}]);
+  const { valFilter } = useContext(FilterContext);
 
   const columns = [
     {
@@ -91,12 +93,14 @@ export const TableData = () => {
   useEffect(() => {
     async function loadData(){
       const response = await getData('kq2');
-      if(response.status === 200){
+      if(response.status === 200 && valFilter == 'allData'){
         setDataTable(response.data);
+      }else{
+        setDataTable([response.data[valFilter]])
       }
     }
     loadData();
-  }, [])
+  }, [valFilter])
 
   const tableData = {
     columns,
@@ -106,7 +110,7 @@ export const TableData = () => {
   
   return (
     <div className='tableData table-responsive table-striped table-bordered'>
-       <DataTableExtensions
+      <DataTableExtensions
       {...tableData}
       exportHeaders = {true} 
     >

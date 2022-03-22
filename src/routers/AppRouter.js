@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import { Navbar } from "../components/ui/Navbar";
 import { Sidebar } from "../components/ui/Sidebar";
@@ -11,13 +11,24 @@ import { TokenB3Screen } from "../pages/tokens/TokenB3Screen";
 import { TokenB4Screen } from "../pages/tokens/TokenB4Screen";
 import { TokenC0Screen } from "../pages/tokens/TokenC0Screen";
 import { TokenC4Screen } from "../pages/tokens/TokenC4Screen";
-
+import { FilterContext } from "../services/FilterContext";
 export const AppRouter = () => {
+    const[valFilter, setValFilter] = useState('allData');
+    const[valFilterCR, setValFilterCR] = useState('allData');
+    const[valFilterEntry, setValFilterEntry] = useState('allData');
+
     return (
+        <FilterContext.Provider value={{
+            valFilter, 
+            setValFilter,
+            valFilterCR, 
+            setValFilterCR,
+            valFilterEntry,
+            setValFilterEntry}}>
         <BrowserRouter>
         <div className="flex">
         <Sidebar />
-            <div className="content w-100">
+            <div className="content">
             <Navbar />
                 <Routes>
                     <Route path="/" element={<DashboardScreen />}/>
@@ -33,5 +44,6 @@ export const AppRouter = () => {
                 </div>
             </div>
         </BrowserRouter>
+        </FilterContext.Provider>
     )
 }

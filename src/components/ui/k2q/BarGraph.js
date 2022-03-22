@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {Bar} from 'react-chartjs-2';
 import { getData } from '../../../services/dashService';
 import numeral from 'numeral';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const BarGraph = () => {
 
     const [dataBar, setDataBar] = useState([]);
+    const { valFilter } = useContext(FilterContext);
 
     useEffect(() => {
     async function loadData(){
         const response = await getData('kq2');
-        if(response.status === 200){
+        if(response.status === 200 && valFilter == 'allData'){
             setDataBar(response.data);
+        }else{
+            setDataBar([response.data[valFilter]]);
         }
     }
     loadData();
-    }, [])
+    }, [valFilter])
 
     const tx_acepted = [], tx_rejected = [], label = [], rejected_Amount = [], accepted_Amount =[];
     dataBar.map((e) =>{
@@ -57,7 +61,7 @@ export const BarGraph = () => {
             },
             title:{
                 display: true,
-                text: 'Transacciones Aceptadas y Rechazadas por Medio Acceso',
+                text:  'Transacciones Aceptadas y Rechazadas por Medio Acceso',
                 align: 'end',
                 color: 'black',
                 font:{
@@ -145,7 +149,7 @@ export const BarGraph = () => {
     };
 
     return (
-        <div className='graphBar w-100'>
+        <div className='graphBar w-100'> 
             <div className='col p-3'>
                 <Bar
                 data={dataTX} 

@@ -1,18 +1,18 @@
 $light: #ffff;
 $gray: #e7e9eb;
-$gray-strong: #1e1e1e;
+$gray-strong: #1e1e1e;   
 $black-selected: #434957;
 $background: #f1ffef; 
-//CSS base 
+//CSS base
 @import './base/base';
 //Components 
-@import './components/navbar';
+@import './components/navbar'; 
 @import './components/sidebar';
-@import './components/dashboard';
+@import './components/dashboard'; 
 @import './components/cards';
 @import './components/graphs';
 //Tokens
-@import './components/kq2';
+@import './components/kq2'; 
 @import './components/codeResponse'; 
 @import './components/entrymode';
 @import './components/tokenc4';
@@ -20,3 +20,5 @@ $background: #f1ffef;
 @import './components/tokenb3';
 @import './components/tokenb4';
 @import './components/tokenb2';
+
+

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getData } from '../../../services/dashService';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import DataTable from 'react-data-table-component';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const TableDataEntryMode = () => {
 
     const [data, setData] = useState([{}]);
+    const { valFilterEntry } = useContext(FilterContext);
 
     const columns = [
         {
@@ -90,12 +92,14 @@ export const TableDataEntryMode = () => {
     useEffect(() => {
         async function loadData(){
             const response = await getData('entryMode');
-            if(response.status === 200){
+            if(response.status === 200 && valFilterEntry == 'allData'){
                 setData(response.data);
+            }else{
+                setData([response.data[valFilterEntry]])
             }
         }
         loadData();
-    }, [])
+    }, [valFilterEntry])
 
     const tableData = {
         columns,
