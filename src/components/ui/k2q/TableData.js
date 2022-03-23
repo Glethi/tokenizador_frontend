@@ -20,7 +20,7 @@ export const TableData = () => {
     },
     {
       name: 'Descripción',
-      selector: 'TX_Description',
+      selector: 'Description',
       sortable: true,
       center: true,
       wrap: true,

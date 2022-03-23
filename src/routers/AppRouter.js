@@ -13,12 +13,18 @@ import { TokenC0Screen } from "../pages/tokens/TokenC0Screen";
 import { TokenC4Screen } from "../pages/tokens/TokenC4Screen";
 import { FilterContext } from "../services/FilterContext";
 export const AppRouter = () => {
-    const[valFilter, setValFilter] = useState('allData');
-    const[valFilterCR, setValFilterCR] = useState('allData');
-    const[valFilterEntry, setValFilterEntry] = useState('allData');
+    const[valGlobal, setValGlobal] = useState('dashboard'); //Estado para dashboard
+    const[data, setData] = useState([{}]); //Estado para dashboard, data API
+    const[valFilter, setValFilter] = useState('allData');  //Estado para Medio Accesso
+    const[valFilterCR, setValFilterCR] = useState('allData'); //Estado para Codigo respuesta
+    const[valFilterEntry, setValFilterEntry] = useState('allData'); //Estado para Entry Mode
 
     return (
         <FilterContext.Provider value={{
+            valGlobal,
+            setValGlobal,
+            data,
+            setData,
             valFilter, 
             setValFilter,
             valFilterCR, 

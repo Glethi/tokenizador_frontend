@@ -23,7 +23,7 @@ export const BarGraphCodeResp = () => {
 
     const label = [], tx = [], amount = [], color = [];
     dataBar.map((e) => {
-        label.push(e.ID_CodeResponse)
+        label.push(e.ID)
         tx.push(numeral(e.CodeResp_TXS).value())
         amount.push(numeral(e.CodeResp_Amount).value())
         if(e.ID_CodeResponse < '010'){

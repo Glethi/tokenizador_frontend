@@ -8,11 +8,11 @@ Chart.register(ArcElement);
 
 export const DonutGraph = () => {
 
-const [dataDonut, setDataDonut] = useState({});
+const [dataDonut, setDataDonut] = useState([{}]);
 
 useEffect(() => {
   async function loadData(){
-    const response = await getData('test');
+    const response = await getData('dashboard');
     if(response.status === 200){
       setDataDonut(response.data);
     }
@@ -20,11 +20,21 @@ useEffect(() => {
   loadData();
 }, [])
 
+var percenAccepted = 0, percenRejected = 0, total_TX = 0;
+dataDonut.map((e) => {
+  total_TX += e.tx;
+  if(e.code_Response < '010'){
+    percenAccepted += e.tx;
+  }else{
+    percenRejected += e.tx;
+  }
+})
+
 
 const data = {
     labels:['Aceptadas', 'Rechazadas'],
     datasets:[{
-        data:[dataDonut.percenAccepted, dataDonut.percenRejected],
+        data:[((percenAccepted / total_TX) * 100), ((percenRejected / total_TX) * 100)],
         backgroundColor:['green', 'red'],
         borderColor: 'white'
     }]

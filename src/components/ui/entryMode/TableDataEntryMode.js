@@ -19,7 +19,7 @@ export const TableDataEntryMode = () => {
         },
         {
             name: 'Entry Mode',
-            selector: 'entryMode_Description',
+            selector: 'Description',
             sortable: true,
             center: true,
             wrap: true

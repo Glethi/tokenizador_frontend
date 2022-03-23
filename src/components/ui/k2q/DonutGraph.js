@@ -27,7 +27,7 @@ useEffect(() => {
 
 const label = [], perceTX_A = [], perceTX_R = [];
 dataPie.map((e) => {
-  label.push(e.ID +" - "+e.TX_Description)
+  label.push(e.ID +" - "+e.Description)
   perceTX_A.push(e.percenTX_Accepted)
   perceTX_R.push(e.percenTX_Rejected)
 })

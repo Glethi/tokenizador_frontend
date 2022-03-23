@@ -18,7 +18,7 @@ export const FilterDataEntryMode = () => {
     
     const filter = [];
     data.map((e) => {
-        filter.push(e.ID+" - "+e.entryMode_Description);
+        filter.push(e.ID+" - "+e.Description);
     })
 
     const { valFilterEntry, setValFilterEntry } = useContext(FilterContext);

@@ -18,7 +18,7 @@ export const FilterData = () => {
     
     const filter = [];
     data.map((e) => {
-        filter.push(e.ID +" - "+ e.TX_Description)
+        filter.push(e.ID +" - "+ e.Description)
     })
 
     const { valFilter, setValFilter } = useContext(FilterContext);

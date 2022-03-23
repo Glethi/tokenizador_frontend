@@ -18,7 +18,7 @@ export const FilterDataCodeResp = () => {
 
     const filter = [];
     data.map((e) => {
-        filter.push(e.ID_CodeResponse +" - "+e.CodeResp_Description)
+        filter.push(e.ID+" - "+e.Description)
     })
 
     const { valFilterCR, setValFilterCR } = useContext(FilterContext);

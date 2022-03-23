@@ -23,7 +23,7 @@ useEffect(() => {
 
 const labels = [], percenTX = [], colorBack = [];
 dataDonut.map((e) => {
-    labels.push(e.ID_CodeResponse +" - "+e.CodeResp_Description)
+    labels.push(e.ID +" - "+e.Description)
     percenTX.push(e.CodeResp_Percent)
     if(e.ID_CodeResponse < '011'){
         colorBack.push(randomColor({

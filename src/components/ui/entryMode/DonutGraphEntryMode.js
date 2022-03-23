@@ -23,7 +23,7 @@ export const DonutGraphEntryMode = () => {
 
     const label = [], percenTX_Accepted = [], percenTX_Rejected = [];
     dataDonut.map((e) => {
-        label.push(e.ID +" - "+e.entryMode_Description)
+        label.push(e.ID +" - "+e.Description)
         percenTX_Accepted.push(e.percenTX_Accepted)
         percenTX_Rejected.push(e.percenTX_Rejected)
     })

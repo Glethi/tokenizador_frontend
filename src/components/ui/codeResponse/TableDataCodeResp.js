@@ -13,7 +13,7 @@ export const TableDataCodeResp = () => {
     const columns = [
         {
             name: 'ID Código Respuesta',
-            selector: 'ID_CodeResponse',
+            selector: 'ID',
             sortable: true,
             center: true,
             wrap: true,
@@ -35,7 +35,7 @@ export const TableDataCodeResp = () => {
         },
         {
             name: 'Código Respuesta',
-            selector: 'CodeResp_Description',
+            selector: 'Description',
             sortable: true,
             center: true,
             wrap: true,
