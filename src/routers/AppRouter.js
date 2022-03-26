@@ -13,20 +13,26 @@ import { TokenC0Screen } from "../pages/tokens/TokenC0Screen";
 import { TokenC4Screen } from "../pages/tokens/TokenC4Screen";
 import { FilterContext } from "../services/FilterContext";
 export const AppRouter = () => {
-    const[valGlobal, setValGlobal] = useState('dashboard'); //Estado para dashboard
-    const[data, setData] = useState([{}]); //Estado para dashboard, data API
-    const[valFilter, setValFilter] = useState('allData');  //Estado para Medio Accesso
+
+    //Estados para dashboard
+    const[valEndpoint, setValEndpoint] = useState('dashboard'); 
+    const[options, setOptions] = useState(''); 
+    //const[dataFiltered, setDataFiltered] = useState([{}]); 
+
+    const[valFilterKq2, setValFilterKq2] = useState('allData');  //Estado para Medio Accesso
+
     const[valFilterCR, setValFilterCR] = useState('allData'); //Estado para Codigo respuesta
+
     const[valFilterEntry, setValFilterEntry] = useState('allData'); //Estado para Entry Mode
 
     return (
         <FilterContext.Provider value={{
-            valGlobal,
-            setValGlobal,
-            data,
-            setData,
-            valFilter, 
-            setValFilter,
+            valEndpoint,
+            setValEndpoint,
+            options,
+            setOptions,
+            valFilterKq2, 
+            setValFilterKq2,
             valFilterCR, 
             setValFilterCR,
             valFilterEntry,
@@ -35,9 +41,8 @@ export const AppRouter = () => {
         <div className="flex">
         <Sidebar />
             <div className="content">
-            <Navbar />
                 <Routes>
-                    <Route path="/" element={<DashboardScreen />}/>
+                    <Route path="/" element={<DashboardScreen />}/> 
                     <Route path="/kq2" element={<Kq2Screen />} />
                     <Route path="/codigorespuesta" element={<CodeResponseScreen />}/>
                     <Route path="/entrymode" element={<EntryModeScreen/>} />

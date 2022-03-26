@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
-import { getData } from '../../services/dashService';
+import { getData, postData } from '../../services/dashService';
+import { FilterContext } from '../../services/FilterContext';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
@@ -9,16 +10,30 @@ Chart.register(ArcElement);
 export const DonutGraph = () => {
 
 const [dataDonut, setDataDonut] = useState([{}]);
+const { valEndpoint, options, valFilterKq2, valFilterCR, valFilterEntry } = useContext(FilterContext);
 
 useEffect(() => {
   async function loadData(){
-    const response = await getData('dashboard');
-    if(response.status === 200){
-      setDataDonut(response.data);
+    if(valEndpoint === 'dashboard' && options === 'allData'){
+      const response = await getData('dashboard');
+      if(response.status === 200){
+        setDataDonut(response.data);
+      }
+    }
+    else{
+      var filter = new Object();
+            filter.endPoint = valEndpoint
+            filter.kq2 = valFilterKq2
+            filter.code_Response = valFilterCR
+            filter.entry_Mode = valFilterEntry
+            const responseFilter = await postData('dashboardFilter', filter);
+            if(responseFilter.status === 200){
+                setDataDonut(responseFilter.data)
+            }
     }
   }
   loadData();
-}, [])
+}, [valEndpoint, options])
 
 var percenAccepted = 0, percenRejected = 0, total_TX = 0;
 dataDonut.map((e) => {
@@ -30,22 +45,24 @@ dataDonut.map((e) => {
   }
 })
 
+const accepted = (parseFloat(((percenAccepted / total_TX) * 100)).toFixed(2))
+const rejected = parseFloat(((percenRejected / total_TX) * 100)).toFixed(2)
 
 const data = {
-    labels:['Aceptadas', 'Rechazadas'],
+    labels:['Aceptadas: '+accepted+ '%', 'Rechazadas: '+rejected+ '%'],
     datasets:[{
-        data:[((percenAccepted / total_TX) * 100), ((percenRejected / total_TX) * 100)],
+        data:[accepted, rejected],
         backgroundColor:['green', 'red'],
         borderColor: 'white'
     }]
 };
 
-const options = {
+const optionsDonut = {
     responsive: true,
     plugins: {
       legend: {
           align: 'start',
-          position: 'top',
+          position: 'left',
           title: {
             display: true,
             text: 'Transacciones',
@@ -69,7 +86,7 @@ const options = {
     <div className='graphDonut-dashboard'> 
         <Doughnut
         data={data}
-        options={options}/>
+        options={optionsDonut}/>
     </div>
   )
 }

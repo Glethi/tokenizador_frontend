@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
-import { getData } from '../../../services/dashService';
+import { getData, postData } from '../../../services/dashService';
 import randomColor from 'randomcolor';
 import { FilterContext } from '../../../services/FilterContext';
 Chart.register(...registerables);
@@ -11,46 +11,45 @@ Chart.register(ArcElement);
 export const DonutGraphK2q = () => {
 
 const [dataPie, setDataPie] = useState([]);
-const { valFilter } = useContext(FilterContext);
+const { valFilterKq2 } = useContext(FilterContext);
 
 useEffect(() => {
   async function loadData(){
-    const response = await getData('kq2');
-    if(response.status === 200 && valFilter == 'allData'){
-      setDataPie(response.data);
-    }else{
-      setDataPie([response.data[valFilter]])
+    if(valFilterKq2 == 'allData'){
+      const response = await getData('kq2');
+      if(response.status === 200){
+        setDataPie(response.data);
+      }
+    }
+    else{
+      const responseFilter = await postData('kq2Filter', { kq2: valFilterKq2 });
+      if(responseFilter.status === 200){
+        setDataPie(responseFilter.data);
+      }
     }
   }
   loadData();
-}, [valFilter])
-
-const label = [], perceTX_A = [], perceTX_R = [];
-dataPie.map((e) => {
-  label.push(e.ID +" - "+e.Description)
-  perceTX_A.push(e.percenTX_Accepted)
-  perceTX_R.push(e.percenTX_Rejected)
-})
+}, [valFilterKq2])
 
 const dataAccepted = {
-    labels: label,
+    labels: dataPie.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Accepted+"%"),
     datasets:[{
-        data: perceTX_A,
+        data: dataPie.map((e) => e.percenTX_Accepted),
         backgroundColor: randomColor({
           hue: '#00FF23', 
-          count: label.length,
+          count: dataPie.length,
           luminosity: 'dark'
         }),
         borderColor: 'white'
     }]
 };
 const dataRejected = {
-  labels: label,
+  labels: dataPie.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Rejected+"%"),
   datasets:[{
-      data: perceTX_R, 
+      data: dataPie.map((e) => e.percenTX_Rejected), 
       backgroundColor: randomColor({
         hue: '#FF0000',
-        count: label.length,
+        count: dataPie.length,
         luminosity: 'bright'
       }),
       borderColor: 'white'

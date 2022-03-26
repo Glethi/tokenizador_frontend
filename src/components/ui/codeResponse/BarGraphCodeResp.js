@@ -1,46 +1,46 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Bar } from 'react-chartjs-2';
-import {getData} from '../../../services/dashService';
+import {getData, postData} from '../../../services/dashService';
 import numeral from 'numeral';
 import { FilterContext } from '../../../services/FilterContext';
 
 export const BarGraphCodeResp = () => {
 
-    const [dataBar, setDataBar] = useState([]);
+    const [dataBar, setDataBar] = useState([{}]);
     const { valFilterCR } = useContext(FilterContext);
 
     useEffect(() => {
     async function loadData(){
-        const response = await getData('codeResponse');
-        if(response.status === 200 && valFilterCR == 'allData'){
-            setDataBar(response.data);
-        }else{
-            setDataBar([response.data[valFilterCR]])
+        if(valFilterCR == 'allData'){
+            const response = await getData('codeResponse');
+            if(response.status === 200){
+                setDataBar(response.data);
+            }
+        }
+        else{
+            const responseFilter = await postData('codeResponseFilter', { codeResponse: valFilterCR });
+            if(responseFilter.status === 200){
+                setDataBar(responseFilter.data);
+            }
         }
     }
     loadData();
     }, [valFilterCR])
 
-    const label = [], tx = [], amount = [], color = [];
-    dataBar.map((e) => {
-        label.push(e.ID)
-        tx.push(numeral(e.CodeResp_TXS).value())
-        amount.push(numeral(e.CodeResp_Amount).value())
-        if(e.ID_CodeResponse < '010'){
-            color.push('#2FA40B')
-        }else{
-            color.push('#FF0000')
-        }
-    })
-
     //DATOS PARA GRÁFICO DE TRANSACCIONES
     const dataCodeRespTX = {
-        data: tx,
-        backgroundColor: color,
+        data: dataBar.map((e) => numeral(e.CodeResp_TXS).value()),
+        backgroundColor: dataBar.map((e) => {
+            if(e.ID < '010'){
+                return '#2FA40B'
+            }else{
+                return '#FF0000'
+            }
+        }),
     }
 
     const dataTX = {
-        labels: label,
+        labels: dataBar.map((e) => e.ID),
         datasets: [dataCodeRespTX]
     }
 
@@ -82,12 +82,12 @@ export const BarGraphCodeResp = () => {
 
     //DATOS PARA GRÁFICO DE MONTO
     const dataCodeRespAmount = {
-        data: amount,
+        data: dataBar.map((e) => numeral(e.CodeResp_Amount).value()),
         backgroundColor: ['blue']
     }
 
     const dataAmount = {
-        labels: label,
+        labels: dataBar.map((e) => e.ID),
         datasets: [dataCodeRespAmount]
     }
 

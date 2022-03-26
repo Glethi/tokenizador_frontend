@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { getData } from '../../../services/dashService';
+import { getData, postData } from '../../../services/dashService';
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
@@ -7,8 +7,8 @@ import { FilterContext } from '../../../services/FilterContext';
 
 export const TableData = () => {
 
-  const [data, setDataTable] = useState([{}]);
-  const { valFilter } = useContext(FilterContext);
+  const [data, setData] = useState([{}]);
+  const { valFilterKq2 } = useContext(FilterContext);
 
   const columns = [
     {
@@ -92,15 +92,21 @@ export const TableData = () => {
 
   useEffect(() => {
     async function loadData(){
-      const response = await getData('kq2');
-      if(response.status === 200 && valFilter == 'allData'){
-        setDataTable(response.data);
+      if(valFilterKq2 == 'allData'){
+        const response = await getData('kq2');
+        if(response.status === 200){
+          setData(response.data);
+        }
       }else{
-        setDataTable([response.data[valFilter]])
+        const responseFilter = await postData('kq2Filter', { kq2: valFilterKq2 });
+        if(responseFilter.status === 200){
+          setData(responseFilter.data);
+        }
       }
+      
     }
     loadData();
-  }, [valFilter])
+  }, [valFilterKq2])
 
   const tableData = {
     columns,
@@ -109,7 +115,7 @@ export const TableData = () => {
 
   
   return (
-    <div className='tableData table-responsive table-striped table-bordered'>
+    <div className='tableData table-responsive'>
       <DataTableExtensions
       {...tableData}
       exportHeaders = {true} 

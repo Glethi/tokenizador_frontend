@@ -1,50 +1,47 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {Bar} from 'react-chartjs-2';
-import { getData } from '../../../services/dashService';
+import { getData, postData } from '../../../services/dashService';
 import numeral from 'numeral';
 import { FilterContext } from '../../../services/FilterContext';
 
 export const BarGraph = () => {
 
-    const [dataBar, setDataBar] = useState([]);
-    const { valFilter } = useContext(FilterContext);
+    const [dataBar, setDataBar] = useState([{}]);
+    const { valFilterKq2 } = useContext(FilterContext);
 
     useEffect(() => {
     async function loadData(){
-        const response = await getData('kq2');
-        if(response.status === 200 && valFilter == 'allData'){
-            setDataBar(response.data);
-        }else{
-            setDataBar([response.data[valFilter]]);
+        if(valFilterKq2 == 'allData'){
+            const response = await getData('kq2');
+            if(response.status === 200){
+                setDataBar(response.data);
+            }
+        }
+        else{
+            const responseFilter = await postData('kq2Filter', { kq2: valFilterKq2 });
+            if(responseFilter.status === 200){
+                setDataBar(responseFilter.data);
+            }
         }
     }
     loadData();
-    }, [valFilter])
-
-    const tx_acepted = [], tx_rejected = [], label = [], rejected_Amount = [], accepted_Amount =[];
-    dataBar.map((e) =>{
-        label.push(e.ID)
-        tx_acepted.push(numeral(e.TX_Accepted).value())
-        tx_rejected.push(numeral(e.TX_Rejected).value()) 
-        rejected_Amount.push(numeral(e.rejected_Amount).value()) 
-        accepted_Amount.push(numeral(e.accepted_Amount).value()) 
-    })
+    }, [valFilterKq2])
 
     //DATOS Y OPCIONES PARA GRÁFICO DE TRANSACCIONES
     const dataTX_Accepted = {
         label: "TX's Aceptadas",
-        data: tx_acepted,
+        data: dataBar.map((e) => numeral(e.TX_Accepted).value()),
         backgroundColor:['#2FA40B'],
     };
 
     const dataTX_Rejected = {
         label: "TX's Rechazadas",
-        data: tx_rejected,
+        data: dataBar.map((e) => numeral(e.TX_Rejected).value()),
         backgroundColor:['#FF0000'],
     };
 
     const dataTX = {
-        labels: label,
+        labels: dataBar.map((e) => e.ID),
         datasets:[dataTX_Accepted, dataTX_Rejected]
     };
 
@@ -92,18 +89,18 @@ export const BarGraph = () => {
     //DATOS Y OPCIONES PARA GRÁFICO DE MONTO
     const dataAmount_Accepted = {
         label: "Monto Aceptado",
-        data: accepted_Amount,
+        data: dataBar.map((e) => numeral(e.accepted_Amount).value()),
         backgroundColor:['#2FA40B']
     }
 
     const dataAmount_Rejected = {
         label: "Monto Rechazado",
-        data: rejected_Amount,
+        data: dataBar.map((e) => numeral(e.rejected_Amount).value()),
         backgroundColor:['#FF0000']
     }
 
     const dataAmount = {
-        labels: label,
+        labels: dataBar.map((e) => e.ID),
         datasets:[dataAmount_Accepted, dataAmount_Rejected]
     }
 

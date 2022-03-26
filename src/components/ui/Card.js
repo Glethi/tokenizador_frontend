@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsBarChartFill } from "react-icons/bs"; 
 
-export const Card = ({title, tx, amount, color, label}) => {
+export const Card = ({title, tx, amount, color}) => {
   return (
     <div className='card'> 
         <div className={"card-body bg-"+color}>

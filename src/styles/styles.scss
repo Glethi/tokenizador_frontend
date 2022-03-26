@@ -5,14 +5,14 @@ $black-selected: #434957;
 $background: #f1ffef; 
 //CSS base
 @import './base/base';
-//Components 
+//Components
 @import './components/navbar'; 
 @import './components/sidebar';
 @import './components/dashboard'; 
 @import './components/cards';
 @import './components/graphs';
 //Tokens
-@import './components/kq2'; 
+@import './components/kq2';
 @import './components/codeResponse'; 
 @import './components/entrymode';
 @import './components/tokenc4';

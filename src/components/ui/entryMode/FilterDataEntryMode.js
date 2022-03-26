@@ -33,7 +33,7 @@ export const FilterDataEntryMode = () => {
             <div className='row'>
                 <label><h4>Filtrar por:</h4></label>
                 <div className='col'>
-                <select onChange={(ev) => sysChanges(ev.target.value)} onSelect={valFilterEntry}>
+                <select onChange={(ev) => sysChanges(ev.target.value)}>
                     <option value={'allData'} selected={valFilterEntry == 'allData'}>Todos</option>
                     {
                         filter.map((e, index) => {

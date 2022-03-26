@@ -1,21 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Card } from './Card'
-import { getData } from '../../services/dashService'
+import { getData, postData } from '../../services/dashService'
 import numeral from 'numeral'
+import { FilterContext } from '../../services/FilterContext'
 
 export const Cards = () => { 
 
-const [data, setData] = useState([{}]);
+    const [data, setData] = useState([{}]);
+    const { valEndpoint, options, valFilterKq2, valFilterCR, valFilterEntry } = useContext(FilterContext);
 
 useEffect(() => {
     async function loadData() {
-        const response = await getData('dashboard');
-        if(response.status == 200){
-            setData(response.data);
-        }      
+        if(valEndpoint == 'dasboard' && options == 'allData'){
+            const response = await getData('dashboard');
+            if(response.status == 200){
+                setData(response.data);
+            }
+        }else{
+            var filter = new Object();
+            filter.endPoint = valEndpoint
+            filter.kq2 = valFilterKq2
+            filter.code_Response = valFilterCR
+            filter.entry_Mode = valFilterEntry
+            const responseFilter = await postData('dashboardFilter', filter);
+            if(responseFilter.status === 200){
+                setData(responseFilter.data)
+            }
+        }
     }
     loadData();
-}, [])
+}, [valEndpoint, options])
+
 
 var total_TX = 0, total_Amount = 0, tx_Accepted = 0, amount_Accepted = 0, tx_Rejected = 0, amount_Rejected = 0;
 data.map((e) => {
@@ -58,7 +73,7 @@ return (
     <div className='container'>
         <div className='row'>
             {
-                cards.map( card => ( 
+                cards.map( card => (
                     <div className='col-md-4' key={card.id}>
                         <Card 
                         title={card.title}

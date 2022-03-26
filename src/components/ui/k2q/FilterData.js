@@ -15,17 +15,12 @@ export const FilterData = () => {
         }
         loadData()
     }, [])
-    
-    const filter = [];
-    data.map((e) => {
-        filter.push(e.ID +" - "+ e.Description)
-    })
 
-    const { valFilter, setValFilter } = useContext(FilterContext);
+    const { valFilterKq2, setValFilterKq2 } = useContext(FilterContext);
     function sysChanges(values){
-        var state = {... valFilter}
+        var state = {... valFilterKq2}
         state = values
-        setValFilter(state)
+        setValFilterKq2(state)
     }
 
     return (
@@ -33,12 +28,15 @@ export const FilterData = () => {
             <div className='row'>
                 <label><h4>Filtrar por:</h4></label>
                 <div className='col'>
-                <select onChange={(ev) => sysChanges(ev.target.value)} onSelect={valFilter}>
-                    <option value={'allData'} selected={valFilter == 'allData'}>Todos</option>
+                <select onChange={(ev) => sysChanges(ev.target.value)}>
+                    <option value={'allData'} selected={valFilterKq2 == 'allData'}>Todos</option>
                     {
-                        filter.map((e, index) => {
+                        data.map((e, index) => {
                             return(
-                                <option value={index} key={index} selected={valFilter == index}>{e}</option>
+                                <option 
+                                value={e.ID} 
+                                key={index} 
+                                selected={valFilterKq2 == e.ID}>{e.ID+" - "+e.Description}</option>
                             )
                         })
                     }
