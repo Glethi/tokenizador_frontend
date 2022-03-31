@@ -9,84 +9,59 @@ Chart.register(ArcElement);
 
 export const DonutGraph = () => {
 
-const [dataDonut, setDataDonut] = useState([{}]);
-const { valEndpoint, options, valFilterKq2, valFilterCR, valFilterEntry } = useContext(FilterContext);
+  const { data } = useContext(FilterContext);
 
-useEffect(() => {
-  async function loadData(){
-    if(valEndpoint === 'dashboard' && options === 'allData'){
-      const response = await getData('dashboard');
-      if(response.status === 200){
-        setDataDonut(response.data);
-      }
+  var percenAccepted = 0, percenRejected = 0, total_TX = 0;
+  data.map((e) => {
+    total_TX += e.tx;
+    if(e.code_Response < '010'){
+      percenAccepted += e.tx;
+    }else{
+      percenRejected += e.tx;
     }
-    else{
-      var filter = new Object();
-            filter.endPoint = valEndpoint
-            filter.kq2 = valFilterKq2
-            filter.code_Response = valFilterCR
-            filter.entry_Mode = valFilterEntry
-            const responseFilter = await postData('dashboardFilter', filter);
-            if(responseFilter.status === 200){
-                setDataDonut(responseFilter.data)
-            }
-    }
-  }
-  loadData();
-}, [valEndpoint, options])
+  })
 
-var percenAccepted = 0, percenRejected = 0, total_TX = 0;
-dataDonut.map((e) => {
-  total_TX += e.tx;
-  if(e.code_Response < '010'){
-    percenAccepted += e.tx;
-  }else{
-    percenRejected += e.tx;
-  }
-})
+  const accepted = (parseFloat(((percenAccepted / total_TX) * 100)).toFixed(2))
+  const rejected = parseFloat(((percenRejected / total_TX) * 100)).toFixed(2)
 
-const accepted = (parseFloat(((percenAccepted / total_TX) * 100)).toFixed(2))
-const rejected = parseFloat(((percenRejected / total_TX) * 100)).toFixed(2)
+  const dataDonut = {
+      labels:['Aceptadas: '+accepted+ '%', 'Rechazadas: '+rejected+ '%'],
+      datasets:[{
+          data:[accepted, rejected],
+          backgroundColor:['green', 'red'],
+          borderColor: 'white'
+      }]
+  };
 
-const data = {
-    labels:['Aceptadas: '+accepted+ '%', 'Rechazadas: '+rejected+ '%'],
-    datasets:[{
-        data:[accepted, rejected],
-        backgroundColor:['green', 'red'],
-        borderColor: 'white'
-    }]
-};
-
-const optionsDonut = {
-    responsive: true,
-    plugins: {
-      legend: {
-          align: 'start',
-          position: 'left',
-          title: {
-            display: true,
-            text: 'Transacciones',
-            color: 'black',
-            font:{
-                size: 25
-            }
-        },
-          labels:{
+  const optionsDonut = {
+      responsive: true,
+      plugins: {
+        legend: {
+            align: 'center',
+            title: {
+              display: true,
+              text: 'Transacciones',
               color: 'black',
-              boxWidth: 50,
-              font: {
-                  size: 17.5
+              font:{
+                  size: 25
               }
-          }
-      }
-  }
-};
+          },
+            labels:{
+                color: 'black',
+                boxWidth: 50,
+                font: {
+                    size: 17.5
+                }
+            }
+        }
+    }
+  };
 
-  return (
-    <div className='graphDonut-dashboard'> 
-        <Doughnut
-        data={data}
-        options={optionsDonut}/>
-    </div>
-  )
+    return (
+      <div className='graphDonut row w-100'> 
+          <Doughnut
+          data={dataDonut}
+          options={optionsDonut}/>
+      </div>
+    )
 }

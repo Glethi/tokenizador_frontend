@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import DataTableExtension from 'react-data-table-component-extensions';
 import DataTable from 'react-data-table-component';
-import { getData } from '../../../services/dashService';
+import { FilterContext } from '../../../services/FilterContext';
 
-export const TableDataC4 = () => {
+export const TableDataC4 = () => { 
 
-    const [data, setData] = useState([{}]);
+    const { dat } = useContext(FilterContext);
+    var data = dat;
 
     const columns = [
         {
             name: 'KC4_TERM_ATTEND_IND',
-            selector: 'ID_Terminal_Attended',
+            selector:  row => row.ID_Terminal_Attended,
             sortable: true,
             right: true,
             wrap: true,
@@ -32,7 +33,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_TERM_OPER_IND',
-            selector: 'ID_Terminal',
+            selector: row => row.ID_Terminal,
             sortable: true,
             right: true,
             wrap: true,
@@ -54,7 +55,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_TERM_LOC_IND',
-            selector: 'Terminal_Location',
+            selector: row => row.Terminal_Location,
             sortable: true,
             right: true,
             wrap: true,
@@ -76,7 +77,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_CRDHLDR_PRESENT_IND',
-            selector: 'ID_Cardholder_Presence',
+            selector: row => row.ID_Cardholder_Presence,
             sortable: true,
             right: true,
             wrap: true,
@@ -98,7 +99,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_CRD_PRESENT_IND',
-            selector: 'ID_Card_Presence',
+            selector: row => row.ID_Card_Presence,
             sortable: true,
             right: true,
             wrap: true,
@@ -120,7 +121,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_CRD_CAPTR_IND',
-            selector: 'ID_Card_Capture',
+            selector: row => row.ID_Card_Capture,
             sortable: true,
             right: true,
             wrap: true,
@@ -142,7 +143,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_TXN_STAT_IND',
-            selector: 'ID_Status',
+            selector: row => row.ID_Status,
             sortable: true,
             right: true,
             wrap: true,
@@ -164,7 +165,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_TXN_SEC_IND',
-            selector: 'Security_Level',
+            selector: row => row.Security_Level,
             sortable: true,
             right: true,
             wrap: true,
@@ -186,7 +187,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_TXN_RTN_IND',
-            selector: 'Routing_Indicator',
+            selector: row => row.Routing_Indicator,
             sortable: true,
             right: true,
             wrap: true,
@@ -208,7 +209,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_CRDHLDR_ACTVT_TERM_IND',
-            selector: 'Terminal_Activation_Cardholder',
+            selector: row => row.Terminal_Activation_Cardholder,
             sortable: true,
             right: true,
             wrap: true,
@@ -230,7 +231,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_TERM_INPUT_CAP_IND',
-            selector: 'ID_Terminal_Data_Transfer',
+            selector: row => row.ID_Terminal_Data_Transfer,
             sortable: true,
             right: true,
             wrap: true,
@@ -252,7 +253,7 @@ export const TableDataC4 = () => {
         },
         {
             name: 'KC4_CRDHLDR_ID_METHOD',
-            selector: 'ID_Cardholder_Method',
+            selector: row => row.ID_Cardholder_Method,
             sortable: true,
             right: true,
             wrap: true,
@@ -273,16 +274,6 @@ export const TableDataC4 = () => {
             ]
         },
     ];
-
-    useEffect(() => {
-        async function loadData() {
-            const response = await getData('tokenC4');
-            if(response.status === 200){
-                setData(response.data);
-            }
-        }
-        loadData();
-    }, []);
 
     const tableData = {
         columns,

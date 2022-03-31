@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import { getData } from '../../../services/dashService';
+import React, { useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
+import { FilterContext } from '../../../services/FilterContext';
 
 
 export const TableDataC0 = () => {
 
-    const [data, setData] = useState([{}]);
+    const { dat } = useContext(FilterContext);
+    const data = dat;
 
     const columns = [
         {
@@ -106,16 +107,6 @@ export const TableDataC0 = () => {
             ]
         },
     ]
-
-    useEffect(() => {
-        async function loadData() {
-            const response = await getData('tokenC0');
-            if(response.status === 200){
-                setData(response.data);
-            }
-        }
-        loadData();
-    }, []);
 
     const tableData = {
         columns,

@@ -8,19 +8,20 @@ export const FilterData = () => {
 
     useEffect(() => {
         async function loadData(){
-            const response = await getData('kq2')
+            const response = await getData('kq2');
             if(response.status == 200){
-                setData(response.data)
+                setData(response.data);
             }
         }
         loadData()
     }, [])
 
-    const { valFilterKq2, setValFilterKq2 } = useContext(FilterContext);
+    const { valFilterKq2, setValFilterKq2, setOptions } = useContext(FilterContext);
     function sysChanges(values){
         var state = {... valFilterKq2}
         state = values
         setValFilterKq2(state)
+        setOptions(state)
     }
 
     return (

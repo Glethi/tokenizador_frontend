@@ -1,36 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Bar } from 'react-chartjs-2';
-import {getData, postData} from '../../../services/dashService';
 import numeral from 'numeral';
 import { FilterContext } from '../../../services/FilterContext';
 
 export const BarGraphCodeResp = () => {
 
-    const [dataBar, setDataBar] = useState([{}]);
-    const { valFilterCR } = useContext(FilterContext);
-
-    useEffect(() => {
-    async function loadData(){
-        if(valFilterCR == 'allData'){
-            const response = await getData('codeResponse');
-            if(response.status === 200){
-                setDataBar(response.data);
-            }
-        }
-        else{
-            const responseFilter = await postData('codeResponseFilter', { codeResponse: valFilterCR });
-            if(responseFilter.status === 200){
-                setDataBar(responseFilter.data);
-            }
-        }
-    }
-    loadData();
-    }, [valFilterCR])
+    const { data } = useContext(FilterContext);
 
     //DATOS PARA GRÁFICO DE TRANSACCIONES
     const dataCodeRespTX = {
-        data: dataBar.map((e) => numeral(e.CodeResp_TXS).value()),
-        backgroundColor: dataBar.map((e) => {
+        data: data.map((e) => numeral(e.CodeResp_TXS).value()),
+        backgroundColor: data.map((e) => {
             if(e.ID < '010'){
                 return '#2FA40B'
             }else{
@@ -40,7 +20,7 @@ export const BarGraphCodeResp = () => {
     }
 
     const dataTX = {
-        labels: dataBar.map((e) => e.ID),
+        labels: data.map((e) => e.ID),
         datasets: [dataCodeRespTX]
     }
 
@@ -82,12 +62,12 @@ export const BarGraphCodeResp = () => {
 
     //DATOS PARA GRÁFICO DE MONTO
     const dataCodeRespAmount = {
-        data: dataBar.map((e) => numeral(e.CodeResp_Amount).value()),
+        data: data.map((e) => numeral(e.CodeResp_Amount).value()),
         backgroundColor: ['blue']
     }
 
     const dataAmount = {
-        labels: dataBar.map((e) => e.ID),
+        labels: data.map((e) => e.ID),
         datasets: [dataCodeRespAmount]
     }
 

@@ -57,7 +57,7 @@ export const FormFilterDataB3 = () => {
   FN = [... new Set(File_Name)]
 
   function sysChanges(value, prop){
-    var state = {... dataFilter}
+    var state = {...dataFilter}
     state[prop] = value
     setDataFilter(state)
   }
@@ -81,7 +81,7 @@ export const FormFilterDataB3 = () => {
     <div className='form'>
         <div className='row p-2 m-1'>
             <div className='col m-2'>
-                <label>KB3_BIT_MAP</label>
+                <label>KB3_BIT_MAP</label><br />
                 <select onChange={(ev) => {sysChanges(ev.target.value, 'Bit_Map')}}>
                   <option value={'NonValue'}>Sin valor</option>
                   {
@@ -91,8 +91,8 @@ export const FormFilterDataB3 = () => {
                       )
                     })
                   }
-                  </select>
-                  <label>KB3_TERM_SRL_NUM</label>
+                  </select><br />
+                  <label>KB3_TERM_SRL_NUM</label><br />
                   <select onChange={(ev) => {sysChanges(ev.target.value, 'Terminal_Serial_Number')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
@@ -102,8 +102,8 @@ export const FormFilterDataB3 = () => {
                         )
                       })
                     }
-                  </select>
-                  <label>KB3_EMV_TERM_CAP</label>
+                  </select><br />
+                  <label>KB3_EMV_TERM_CAP</label><br />
                   <select onChange={(ev) => {sysChanges(ev.target.value, 'Check_Cardholder')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
@@ -116,7 +116,7 @@ export const FormFilterDataB3 = () => {
                   </select>
             </div>
             <div className='col m-2'>
-                  <label>KB3_USR_FLD1</label>
+                  <label>KB3_USR_FLD1</label><br />
                   <select onChange={(ev) => {sysChanges(ev.target.value, 'User_Field_One')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
@@ -126,8 +126,8 @@ export const FormFilterDataB3 = () => {
                         )
                       })
                     }
-                  </select>
-                  <label>KB3_USR_FLD2</label>
+                  </select><br />
+                  <label>KB3_USR_FLD2</label><br />
                   <select onChange={(ev) => {sysChanges(ev.target.value, 'User_Field_Two')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
@@ -137,8 +137,8 @@ export const FormFilterDataB3 = () => {
                         )
                       })
                     }
-                  </select>
-                  <label>KB3_EMV_TERM_TYPE</label>
+                  </select><br />
+                  <label>KB3_EMV_TERM_TYPE</label><br />
                   <select onChange={(ev) => {sysChanges(ev.target.value, 'Terminal_TypeEMV')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
@@ -151,7 +151,7 @@ export const FormFilterDataB3 = () => {
                   </select>
             </div>
             <div className='col m-2'>
-                <label>KB3_APP_VER_NUM</label>
+                <label>KB3_APP_VER_NUM</label><br />
                 <select oncChange={(ev) => {sysChanges(ev.target.value, 'App_Version_Number')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
@@ -161,8 +161,8 @@ export const FormFilterDataB3 = () => {
                         )
                       })
                     }
-                </select>
-                <label>KB3_CVM_RSLTS</label>
+                </select><br />
+                <label>KB3_CVM_RSLTS</label><br />
                 <select onChange={(ev) => {sysChanges(ev.target.value, 'CVM_Result')}}>
                   <option value={'NonValue'}>Sin valor</option>
                   {
@@ -172,8 +172,8 @@ export const FormFilterDataB3 = () => {
                       )
                     })
                   }
-                </select>
-                <label>KB3_DF_NAME_LGTH</label>
+                </select><br />
+                <label>KB3_DF_NAME_LGTH</label><br />
                 <select onChange={(ev) => {sysChanges(ev.target.value, 'File_Name_Length')}}>
                   <option value={'NonValue'}>Sin valor</option>
                   {

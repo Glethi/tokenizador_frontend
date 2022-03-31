@@ -1,41 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getData } from '../../../services/dashService';
+import React, { useContext } from 'react';
+import { FilterContext } from '../../../services/FilterContext';
 import { Doughnut } from 'react-chartjs-2';
 import randomColor from 'randomcolor';
-import { FilterContext } from '../../../services/FilterContext';
 
 export const DonutGraphEntryMode = () => {
 
-    const [dataDonut, setDataDonut] = useState([]);
-    const { valFilterEntry } = useContext(FilterContext);
-
-    useEffect(() => {
-        async function loadData(){
-            const response = await getData('entryMode');
-            if(response.status === 200 && valFilterEntry == 'allData'){
-                setDataDonut(response.data);
-            }else{
-                setDataDonut([response.data[valFilterEntry]])
-            }
-        }
-        loadData();
-    }, [valFilterEntry])
-
-    const label = [], percenTX_Accepted = [], percenTX_Rejected = [];
-    dataDonut.map((e) => {
-        label.push(e.ID +" - "+e.Description)
-        percenTX_Accepted.push(e.percenTX_Accepted)
-        percenTX_Rejected.push(e.percenTX_Rejected)
-    })
+    const { data } = useContext(FilterContext);
 
     //DATOS Y OPCIONES PARA % ACEPTACIÓN
     const dataAccepted = {
-        labels: label,
+        labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.percenTX_Accepted+"%"),
         datasets: [{
-            data: percenTX_Accepted,
+            data: data.map((e) => e.percenTX_Accepted),
             backgroundColor: randomColor({
                 hue: '#00FF23',
-                count: label.length,
+                count: data.length,
                 luminosity: 'dark'
             }),
             borderColor: 'white'
@@ -47,7 +26,7 @@ export const DonutGraphEntryMode = () => {
         plugins: {
             legend:{
                 align: 'start',
-                //position: 'left',
+                position: 'left',
                 title: {
                     display: true,
                     text: '% de Aprobación',
@@ -69,12 +48,12 @@ export const DonutGraphEntryMode = () => {
 
     //DATOS Y OPCIONES PARA % RECHAZADO
     const dataRejected = {
-        labels: label,
+        labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.percenTX_Rejected+"%"),
         datasets: [{
-            data: percenTX_Rejected,
+            data: data.map((e) => e.percenTX_Rejected),
             backgroundColor: randomColor({
                 hue: '#FF0000',
-                count: label.length,
+                count: data.length,
                 luminosity: 'bright'
             }),
             borderColor: 'white'
@@ -86,7 +65,7 @@ export const DonutGraphEntryMode = () => {
         plugins: {
             legend: {
                 align: 'start',
-                //position: 'left',
+                position: 'left',
                 title: {
                     display: true,
                     text: '% de Rechazo',
@@ -107,13 +86,13 @@ export const DonutGraphEntryMode = () => {
     }
 
     return (
-        <div className='graphDonut-entryMode row w-100'>
-            <div className='col p-4'>
+        <div className='graphDonut row w-100'>
+            <div className='row p-5'>
                 <Doughnut 
                 data = {dataAccepted}
                 options = {optionsAccepted}/>
             </div>
-            <div className='col p-4'>
+            <div className='row p-5'>
                 <Doughnut 
                 data = {dataRejected}
                 options = {optionsRejected}/>

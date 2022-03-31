@@ -54,7 +54,7 @@ export const FormFilterDataB4 = () => {
     ID_Resp_ISO = [... new Set(ID_Response_ISO)]
 
     function sysChanges(value, prop){
-        var state = {... dataFilter}
+        var state = {...dataFilter}
         state[prop] = value
         setDataFilter(state)
     }
@@ -79,7 +79,7 @@ export const FormFilterDataB4 = () => {
         <div className='form'>
             <div className='row p-2 m-1'>
                 <div className='col m-3'>
-                    <label>KB4_PT_SRV_ENTRY_MDE</label>
+                    <label>KB4_PT_SRV_ENTRY_MDE</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Service_EntryMode')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -89,8 +89,8 @@ export const FormFilterDataB4 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB4_TERM_ENTRY_CAP</label>
+                    </select><br />
+                    <label>KB4_TERM_ENTRY_CAP</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Capacity_Terminal')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -100,8 +100,8 @@ export const FormFilterDataB4 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB4_LAST_EMV_STAT</label>
+                    </select><br />
+                    <label>KB4_LAST_EMV_STAT</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'EVM_Status')}}> 
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -111,8 +111,8 @@ export const FormFilterDataB4 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB4_DATA_SUSPECT</label>
+                    </select><br />
+                    <label>KB4_DATA_SUSPECT</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Data_Suspect')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -125,7 +125,7 @@ export const FormFilterDataB4 = () => {
                     </select>
                 </div>
                 <div className='col m-2'>
-                    <label>KB4_APPL_PAN_SEQ_NUM</label>
+                    <label>KB4_APPL_PAN_SEQ_NUM</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'PAN_Number')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -135,8 +135,8 @@ export const FormFilterDataB4 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB4_DEV_INFO</label>
+                    </select><br />
+                    <label>KB4_DEV_INFO</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Device_Info')}}> 
                         <option value={'NonValue'}>Sin Valor</option>
                         { 
@@ -146,8 +146,8 @@ export const FormFilterDataB4 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB4_RSN_ONL_CDE</label>
+                    </select><br />
+                    <label>KB4_RSN_ONL_CDE</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Online_Code')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -157,8 +157,8 @@ export const FormFilterDataB4 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB4_ARQC_VRFY</label>
+                    </select><br />
+                    <label>KB4_ARQC_VRFY</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'ARQC_Verification')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {

@@ -1,14 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, { useContext } from 'react';
+import { FilterContext } from '../../../services/FilterContext';
 import DataTable from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
-import { getData } from '../../../services/dashService';
-import { FilterContext } from '../../../services/FilterContext';
+
 
 export const TableDataCodeResp = () => {
 
-    const [data, setData] = useState([{}]);
-    const { valFilterCR } = useContext(FilterContext);
+    const { data } = useContext(FilterContext);
 
     const columns = [
         {
@@ -19,13 +18,13 @@ export const TableDataCodeResp = () => {
             wrap: true,
             conditionalCellStyles: [
                 {
-                    when: row  => row.ID_CodeResponse <= '010',
+                    when: row  => row.ID <= '010',
                     style: {
                         backgroundColor: 'rgb(47, 164, 11)',
                     }
                 },
                 {
-                    when: row  => row.ID_CodeResponse > '010',
+                    when: row  => row.ID > '010',
                     style: {
                         backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
@@ -41,13 +40,13 @@ export const TableDataCodeResp = () => {
             wrap: true,
             conditionalCellStyles: [
                 {
-                    when: row => row.CodeResp_Description == 'Aprobada',
+                    when: row => row.Description == 'Aprobada',
                     style: {
                         backgroundColor: 'rgb(100, 236, 57)'
                     }
                 },
                 {
-                    when: row => row.CodeResp_Description != 'Aprobada',
+                    when: row => row.Description != 'Aprobada',
                     style: {
                         backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
@@ -74,18 +73,6 @@ export const TableDataCodeResp = () => {
             right: true,
         },
     ]
-
-    useEffect(() => {
-        async function loadData(){
-            const response = await getData('codeResponse');
-            if(response.status === 200 && valFilterCR == 'allData'){
-                setData(response.data);
-            }else{
-                setData([response.data[valFilterCR]])
-            }
-        }
-        loadData();
-    }, [valFilterCR])
 
     const tableData = {
         columns,

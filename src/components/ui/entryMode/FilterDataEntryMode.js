@@ -15,11 +15,6 @@ export const FilterDataEntryMode = () => {
         }
         loadData()
     }, [])
-    
-    const filter = [];
-    data.map((e) => {
-        filter.push(e.ID+" - "+e.Description);
-    })
 
     const { valFilterEntry, setValFilterEntry } = useContext(FilterContext);
     function sysChanges(values){
@@ -36,9 +31,11 @@ export const FilterDataEntryMode = () => {
                 <select onChange={(ev) => sysChanges(ev.target.value)}>
                     <option value={'allData'} selected={valFilterEntry == 'allData'}>Todos</option>
                     {
-                        filter.map((e, index) => {
+                        data.map((e, index) => {
                             return(
-                                <option value={index} key={index} selected={valFilterEntry == index}>{e}</option>
+                                <option value={e.ID} 
+                                key={index} 
+                                selected={valFilterEntry == e.ID}>{e.ID+" - "+e.Description}</option>
                             )
                         })
                     }

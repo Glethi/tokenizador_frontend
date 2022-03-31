@@ -1,70 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getData, postData } from '../../../services/dashService';
-import { DataContext } from '../../../services/DataContext'; 
+import React, { useContext, useState } from 'react'; 
+import { FilterContext } from '../../../services/FilterContext';
 
 export const FormFilterDataC0 = () => {
 
-    const [data, setData] = useState([]);
-
-    const [dataFilter, setDataFilter] = useState({
+    const { dat, setFlag, setFilter } = useContext(FilterContext);
+    const [filterC0, setFilterC0] = useState({
         ID_Ecommerce: 'NonValue',
         Card_Type: 'NonValue',
         ID_CVV2: 'NonValue',
         ID_Information: 'NonValue'
-    })
+    });
 
-    useEffect(() => {
-        async function loadData(){
-            const response = await getData('tokenC0');
-            if(response.status === 200){
-                setData(response.data)
-            }
-        }
-        loadData();
-    }, []);
-
-    const ID_Ecommerce = [], Card_Type = [], ID_CVV2 = [], ID_Information = [];
-    var ID_Ecom, Card_T, CVV2, Info;
-
-    data.map((e) => {
-        ID_Ecommerce.push(e.ID_Ecommerce)
-        Card_Type.push(e.Card_Type)
-        ID_CVV2.push(e.ID_CVV2)
-        ID_Information.push(e.ID_Information)
-    })
-
-    ID_Ecom = [... new Set(ID_Ecommerce)]
-    Card_T = [... new Set(Card_Type)]
-    CVV2 = [... new Set(ID_CVV2)]
-    Info = [... new Set(ID_Information)]
+    const ID_Ecom = [...new Set(dat.map((e) => e.ID_Ecommerce))]
+    const Card_T = [...new Set(dat.map((e) => e.Card_Type))]
+    const CVV2 = [...new Set(dat.map((e) => e.ID_CVV2))]
+    const Info = [...new Set(dat.map((e) => e.ID_Information))]
 
     function sysChanges(value, prop){
-        var state = {...dataFilter};
+        var state = {...filterC0};
         state[prop] = value;
-        setDataFilter(state);
+        setFilterC0(state);
     }
 
-    const {setDat} = useContext(DataContext);
-    async function sendData(){
-        const response = await postData('tokenC0Filter', dataFilter)
-        if(response.status === 200){
-            setDat(response.data)
-            console.log(dataFilter);
-        }
-    }
-
-    async function resetData(){
-        const response = await getData('tokenC4DataTable')
-        if(response.status === 200){
-            setDat(response.data)
-        }
+    function sysFlag(f){
+        setFilter(filterC0);
+        setFlag(f);
     }
 
     return (
         <div className='form'>
             <div className='row p-2 m-1'>
                 <div className='col m-2'>
-                    <label>KC0_INDICADOR_DE_COMERCIO_ELEC</label>
+                    <label>KC0_INDICADOR_DE_COMERCIO_ELEC</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'ID_Ecommerce')}}> 
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -74,8 +41,8 @@ export const FormFilterDataC0 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KC0_TIPO_DE_TARJETA</label>
+                    </select><br />
+                    <label>KC0_TIPO_DE_TARJETA</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Card_Type')}}>
                         <option value={'NonValue'}>Sin Valor</option>
                         {
@@ -88,7 +55,7 @@ export const FormFilterDataC0 = () => {
                     </select>
                 </div>
                 <div className='col m-2'>
-                    <label>KC0_INDICADOR_DE_CVV2_CVC2_PRE</label>
+                    <label>KC0_INDICADOR_DE_CVV2_CVC2_PRE</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'ID_CVV2')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -98,8 +65,8 @@ export const FormFilterDataC0 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KC0_INDICADOR_DE_INFORMACION_A</label>
+                    </select><br />
+                    <label>KC0_INDICADOR_DE_INFORMACION_A</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'ID_Information')}}>
                         <option value={'NonValue'}>Sin valor</option> 
                         {
@@ -115,13 +82,13 @@ export const FormFilterDataC0 = () => {
                     <div className='col'>
                         <button className='button-filter'
                         type='button'
-                        onClick={sendData}>
+                        onClick={() => {sysFlag('tokenC0Filter')}}>
                         Filtrar</button>
                     </div>
                     <div className='col'>
                         <button className='button-reset'
                         type = 'button'
-                        onClick={resetData}>
+                        onClick={() => {sysFlag('tokenC4DataTable')}}>
                         Reset Tabla</button>
                     </div>
                 </div>

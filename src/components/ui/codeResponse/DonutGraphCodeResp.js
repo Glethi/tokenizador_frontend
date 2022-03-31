@@ -1,48 +1,29 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Doughnut } from 'react-chartjs-2';
-import { getData } from '../../../services/dashService';
 import randomColor from 'randomcolor';
 import { FilterContext } from '../../../services/FilterContext';
 
 export const DonutGraphCodeResp = () => {
 
-const [dataDonut, setDataDonut] = useState([]);
-const { valFilterCR } = useContext(FilterContext);
+const { data } = useContext(FilterContext);
 
-useEffect(() => {
-    async function loadData(){
-        const response = await getData('codeResponse');
-        if(response.status === 200 && valFilterCR == 'allData'){
-            setDataDonut(response.data);
-        }else{
-            setDataDonut([response.data[valFilterCR]])
-        }
-    }
-    loadData();
-}, [valFilterCR])
-
-const labels = [], percenTX = [], colorBack = [];
-dataDonut.map((e) => {
-    labels.push(e.ID +" - "+e.Description)
-    percenTX.push(e.CodeResp_Percent)
-    if(e.ID_CodeResponse < '011'){
-        colorBack.push(randomColor({
-            hue: '#00FF23',
-            luminosity: 'dark'
-        }))
-    }else{
-        colorBack.push(randomColor({
-            hue: '#FF0000',
-            luminosity: 'bright'
-        }))
-    }
-})
-
-const data = {
-    labels: labels,
+const dataDonut = {
+    labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.CodeResp_Percent+"%"),
     datasets: [{
-        data: percenTX,
-        backgroundColor: colorBack,
+        data: data.map((e) => e.CodeResp_Percent),
+        backgroundColor: data.map((e) => {
+            if(e.ID < '011'){
+                return randomColor({
+                    hue: '#00FF23',
+                    luminosity: 'dark'
+                })
+            }else{
+                return randomColor({
+                    hue: '#3D0101',
+                    luminosity: 'dark'
+                })
+            }
+        }),
         borderColor: 'white'
     }]
 }
@@ -63,9 +44,8 @@ const options = {
             },
             labels:{
                 color: 'black',
-                boxWidth: 50,
                 font:{
-                    size: 17.5
+                    size: 15
                 }
             }
         }
@@ -73,13 +53,11 @@ const options = {
 }
 
 return (
-    <div className='graphDonut-CodeResp row w-100'>
-        <div className='col p-3'>
-            <Doughnut
-            data = {data}
-            options = {options}
-            />
-        </div>
+    <div className='graphDonut row w-100'>
+        <Doughnut
+        data = {dataDonut}
+        options = {options}
+        />
     </div>
 )
 }

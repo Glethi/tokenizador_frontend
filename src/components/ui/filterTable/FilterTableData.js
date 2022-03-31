@@ -1,40 +1,39 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { getData } from '../../../services/dashService';
+import React, { useEffect, useContext, useState } from 'react';
+import { getData, postData } from '../../../services/dashService';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
-import { DataContext } from '../../../services/DataContext';
+import { FilterContext } from '../../../services/FilterContext';
 
 export const FilterTableData = () => {
 
-    //const [data, setData] = useState([{}]);
-
-    const {data, setDat} = useContext(DataContext);
+    const [data, setData] = useState([{}]);
+    const { flag, filter, setFilter } = useContext(FilterContext);
 
     const columns = [
         {
             name: 'FIID_TARJ',
-            selector: 'Fiid_Card',
+            selector: row => row.Fiid_Card,
             sortable: true,
             center: true,
             wrap: true
         },
         {
             name: 'FIID_COMER',
-            selector: 'Fiid_Comerce',
+            selector: row => row.Fiid_Comerce,
             sortable: true,
             center: true,
             wrap: true
         },
         {
             name: 'NOMBRE_DE_TERMINAL',
-            selector: 'Terminal_Name',
+            selector: row => row.Terminal_Name,
             sortable: true,
             center: true,
             wrap: true
         },
         {
             name: 'CODIGO_RESPUESTA',
-            selector: 'Code_Response',
+            selector: row => row.Code_Response,
             sortable: true,
             right: true,
             wrap: true,
@@ -56,35 +55,35 @@ export const FilterTableData = () => {
         },
         {
             name: 'R',
-            selector: 'R',
+            selector: row => row.R,
             sortable: true,
             center: true,
             wrap: true,
         },
         {
             name: 'NUM_SEC',
-            selector: 'Number_Sec',
+            selector: row => row.Number_Sec,
             sortable: true,
             right: true,
             wrap: true
         },
         {
             name: 'KQ2_ID_MEDIO_ACCESO',
-            selector: 'ID_Access_Mode',
+            selector: row => row.ID_Access_Mode,
             sortable: true,
             right: true,
             wrap: true
         },
         {
             name: 'ENTRY_MODE',
-            selector: 'entryMode',
+            selector: row => row.entryMode,
             sortable: true,
             right: true,
             wrap: true
         },
         {
             name: 'MONTO',
-            selector: 'amount',
+            selector: row => row.amount,
             sortable: true,
             right: true,
             wrap: true
@@ -93,13 +92,34 @@ export const FilterTableData = () => {
 
     useEffect(() => {
         async function loadData(){
-            const response = await getData('tokenC4DataTable');
-            if(response.status === 200){
-                setDat(response.data)
+            if(flag === 'tokenC4DataTable'){
+                const response = await getData(flag);
+                if(response.status === 200){
+                    setData(response.data);
+                }
+            }else{
+                switch(flag){
+                    case 'tokenC4Filter': {
+                        const responseFilter = await postData(flag, filter);
+                        if(responseFilter.status === 200){
+                            setData(responseFilter.data);
+                        }
+                        setFilter({});
+                        break;
+                    }
+                    case 'tokenC0Filter': {
+                        const responseFilter = await postData(flag, filter);
+                        if(responseFilter.status === 200){
+                            setData(responseFilter.data);
+                        }
+                        setFilter({});
+                        break;
+                    }
+                }
             }
         }
         loadData();
-    }, []);
+    }, [flag]);
 
     const tableData = {
         columns,

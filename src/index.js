@@ -5,6 +5,6 @@ import './styles/styles.scss';
 import 'bootstrap/scss/bootstrap.scss';
 
 ReactDOM.render(
-    <TokenApp />,
+      <TokenApp />,
   document.getElementById('root')
 );

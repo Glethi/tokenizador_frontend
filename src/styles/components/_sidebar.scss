@@ -1,5 +1,4 @@
 .sidebar{
-    overflow: hidden;
     background-color: $gray-strong;
     position: fixed;
     top: 0;
@@ -11,9 +10,8 @@
         float: left;
         display: flex;
         text-align: center;
-        margin: 0.5rem;
         li{
-            
+            margin: 0.5rem;
             a{ 
                 text-decoration: none;
                 &.active{
@@ -23,6 +21,24 @@
             a:hover{
                 background-color: $black-selected;
             }
+            img{
+                width: 70px;
+                height: 60px;
+                padding-bottom: 0.7rem;
+            }
         }
+    }
+    .drap{
+        margin: 0.5rem !important;
+        color: white !important;
+        background-color: $gray-strong !important;
+        border-color: transparent !important;
+    }
+    .drap:active{
+        background-color: $black-selected !important;
+        border-color: transparent !important;
+    }
+    .drap:hover{
+        background-color: $black-selected !important;
     }
 }

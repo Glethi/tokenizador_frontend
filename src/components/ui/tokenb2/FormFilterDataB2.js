@@ -75,7 +75,7 @@ export const FormFilterDataB2 = () => {
     aip = [... new Set(AIP)]
 
     function sysChanges(value, prop){
-        var state = {... dataFilter}
+        var state = {...dataFilter}
         state[prop] = value
         setDataFilter(state)
     }
@@ -99,7 +99,7 @@ export const FormFilterDataB2 = () => {
         <div className='form'>
             <div className='row p-2 m-1'>
                 <div className='col m-2'>
-                    <label>KB2_BIT_MAP</label>
+                    <label>KB2_BIT_MAP</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Bit_Map')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -109,8 +109,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_USR_FLD1</label>
+                    </select><br />
+                    <label>KB2_USR_FLD1</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'User_Field_One')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -120,8 +120,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_ARQC</label>
+                    </select><br />
+                    <label>KB2_ARQC</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'ARQC')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -131,8 +131,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_AMT_AUTH</label>
+                    </select><br />
+                    <label>KB2_AMT_AUTH</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'AMT_Auth')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -142,8 +142,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_AMT_OTHER</label>
+                    </select><br />
+                    <label>KB2_AMT_OTHER</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'AMT_Other')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -156,7 +156,7 @@ export const FormFilterDataB2 = () => {
                     </select>
                 </div>
                 <div className='col m-2'>
-                    <label>KB2_ATC</label>
+                    <label>KB2_ATC</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'ATC')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -166,8 +166,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_TERM_CTRY_CDE</label>
+                    </select><br />
+                    <label>KB2_TERM_CTRY_CDE</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Terminal_Country_Code')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -177,8 +177,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_TRAN_CRNCY_CDE</label>
+                    </select><br />
+                    <label>KB2_TRAN_CRNCY_CDE</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Terminal_Currency_Code')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -188,8 +188,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_TRAN_DAT</label>
+                    </select><br />
+                    <label>KB2_TRAN_DAT</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Transaction_Date')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -199,8 +199,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_TRAN_TYPE</label>
+                    </select><br />
+                    <label>KB2_TRAN_TYPE</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Transaction_Type')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -213,7 +213,7 @@ export const FormFilterDataB2 = () => {
                     </select>
                 </div>
                 <div className='col m-2'>
-                    <label>KB2_UNPREDICT_NUM</label>
+                    <label>KB2_UNPREDICT_NUM</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Umpedict_Number')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -223,8 +223,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_ISS_APPL_DATA_LGTH</label>
+                    </select><br />
+                    <label>KB2_ISS_APPL_DATA_LGTH</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'Issuing_App_Data_Length')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -234,8 +234,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_ISS_APPL_DATA</label>
+                    </select><br />
+                    <label>KB2_ISS_APPL_DATA</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'KB2_ISS_APPL_DATA')}}>
                         <option value={'NonValue'}>Sin valor</option>
                         {
@@ -245,8 +245,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_TVR</label>
+                    </select><br />
+                    <label>KB2_TVR</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'TVR')}}>
                         <option value={'NonValue'}>sin valor</option>
                         {
@@ -256,8 +256,8 @@ export const FormFilterDataB2 = () => {
                                 )
                             })
                         }
-                    </select>
-                    <label>KB2_AIP</label>
+                    </select><br />
+                    <label>KB2_AIP</label><br />
                     <select onChange={(ev) => {sysChanges(ev.target.value, 'AIP')}}>
                         <option value={'NonVale'}>Sin valor</option>
                         {

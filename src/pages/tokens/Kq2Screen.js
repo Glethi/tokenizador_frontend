@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useEffect } from "react";
+import { getData, postData } from "../../services/dashService";
 import { BsBarChart, BsPercent, BsGrid3X3GapFill } from "react-icons/bs";
 import { BarGraph } from "../../components/ui/k2q/BarGraph";
 import { DonutGraphK2q } from "../../components/ui/k2q/DonutGraph";
@@ -8,6 +9,27 @@ import { FilterContext } from "../../services/FilterContext";
 
 
 export const Kq2Screen = () => {
+
+    const { valFilterKq2, setData } = useContext(FilterContext);
+
+    useEffect(() => {
+    async function loadData(){
+        setData([{}])
+        if(valFilterKq2 == 'allData'){
+            const response = await getData('kq2');
+            if(response.status === 200){
+                setData(response.data);
+            }
+        }
+        else{
+            const responseFilter = await postData('kq2Filter', { kq2: valFilterKq2 });
+            if(responseFilter.status === 200){
+                setData(responseFilter.data);
+            }
+        }
+    }
+    loadData();
+    }, [valFilterKq2])
 
     return ( 
             <div className="medio-acceso">

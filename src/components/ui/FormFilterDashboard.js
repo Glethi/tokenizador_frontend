@@ -10,13 +10,9 @@ export const FormFilterDashboard = () => {
         valEndpoint,
         setValEndpoint,
         options,
-        setOptions,
-        setDataFiltered,
-        valFilterKq2, 
+        setOptions, 
         setValFilterKq2,
-        valFilterCR, 
         setValFilterCR,
-        valFilterEntry,
         setValFilterEntry
     } = useContext(FilterContext);
 
@@ -30,31 +26,12 @@ export const FormFilterDashboard = () => {
         loadData()
     }, [valEndpoint])
 
-    /*
-    useEffect(() => {
-        async function filterData(){
-            var filter = new Object();
-            filter.endPoint = valEndpoint
-            filter.kq2 = valFilterKq2
-            filter.code_Response = valFilterCR
-            filter.entry_Mode = valFilterEntry
-            const response = await postData('dashboardFilter', filter)
-            if(response.status === 200){
-                setDataFiltered(response.data)
-            }    
-        }
-        filterData()
-    }, [options])
-    */
-    
-
     function sysChangesEndpoint(values){
         var state = values
         setValEndpoint(state)
     }
 
     function sysChanges(values){
-        //var state = {... valEndpoint}
         var state = values
         switch(valEndpoint){
             case 'kq2':{
@@ -109,7 +86,7 @@ export const FormFilterDashboard = () => {
                         {
                             data.map((e, index) => {
                                 return (
-                                    <option value={e.ID} key={index} selected={options == e.ID}>{e.ID + " - " + e.Description}</option>
+                                    <option value={e.ID} key={index} selected={options === e.ID}>{e.ID + " - " + e.Description}</option>
                                 )
                             })
                         }
