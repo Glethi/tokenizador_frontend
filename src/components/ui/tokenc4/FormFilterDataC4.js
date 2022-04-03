@@ -40,8 +40,14 @@ export const FormFilterDataC4 = () => {
   }
 
   function sysFlag(f){
-    setFilter(filterC4);
-    setFlag(f);
+    if(f === 'tokenC4Filter'){
+      setFilter(filterC4);
+      setFlag(f);
+    }else{
+      setFilter({});
+      setFlag(f)
+    }
+    
   }
 
   return (

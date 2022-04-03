@@ -9,7 +9,6 @@ import { TableDataC0 } from "../../components/ui/tokenc0/TableDataC0";
 export const TokenC0Screen = () => {
 
     const { setDat, setFlag } = useContext(FilterContext);
-    setFlag('tokenC4DataTable');
     useEffect(() => {
         setDat([{}]);
         async function loadData() {

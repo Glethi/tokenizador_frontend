@@ -9,7 +9,6 @@ import { FilterTableData } from "../../components/ui/filterTable/FilterTableData
 export const TokenC4Screen = () => {
 
     const { setDat, setFlag } = useContext(FilterContext);
-    setFlag('tokenC4DataTable');
     useEffect(() => {
         setDat([{}]);
         async function loadData() {

@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { getData, postData } from '../../../services/dashService';
-import { DataContext } from '../../../services/DataContext'; 
+import React, { useState, useContext } from 'react'
+import { FilterContext } from '../../../services/FilterContext';
 
 export const FormFilterDataB3 = () => {
 
-  const [data, setData] = useState([{}]);
+  const { dat, setFlag, setFilter = ({}) } = useContext(FilterContext);
 
-  const [dataFilter, setDataFilter] = useState({
+  const [filterB3, setFilterB3] = useState({
     Bit_Map: 'NonValue',
     Terminal_Serial_Number: 'NonValue',
     Check_Cardholder: 'NonValue',
@@ -19,63 +18,32 @@ export const FormFilterDataB3 = () => {
     File_Name: 'NonValue'
   });
 
-  useEffect(() => {
-    async function loadData(){
-      const response = await getData('tokenB3')
-      if(response.status == 200){
-        setData(response.data);
-      }
-    }
-    loadData();
-  }, []);
-
-  const Bit_Map = [], Terminal_Serial_Number = [], Check_CardHolder = [], User_Field_One = [], User_Field_Two = [];
-  const Terminal_Type_EMV = [], App_Version_Number = [], CVM_Result = [], File_Name_Length = [], File_Name = [];
-  var BitM, Term_SN, Check_CH, User_FO, User_FT, Term_TEMV, App_VN, CVM_Res, FN_Length, FN;
-  data.map((e) => {
-    Bit_Map.push(e.Bit_Map)
-    Terminal_Serial_Number.push(e.Terminal_Serial_Number)
-    Check_CardHolder.push(e.Check_CardHolder)
-    User_Field_One.push(e.User_Field_One)
-    User_Field_Two.push(e.User_Field_Two)
-    Terminal_Type_EMV.push(e.Terminal_Type_EMV)
-    App_Version_Number.push(e.App_Version_Number)
-    CVM_Result.push(e.CVM_Result)
-    File_Name_Length.push(e.File_Name_Length)
-    File_Name.push(e.File_Name)
-  })
-
-  BitM = [... new Set(Bit_Map)]
-  Term_SN = [... new Set(Terminal_Serial_Number)]
-  Check_CH = [... new Set(Check_CardHolder)]
-  User_FO = [... new Set(User_Field_One)]
-  User_FT = [... new Set(User_Field_Two)]
-  Term_TEMV = [... new Set(Terminal_Type_EMV)]
-  App_VN = [... new Set(App_Version_Number)]
-  CVM_Res = [... new Set(CVM_Result)]
-  FN_Length = [... new Set(File_Name_Length)]
-  FN = [... new Set(File_Name)]
+  const BitM = [...new Set(dat.map((e) => e.Bit_Map))]
+  const Term_SN = [...new Set(dat.map((e) => e.Terminal_Serial_Number))]
+  const Check_CH = [...new Set(dat.map((e) => e.Check_CardHolder))]
+  const User_FO = [...new Set(dat.map((e) => e.User_Field_One))]
+  const User_FT = [...new Set(dat.map((e) => e.User_Field_Two))]
+  const Term_TEMV = [...new Set(dat.map((e) => e.Terminal_Type_EMV))]
+  const App_VN = [...new Set(dat.map((e) => e.App_Version_Number))]
+  const CVM_Res = [...new Set(dat.map((e) => e.CVM_Result))]
+  const FN_Length = [...new Set(dat.map((e) => e.File_Name_Length))]
+  const FN = [...new Set(dat.map((e) => e.File_Name))]
 
   function sysChanges(value, prop){
-    var state = {...dataFilter}
+    var state = {...filterB3}
     state[prop] = value
-    setDataFilter(state)
+    setFilterB3(state)
   }
-  
-  const {setDat} = useContext(DataContext);
-  async function sendData(){
-    const response = await postData('tokenB3Filter', dataFilter)
-    if(response.status === 200){
-        setDat(response.data)
-    }
-}
 
-  async function resetData(){
-    const response = await getData('tokenC4DataTable')
-    if(response.status === 200){
-        setDat(response.data)
+  function sysFlag(f){
+    if(f === 'tokenB3Filter'){
+      setFilter(filterB3);
+      setFlag(f);
+    }else{
+      setFilter({});
+      setFlag(f);
     }
-}
+  }
 
   return (
     <div className='form'>
@@ -152,7 +120,7 @@ export const FormFilterDataB3 = () => {
             </div>
             <div className='col m-2'>
                 <label>KB3_APP_VER_NUM</label><br />
-                <select oncChange={(ev) => {sysChanges(ev.target.value, 'App_Version_Number')}}>
+                <select onChange={(ev) => {sysChanges(ev.target.value, 'App_Version_Number')}}>
                     <option value={'NonValue'}>Sin valor</option>
                     {
                       App_VN.map((e, index) => {
@@ -205,13 +173,13 @@ export const FormFilterDataB3 = () => {
           <div className='col'>
             <button className='button-filter'
             type='button'
-            onClick={sendData}>
+            onClick={() => sysFlag('tokenB3Filter')}>
             Filtrar</button>
           </div>
           <div className='col'>
             <button className='button-reset'
             type = 'button'
-            onClick={resetData}>
+            onClick={() => sysFlag('tokenC4DataTable')}>
             Reset Tabla</button>
           </div>
         </div>

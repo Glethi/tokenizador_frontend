@@ -6,8 +6,18 @@ import { FilterContext } from '../../../services/FilterContext';
 
 export const FilterTableData = () => {
 
-    const [data, setData] = useState([{}]);
-    const { flag, filter, setFilter } = useContext(FilterContext);
+    const [data, setData] = useState([{
+        Fiid_Card: '',
+        Fiid_Comerce: '',
+        Terminal_Name: '',
+        Code_Response: '',
+        R: '',
+        Number_Sec: '',
+        ID_Access_Mode: '',
+        entryMode: '',
+        amount: ''
+    }]);
+    const { flag, filter } = useContext(FilterContext);
 
     const columns = [
         {
@@ -104,7 +114,6 @@ export const FilterTableData = () => {
                         if(responseFilter.status === 200){
                             setData(responseFilter.data);
                         }
-                        setFilter({});
                         break;
                     }
                     case 'tokenC0Filter': {
@@ -112,14 +121,31 @@ export const FilterTableData = () => {
                         if(responseFilter.status === 200){
                             setData(responseFilter.data);
                         }
-                        setFilter({});
                         break;
+                    }
+                    case 'tokenB3Filter': {
+                        const responseFilter = await postData(flag, filter);
+                        if(responseFilter.status === 200){
+                            setData(responseFilter.data);
+                        }
+                    }
+                    case 'tokenB4Filter':{
+                        const responseFilter = await postData(flag, filter);
+                        if(responseFilter.status === 200){
+                            setData(responseFilter.data);
+                        }
+                    }
+                    case 'tokenB2Filter':{
+                        const responseFilter = await postData(flag, filter);
+                        if(responseFilter.status === 200){
+                            setData(responseFilter.data);
+                        }
                     }
                 }
             }
         }
         loadData();
-    }, [flag]);
+    }, [flag, filter]);
 
     const tableData = {
         columns,
