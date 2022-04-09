@@ -10,7 +10,7 @@ import { FilterContext } from "../../services/FilterContext";
 
 export const Kq2Screen = () => {
 
-    const { valFilterKq2, setData } = useContext(FilterContext);
+    const { valFilterKq2, setData} = useContext(FilterContext);
 
     useEffect(() => {
     async function loadData(){

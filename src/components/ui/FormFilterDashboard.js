@@ -54,7 +54,7 @@ export const FormFilterDashboard = () => {
 
     return (
         <div className='form'>
-            <div className='row'>
+            <div className='row w-100'>
                 <div className='col'>
                     <label><h4>Filtrar por:</h4></label>
                     <select

@@ -3,7 +3,19 @@ import { useState } from "react";
 import { FilterContext } from "./services/FilterContext";
 
 export const TokenApp = () =>{
-
+    //Estado para el usuario
+    const[user, setUser] = useState({
+        username: '',
+        name: '',
+        fisrtname: '',
+        type: '',
+        logged: false
+    }); 
+    //Estado para loading page
+    const[loading, setLoading] = useState({
+        data: true,
+        sesion: false,
+    });
     //Estados para dashboard
     const[valEndpoint, setValEndpoint] = useState('dashboard'); 
     const[options, setOptions] = useState(''); 
@@ -25,6 +37,10 @@ export const TokenApp = () =>{
     
     return(
     <FilterContext.Provider value={{
+            user,
+            setUser, //usuario
+            loading,
+            setLoading,
             valEndpoint,
             setValEndpoint, //Dashboard
             options,

@@ -8,12 +8,12 @@ import { FormFilterDashboard } from "../../components/ui/FormFilterDashboard";
 
 export const DashboardScreen = () => {
 
-    const { data, setData, 
+    const { setData, 
             valEndpoint, 
             options, 
             valFilterKq2, 
             valFilterCR, 
-            valFilterEntry } = useContext(FilterContext);
+            valFilterEntry,} = useContext(FilterContext);
 
     useEffect(() => {
         async function loadData() {

@@ -5,7 +5,7 @@
     height: 60px;
     width: 100%;
     z-index: 10;
-    ul{
+    ul, .userDrop{
         list-style: none;
         float: left;
         display: flex;
@@ -27,18 +27,26 @@
                 padding-bottom: 0.7rem;
             }
         }
+        
     }
-    .drap{
+    .userDrop{
+        float: right;
+    }
+    .drapToken, .drapUser{
         margin: 0.5rem !important;
         color: white !important;
         background-color: $gray-strong !important;
         border-color: transparent !important;
     }
-    .drap:active{
+    .drapUser{
+        margin: 0px !important;
+    }
+
+    .drapToken:active, .drapUser:active{
         background-color: $black-selected !important;
         border-color: transparent !important;
     }
-    .drap:hover{
+    .drapToken:hover, .drapUser:hover{
         background-color: $black-selected !important;
     }
 }

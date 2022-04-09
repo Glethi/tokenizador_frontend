@@ -1,16 +1,39 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { BsBarChart, BsColumnsGap, BsTable } from "react-icons/bs";
 import logo from '../../resources/logo.png';
+import { FilterContext } from '../../services/FilterContext';
+import { BiUserCircle, BiLogOutCircle, BiUser, BiUserPin } from 'react-icons/bi';
 
 
-export const Sidebar = () =>{
+export const Sidebar = () => {
 
-    const [dropdown, setDropdown] = useState(false);
+    const { setUser, user, setLoading } = useContext(FilterContext);
 
-    const handleDropdown = () =>{
-        setDropdown(!dropdown);
+    const [dropdownToken, setDropdownToken] = useState(false);
+    const [dropdownUser, setDropdownUser] = useState(false);
+
+    const handleDropdownToken = () => {
+        setDropdownToken(!dropdownToken);
+    }
+
+    const handleDropdownUser = () => {
+        setDropdownUser(!dropdownUser);
+    }
+
+    const handleLogout = () => {
+        setUser({
+            username: '',
+            name: '',
+            fisrtname: '',
+            type: '',
+            logged: false
+        })
+        setLoading({
+            data: true,
+            sesion: true
+        });
     }
 
     return (
@@ -18,90 +41,106 @@ export const Sidebar = () =>{
             <div className='sidebar-content'>
                 <ul>
                     <li>
-                        <img src={logo}/>  
+                        <img src={logo} />
                     </li>
                     <li>
                         <NavLink  //className -> Para checar si es que esta actio el link.
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
-                            activeClassName={({isActive}) => "" + (isActive ? 'active' : '')} 
-                            to="/">
-                        <BsColumnsGap size={20}/> Dashboard  
+                            activeClassName={({ isActive }) => "" + (isActive ? 'active' : '')}
+                            to="/dashboard">
+                            <BsColumnsGap size={20} /> Dashboard
                         </NavLink>
                     </li>
                     <li>
                         <NavLink  //className -> Para checar si es que esta actio el link.
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-3'
-                            activeClassName={({isActive}) => "" + (isActive ? 'active' : '')} 
+                            activeClassName={({ isActive }) => "" + (isActive ? 'active' : '')}
                             to="/kq2">
-                        <BsBarChart size={20}/> Kq2 Medio Acceso  
+                            <BsBarChart size={20} /> Kq2 Medio Acceso
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink 
+                        <NavLink
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-4'
-                            activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
+                            activeClassName={({ isActive }) => " " + (isActive ? 'active' : '')}
                             to="/codigorespuesta">
-                        <BsBarChart size={20}/> Código Respuesta
+                            <BsBarChart size={20} /> Código Respuesta
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink 
+                        <NavLink
                             className='text-center text-white rounded py-2 w-100 d-inline-block px-4'
-                            activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
+                            activeClassName={({ isActive }) => " " + (isActive ? 'active' : '')}
                             to="/entrymode">
-                        <BsBarChart size={20}/> Entry Mode
+                            <BsBarChart size={20} /> Entry Mode
                         </NavLink>
                     </li>
-                    <Dropdown 
-                    isOpen={dropdown} 
-                    toggle={handleDropdown}
-                    >
-                        <DropdownToggle caret className="drap">
-                        <BsTable size={20}/> Token's
+                    <Dropdown
+                        isOpen={dropdownToken}
+                        toggle={handleDropdownToken}>
+                        <DropdownToggle caret className='drapToken'>
+                            <BsTable size={20} /> Token's
                         </DropdownToggle>
                         <DropdownMenu dark>
                             <DropdownItem>
-                                <NavLink 
-                                className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
-                                activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
-                                to="/tokenc4">
-                                Token C4
+                                <NavLink
+                                    className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
+                                    to="/tokenc4">
+                                    Token C4
                                 </NavLink>
                             </DropdownItem>
                             <DropdownItem>
-                                <NavLink 
-                                className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
-                                activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
-                                to="/tokenc0">
-                                Token C0
+                                <NavLink
+                                    className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
+                                    to="/tokenc0">
+                                    Token C0
                                 </NavLink>
                             </DropdownItem>
                             <DropdownItem>
-                                <NavLink 
-                                className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
-                                activeClassName={({isActive}) => " " + (isActive ? 'active' : '')} 
-                                to="/tokenb3">
-                                Token B3
+                                <NavLink
+                                    className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
+                                    to="/tokenb3">
+                                    Token B3
                                 </NavLink>
                             </DropdownItem>
                             <DropdownItem>
-                                <NavLink 
-                                className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
-                                activeClassName={({isActive}) => " " + (isActive ? 'active' : '')}
-                                to="/tokenb4">
-                                Token B4
+                                <NavLink
+                                    className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
+                                    to="/tokenb4">
+                                    Token B4
                                 </NavLink>
                             </DropdownItem>
                             <DropdownItem>
-                                <NavLink 
-                                className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
-                                activeClassName={({isActive}) => "" + (isActive ? 'active' : '')} 
-                                to="/tokenb2">
-                                Token B2
-                                </NavLink>  
+                                <NavLink
+                                    className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
+                                    to="/tokenb2">
+                                    Token B2
+                                </NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+                </ul>
+                <ul className='userDrop'>
+                    <li>
+                        <Dropdown
+                            isOpen={dropdownUser}
+                            toggle={handleDropdownUser}>
+                            <DropdownToggle caret className='drapUser'>
+                                <BiUserCircle size={30} /> {user.username}
+                            </DropdownToggle>
+                            <DropdownMenu dark>
+                                <DropdownItem disabled className='text-white'>
+                                <BiUser size={20} /> Nombre: {user.name+' '+user.fisrtname+' '+user.secondname}
+                                </DropdownItem>
+                                <DropdownItem disabled className='text-white'>
+                                <BiUserPin size={20} /> Rol: {user.type}
+                                </DropdownItem>
+                                <DropdownItem onClick={handleLogout} className='text-white'>
+                                    <BiLogOutCircle size={20}/> Salir
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </li>
                 </ul>
             </div>
         </div>

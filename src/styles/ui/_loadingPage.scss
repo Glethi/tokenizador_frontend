@@ -1,0 +1,26 @@
+.loading-page, .sesion-page {
+    text-align: center;
+    background: url(../../resources/bg.jpg);
+    background-position: top;
+    background-position: no-repeat;
+    height: 100vh;
+
+    .container{
+        margin: 0px;
+        background: linear-gradient(57.36deg, rgba(0,0,0,0.87) 51.65%, rgba(9, 60, 75, 0.435) 100%);
+        height: 100vh;
+        max-width: 100%;
+        padding: 7rem;
+        h1, h2{
+            color: white;
+            padding: 1rem;
+        }
+
+        .spinner{
+            width: 10rem;
+            height: 10rem;
+            border: 10px solid currentColor;
+            border-right-color: transparent;
+        }
+    }
+}
