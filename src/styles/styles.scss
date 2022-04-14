@@ -3,12 +3,17 @@ $gray: #e7e9eb;
 $gray-strong: #1e1e1e;   
 $black-selected: #434957;
 $background: #f1ffef;
+$normalButton: #1271F1;
+
 //CSS base
 @import './base/base';
 //Auth
 @import './components/auth';
 //Loading pages
 @import './ui/loadingPage';
+//Amdin pages
+@import './admin/userManagment';
+//User pages
 //Componets
 @import './components/sidebar';
 @import './components/dashboard'; 

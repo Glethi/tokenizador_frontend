@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Routes} from 'react-router-dom';
 import { DashboardScreen } from "../pages/main/DashboardScreen";
-import { CodeResponseScreen, EntryModeScreen, Kq2Screen, TokenB2Screen, TokenB3Screen, TokenB4Screen, TokenC0Screen, TokenC4Screen } from "../pages/tokens";
+import { CodeResponseScreen, EntryModeScreen, Kq2Screen, TokenB2Screen, TokenB3Screen, TokenB4Screen, TokenC0Screen, TokenC4Screen,  } from "../pages/tokens";
+import { UserManagmentScreen } from '../pages/admin/UserManagmentScreen';
 import { Sidebar } from "../components/ui/Sidebar";
 import { LoadingScreen } from '../pages/ui/LoadingScreen';
 import { FilterContext } from '../services/FilterContext';
@@ -32,6 +33,7 @@ export const UserRouter = () => {
                     <Route path="/tokenb3" element={<TokenB3Screen />} />
                     <Route path="/tokenb4" element={<TokenB4Screen />} />
                     <Route path="/tokenb2" element={<TokenB2Screen />} />
+                    <Route path="/users" element={<UserManagmentScreen />} />
                 </Routes>
             </div>
         </>

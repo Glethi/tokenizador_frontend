@@ -24,10 +24,10 @@ export const FilterDataEntryMode = () => {
     }
 
     return (
-        <div className='form'>
+        <div className='filter-entrymode'>
             <div className='row'>
-                <label><h4>Filtrar por:</h4></label>
                 <div className='col'>
+                <label>Entry Mode:</label><br />
                 <select onChange={(ev) => sysChanges(ev.target.value)}>
                     <option value={'allData'} selected={valFilterEntry == 'allData'}>Todos</option>
                     {

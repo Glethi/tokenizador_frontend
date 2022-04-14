@@ -23,10 +23,10 @@ export const FilterDataCodeResp = () => {
         setValFilterCR(state)
     }
     return (
-        <div className='form'>
+        <div className='filter-CodeResponse'>
             <div className='row'>
-                <label><h4>Filtrar por:</h4></label>
                 <div className='col'>
+                <label>Código Respuesta</label><br/>
                 <select onChange={(ev) => sysChanges(ev.target.value)}>
                     <option value={'allData'} selected={valFilterCR == 'allData'}>Todos</option>
                     {

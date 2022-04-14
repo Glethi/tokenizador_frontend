@@ -34,6 +34,7 @@ export const CodeResponseScreen = () => {
         <div className="codigo-respuesta">
             <h2><BsBarChart size={20}/> Análisis por Código de Respuesta</h2>
             <div className="codigo-respuesta-content">
+                <h4>Filtrar por:</h4>
                 <FilterDataCodeResp />
                 <BarGraphCodeResp />
                 <h2><BsPercent size={20}/> de Código Respuesta </h2>

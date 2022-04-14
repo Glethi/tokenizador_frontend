@@ -25,10 +25,10 @@ export const FilterData = () => {
     }
 
     return (
-        <div className='form'>
+        <div className='filter-kq2'>
             <div className='row'>
-                <label><h4>Filtrar por:</h4></label>
                 <div className='col'>
+                <label>KQ2 Medio Acceso</label><br />
                 <select onChange={(ev) => sysChanges(ev.target.value)}>
                     <option value={'allData'} selected={valFilterKq2 == 'allData'}>Todos</option>
                     {

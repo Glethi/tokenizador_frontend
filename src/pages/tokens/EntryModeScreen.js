@@ -34,6 +34,7 @@ export const EntryModeScreen = () => {
         <div className="entry-mode">
             <h2><BsBarChart size={20}/> Análisis por Entry Mode</h2>
             <div className="entry-mode-content">
+                <h4>Filtrar por:</h4>
                 <FilterDataEntryMode />
                 <BarGraphEntryMode />
                 <h2><BsPercent size={20}/> de Entry Mode</h2>

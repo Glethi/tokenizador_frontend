@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { BsBarChart, BsColumnsGap, BsTable } from "react-icons/bs";
@@ -13,6 +13,7 @@ export const Sidebar = () => {
 
     const [dropdownToken, setDropdownToken] = useState(false);
     const [dropdownUser, setDropdownUser] = useState(false);
+    let userType = false;
 
     const handleDropdownToken = () => {
         setDropdownToken(!dropdownToken);
@@ -34,6 +35,10 @@ export const Sidebar = () => {
             data: true,
             sesion: true
         });
+    }
+
+    if (user.type === 'admin') {
+        userType = true;
     }
 
     return (
@@ -119,6 +124,19 @@ export const Sidebar = () => {
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+                    {
+                        userType 
+                        ? 
+                        <li>
+                        <NavLink
+                            className='text-center text-white rounded py-2 w-100 d-inline-block px-4'
+                            activeClassName={({ isActive }) => " " + (isActive ? 'active' : '')}
+                            to="/users">
+                            <BiUserPin size={20} /> Gestión Usuarios
+                        </NavLink>
+                        </li>
+                        :<></>
+                    }
                 </ul>
                 <ul className='userDrop'>
                     <li>
@@ -126,17 +144,20 @@ export const Sidebar = () => {
                             isOpen={dropdownUser}
                             toggle={handleDropdownUser}>
                             <DropdownToggle caret className='drapUser'>
-                                <BiUserCircle size={30} /> {user.username}
+                                <BiUserCircle size={30} />
                             </DropdownToggle>
                             <DropdownMenu dark>
                                 <DropdownItem disabled className='text-white'>
-                                <BiUser size={20} /> Nombre: {user.name+' '+user.fisrtname+' '+user.secondname}
+                                    <BiUser size={20} /> Nombre: {user.name + ' ' + user.fisrtname + ' ' + user.secondname}
                                 </DropdownItem>
                                 <DropdownItem disabled className='text-white'>
-                                <BiUserPin size={20} /> Rol: {user.type}
+                                    <BiUserCircle size={20}/> Nombre de Usuario: {user.username}
+                                </DropdownItem>
+                                <DropdownItem disabled className='text-white'>
+                                    <BiUserPin size={20} /> Rol: {user.type}
                                 </DropdownItem>
                                 <DropdownItem onClick={handleLogout} className='text-white'>
-                                    <BiLogOutCircle size={20}/> Salir
+                                    <BiLogOutCircle size={20} /> Salir
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
