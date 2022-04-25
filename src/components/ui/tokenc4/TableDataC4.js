@@ -7,25 +7,23 @@ import Swal from 'sweetalert2';
 
 export const TableDataC4 = () => {
 
-    const { dat, filter } = useContext(FilterContext);
+    const { filterC4 } = useContext(FilterContext);
     const [data, setData] = useState([{}]);
-
     useEffect(() => {
         async function loadData(){
-            setData([{}]);
-            const response = await postData('tokenC4Filter/main', filter)
+            const response = await postData('tokenC4Filter/main', filterC4)
             if(response.status === 200){
                 setData(response.data);
                 Swal.fire({
                     icon: 'success',
                     title: 'Datos cargados correctamente',
                     showConfirmButton: false,
-                    timer: 2000
+                    timer: 1500
                 })
             }
         }
         loadData()
-    }, [filter])
+    }, [filterC4])
     
 
     const columns = [
@@ -78,6 +76,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.TermAttFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.TermAttFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_TERM_OPER_IND',
@@ -85,6 +98,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.TermOperFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.TermOperFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_TERM_LOC_IND',
@@ -92,6 +120,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles:[
+                {
+                    when: row => row.TermLocFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.TermLocFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_CRDHLDR_PRESENT_IND',
@@ -99,6 +142,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles:[
+                {
+                    when: row => row.CardholdrPresFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.CardholdrPresFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_CRD_PRESENT_IND',
@@ -106,6 +164,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.CardpresenceFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.CardpresenceFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_CRD_CAPTR_IND',
@@ -113,6 +186,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.CardCaptureFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.CardCaptureFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_TXN_STAT_IND',
@@ -120,6 +208,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.ReqStatusFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.ReqStatusFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_TXN_SEC_IND',
@@ -127,6 +230,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.SecLevelFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.SecLevelFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_TXN_RTN_IND',
@@ -134,6 +252,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.routingFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.routingFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_CRDHLDR_ACTVT_TERM_IND',
@@ -141,6 +274,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.TermActivationFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.TermActivationFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_TERM_INPUT_CAP_IND',
@@ -148,6 +296,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.TermDataTransFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.TermDataTransFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         },
         {
             name: 'KC4_CRDHLDR_ID_METHOD',
@@ -155,6 +318,21 @@ export const TableDataC4 = () => {
             sortable: true,
             right: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.CardholdrMethodFlag === 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.CardholdrMethodFlag === 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
         },
     ];
 

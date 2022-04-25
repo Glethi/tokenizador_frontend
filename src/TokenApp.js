@@ -30,12 +30,28 @@ export const TokenApp = () => {
     const [valFilterEntry, setValFilterEntry] = useState('allData');
 
     //TOKENS
-    //Estado para tabla resultante en el filtro de todos los tokens
-    const [flag, setFlag] = useState('tokenC4DataTable');
     //Estado para tablas en token's
     const [dat, setDat] = useState([{}]);
-    const [datFilter, setDatFilter] = useState([{}]);
-    const [filter, setFilter] = useState({});
+    //Estado para el filtro Token C4
+    const [filterC4, setFilterC4] = useState({
+        kq2: "allData",
+        Code_Response: "allData",
+        Entry_Mode: "allData",
+        ID_Terminal_Attended: "NonValue",
+        ID_Terminal: "NonValue",
+        Terminal_Location: "NonValue",
+        ID_Cardholder_Presence: "NonValue",
+        ID_Card_Presence: "NonValue",
+        ID_Card_Capture: "NonValue",
+        ID_Status: "NonValue",
+        Security_Level: "NonValue",
+        Routing_Indicator: "NonValue",
+        Terminal_Activation_Cardholder: "NonValue",
+        ID_Terminal_Data_Transfer: "NonValue",
+        ID_Cardholder_Method: "NonValue"
+    });
+    //Estado para el endpoint que se requiere en la
+    const [endpointToken, setEndpointToken] = useState('tokenC4Filter');
 
     return (
         <FilterContext.Provider value={{
@@ -55,14 +71,12 @@ export const TokenApp = () => {
             setValFilterCR, //Filtro para codigo de respuesta
             valFilterEntry,
             setValFilterEntry, //Filtro para entry mode
-            flag,
-            setFlag, //Bandera para los filtros de los tokens
             dat,
             setDat, //Data para tablas y formularios de cada uno de los tokens
-            filter,
-            setFilter,
-            datFilter,
-            setDatFilter
+            filterC4,
+            setFilterC4,
+            endpointToken,
+            setEndpointToken
         }}>
             <AppRouter />
         </FilterContext.Provider>

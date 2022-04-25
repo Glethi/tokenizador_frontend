@@ -30,7 +30,7 @@ export const FilterData = () => {
                 <div className='col'>
                 <label>KQ2 Medio Acceso</label><br />
                 <select onChange={(ev) => sysChanges(ev.target.value)}>
-                    <option value={'allData'} selected={valFilterKq2 == 'allData'}>Todos</option>
+                    <option value={'allData'} selected={valFilterKq2 == 'allData'}>Sin filtrar</option>
                     {
                         data.map((e, index) => {
                             return(

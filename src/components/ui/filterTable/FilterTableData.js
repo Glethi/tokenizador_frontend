@@ -6,20 +6,53 @@ import { FilterContext } from '../../../services/FilterContext';
 
 export const FilterTableData = () => {
 
-    const [data, setData] = useState([{
-        Fiid_Card: '',
-        Fiid_Comerce: '',
-        Terminal_Name: '',
-        Code_Response: '',
-        R: '',
-        Number_Sec: '',
-        ID_Access_Mode: '',
-        entryMode: '',
-        amount: ''
-    }]);
-    const { flag, filter } = useContext(FilterContext);
+    const { filterC4, endpointToken } = useContext(FilterContext);
+    const [data, setData] = useState([{}]);
 
     const columns = [
+        {
+            name: 'Q2_MEDIO_ACCESO',
+            selector: row => row.ID_Access_Mode,
+            sortable: true,
+            right: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(24, 143, 254 )'
+            }
+        },
+        {
+            name: 'CODIGO_RESPUESTA',
+            selector: row => row.ID_Code_Response,
+            sortable: true,
+            right: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.ID_Code_Response <= '010',
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.ID_Code_Response > '010',
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
+        },
+        {
+            name: 'ENTRY_MODE',
+            selector: row => row.ID_Entry_Mode,
+            sortable: true,
+            right: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(150, 24, 254)',
+                color: 'white'
+            }
+        },
         {
             name: 'FIID_TARJ',
             selector: row => row.Fiid_Card,
@@ -42,28 +75,6 @@ export const FilterTableData = () => {
             wrap: true
         },
         {
-            name: 'CODIGO_RESPUESTA',
-            selector: row => row.Code_Response,
-            sortable: true,
-            right: true,
-            wrap: true,
-            conditionalCellStyles:[
-                {
-                    when: row  => row.Code_Response <= '010',
-                    style: {
-                        backgroundColor: 'rgb(47, 164, 11)',
-                    }
-                },
-                {
-                    when: row  => row.Code_Response > '010',
-                    style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
-                        color: 'white'
-                    }
-                }
-            ]
-        },
-        {
             name: 'R',
             selector: row => row.R,
             sortable: true,
@@ -78,20 +89,6 @@ export const FilterTableData = () => {
             wrap: true
         },
         {
-            name: 'KQ2_ID_MEDIO_ACCESO',
-            selector: row => row.ID_Access_Mode,
-            sortable: true,
-            right: true,
-            wrap: true
-        },
-        {
-            name: 'ENTRY_MODE',
-            selector: row => row.entryMode,
-            sortable: true,
-            right: true,
-            wrap: true
-        },
-        {
             name: 'MONTO',
             selector: row => row.amount,
             sortable: true,
@@ -101,51 +98,14 @@ export const FilterTableData = () => {
     ]
 
     useEffect(() => {
-        async function loadData(){
-            if(flag === 'tokenC4DataTable'){
-                const response = await getData(flag);
-                if(response.status === 200){
-                    setData(response.data);
-                }
-            }else{
-                switch(flag){
-                    case 'tokenC4Filter': {
-                        const responseFilter = await postData(flag, filter);
-                        if(responseFilter.status === 200){
-                            setData(responseFilter.data);
-                        }
-                        break;
-                    }
-                    case 'tokenC0Filter': {
-                        const responseFilter = await postData(flag, filter);
-                        if(responseFilter.status === 200){
-                            setData(responseFilter.data);
-                        }
-                        break;
-                    }
-                    case 'tokenB3Filter': {
-                        const responseFilter = await postData(flag, filter);
-                        if(responseFilter.status === 200){
-                            setData(responseFilter.data);
-                        }
-                    }
-                    case 'tokenB4Filter':{
-                        const responseFilter = await postData(flag, filter);
-                        if(responseFilter.status === 200){
-                            setData(responseFilter.data);
-                        }
-                    }
-                    case 'tokenB2Filter':{
-                        const responseFilter = await postData(flag, filter);
-                        if(responseFilter.status === 200){
-                            setData(responseFilter.data);
-                        }
-                    }
-                }
+        async function loadData() {
+            const responseFilter = await postData(endpointToken, filterC4);
+            if (responseFilter.status === 200) {
+                setData(responseFilter.data);
             }
         }
         loadData();
-    }, [flag, filter]);
+    }, [filterC4]);
 
     const tableData = {
         columns,
@@ -154,15 +114,15 @@ export const FilterTableData = () => {
 
     return (
         <div className='tableData table-responsive'>
-            <DataTableExtension 
-            {...tableData}
-            exportHeaders = {true}>
+            <DataTableExtension
+                {...tableData}
+                exportHeaders={true}>
                 <DataTable
-                fixedHeader = {true}
-                fixedHeaderScrollHeight = "500px"
-                pagination
-                highlightOnHover 
-                dense
+                    fixedHeader={true}
+                    fixedHeaderScrollHeight="500px"
+                    pagination
+                    highlightOnHover
+                    dense
                 />
             </DataTableExtension>
         </div>

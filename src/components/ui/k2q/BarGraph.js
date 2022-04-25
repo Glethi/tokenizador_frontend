@@ -12,7 +12,7 @@ export const BarGraph = () => {
         label: "TX's Aceptadas",
         data: data.map((e) => numeral(e.TX_Accepted).value()),
         backgroundColor:['#2FA40B'],
-    };
+    }; 
 
     const dataTX_Rejected = {
         label: "TX's Rechazadas",

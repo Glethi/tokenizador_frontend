@@ -12,8 +12,8 @@ export async function getData (controller) {
         Swal.fire({
             icon: 'error',
             title: '¡ERROR!',
-            text: 'No se ha podido conectar a la base de datos, contacte con soporte',
-            showConfirmButton: false,
+            text: 'Sin conexión a la base de datos',
+            showConfirmButton: false
         })
     }
 }
@@ -28,9 +28,10 @@ export async function postData(controller, objectData){
         return response;
     }catch(e){
         Swal.fire({
-            icon: 'warning',
-            title: 'Precaución',
-            text: 'Para utilizar el filtro, elija valores en el formulario',
+            icon: 'error',
+            title: '!ERROR!',
+            text: 'Sin conexión a base de datos',
+            showConfirmButton: false
         })
     }
 }
