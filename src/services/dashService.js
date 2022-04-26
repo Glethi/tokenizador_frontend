@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 export async function getData (controller) {
     try{
         const response = await axios({
-            url: "http://localhost:8000/api/"+controller,
+            url: "/api/"+controller,
             method: 'GET'
         })
     return response;
@@ -21,7 +21,7 @@ export async function getData (controller) {
 export async function postData(controller, objectData){
     try{
         const response = await axios({
-            url: "http://localhost:8000/api/"+controller,
+            url: "/api/"+controller,
             method: 'POST',
             data: objectData,
         })
