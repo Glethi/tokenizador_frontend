@@ -34,21 +34,21 @@ export const TokenApp = () => {
     const [dat, setDat] = useState([{}]);
     //Estado para el filtro Token C4
     const [filterC4, setFilterC4] = useState({
-        kq2: "allData",
-        Code_Response: "allData",
-        Entry_Mode: "allData",
-        ID_Terminal_Attended: "NonValue",
-        ID_Terminal: "NonValue",
-        Terminal_Location: "NonValue",
-        ID_Cardholder_Presence: "NonValue",
-        ID_Card_Presence: "NonValue",
-        ID_Card_Capture: "NonValue",
-        ID_Status: "NonValue",
-        Security_Level: "NonValue",
-        Routing_Indicator: "NonValue",
-        Terminal_Activation_Cardholder: "NonValue",
-        ID_Terminal_Data_Transfer: "NonValue",
-        ID_Cardholder_Method: "NonValue"
+        Kq2: 'allData',
+        Code_Response: 'allData',
+        Entry_Mode: 'allData',
+        ID_Terminal_Attended: 'NonValue',
+        ID_Terminal: 'NonValue',
+        Terminal_Location: 'NonValue',
+        ID_Cardholder_Presence: 'NonValue',
+        ID_Card_Presence: 'NonValue',
+        ID_Card_Capture: 'NonValue',
+        ID_Status: 'NonValue',
+        Security_Level: 'NonValue',
+        Routing_Indicator: 'NonValue',
+        Terminal_Activation_Cardholder: 'NonValue',
+        ID_Terminal_Data_Transfer: 'NonValue',
+        ID_Cardholder_Method: 'NonValue'
     });
     //Estado para el endpoint que se requiere en la
     const [endpointToken, setEndpointToken] = useState('tokenC4Filter');

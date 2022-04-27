@@ -17,7 +17,7 @@ export const DashboardScreen = () => {
 
     useEffect(() => {
         async function loadData() {
-            if(valEndpoint == 'dasboard' && options == 'allData'){
+            if(valEndpoint == 'dashboard' && options == 'allData'){
                 const response = await getData('dashboard');
                 if(response.status == 200){
                     setData(response.data);

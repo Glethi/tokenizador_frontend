@@ -28,6 +28,7 @@
     "sweetalert2": "^11.4.8",
     "web-vitals": "^2.1.4"
   },
+  "homepage": "http://localhost/saet-tokenizado",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

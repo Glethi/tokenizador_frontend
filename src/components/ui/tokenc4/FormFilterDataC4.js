@@ -12,31 +12,32 @@ export const FormFilterDataC4 = () => {
   const [data, setData] = useState([{}]);
 
   const [filter, setFilter] = useState({
-    ID_Terminal_Attended: "NonValue",
-    ID_Terminal: "NonValue",
-    Terminal_Location: "NonValue",
-    ID_Cardholder_Presence: "NonValue",
-    ID_Card_Presence: "NonValue",
-    ID_Card_Capture: "NonValue",
-    ID_Status: "NonValue",
-    Security_Level: "NonValue",
-    Routing_Indicator: "NonValue",
-    Terminal_Activation_Cardholder: "NonValue",
-    ID_Terminal_Data_Transfer: "NonValue",
-    ID_Cardholder_Method: "NonValue"
+    ID_Terminal_Attended: 'NonValue',
+    ID_Terminal: 'NonValue',
+    Terminal_Location: 'NonValue',
+    ID_Cardholder_Presence: 'NonValue',
+    ID_Card_Presence: 'NonValue',
+    ID_Card_Capture: 'NonValue',
+    ID_Status: 'NonValue',
+    Security_Level: 'NonValue',
+    Routing_Indicator: 'NonValue',
+    Terminal_Activation_Cardholder: 'NonValue',
+    ID_Terminal_Data_Transfer: 'NonValue',
+    ID_Cardholder_Method: 'NonValue'
   })
 
   useEffect(() => {
     async function loadData() {
-        const response = await postData('tokenC4', {kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
-        if (response.status === 200) {
-            setData(response.data);
-        }
+      console.log(filterC4);
+      const response = await postData('tokenC4', {Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
+      if (response.status === 200) {
+        setData(response.data);
+      }
     }
     loadData();
-}, [valFilterKq2, valFilterCR, valFilterEntry]);
+  }, [valFilterKq2, valFilterCR, valFilterEntry]);
 
- //'.sort()' en cada arreglo para ordenar los numeros y los espacios en blanco en el formuarlio. 
+  //'.sort()' en cada arreglo para ordenar los numeros y los espacios en blanco en el formuarlio. 
   const ID_Term_At = [...new Set(data.map((e) => e.ID_Terminal_Attended))].sort()
   const ID_Term = [...new Set(data.map((e) => e.ID_Terminal))].sort()
   const Term_Loc = [...new Set(data.map((e) => e.Terminal_Location))].sort()
@@ -58,9 +59,8 @@ export const FormFilterDataC4 = () => {
 
   function sendFilter(ev) {
     ev.preventDefault();
-    setFilterC4({ ...filter, kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry })
+    setFilterC4({...filter, Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry})
     setEndpointToken('tokenC4Filter');
-    console.log(filterC4);
   }
 
   return (
