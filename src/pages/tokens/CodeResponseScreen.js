@@ -14,17 +14,9 @@ export const CodeResponseScreen = () => {
     useEffect(() => {
     async function loadData(){
         setData([{}])
-        if(valFilterCR === 'allData'){
-            const response = await getData('codeResponse');
-            if(response.status === 200){
-                setData(response.data);
-            }
-        }
-        else{
-            const responseFilter = await postData('codeResponseFilter', { codeResponse: valFilterCR });
-            if(responseFilter.status === 200){
-                setData(responseFilter.data);
-            }
+        const response = await postData('codeResponseFilter', { codeResponse: valFilterCR });
+        if(response.status === 200){
+            setData(response.data);
         }
     }
     loadData();
@@ -34,7 +26,6 @@ export const CodeResponseScreen = () => {
         <div className="codigo-respuesta">
             <h2><BsBarChart size={20}/> Análisis por Código de Respuesta</h2>
             <div className="codigo-respuesta-content">
-                <h4>Filtrar por:</h4>
                 <FilterDataCodeResp />
                 <BarGraphCodeResp />
                 <h2><BsPercent size={20}/> de Código Respuesta </h2>

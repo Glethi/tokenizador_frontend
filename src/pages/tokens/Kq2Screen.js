@@ -15,17 +15,9 @@ export const Kq2Screen = () => {
     useEffect(() => {
     async function loadData(){
         setData([{}])
-        if(valFilterKq2 == 'allData'){
-            const response = await getData('kq2');
-            if(response.status === 200){
-                setData(response.data);
-            }
-        }
-        else{
-            const responseFilter = await postData('kq2Filter', { kq2: valFilterKq2 });
-            if(responseFilter.status === 200){
-                setData(responseFilter.data);
-            }
+        const response = await postData('kq2Filter', { kq2: valFilterKq2 });
+        if(response.status === 200){
+            setData(response.data);
         }
     }
     loadData();
@@ -35,7 +27,6 @@ export const Kq2Screen = () => {
             <div className="medio-acceso">
                 <h2><BsBarChart size={20}/> Análisis por Medio Acceso</h2>
                 <div className="medio-acceso-content">
-                    <h4>Filtrar por:</h4>
                     <FilterData />
                     <BarGraph />
                     <h2><BsPercent size={20}/> de Medio Acceso</h2>

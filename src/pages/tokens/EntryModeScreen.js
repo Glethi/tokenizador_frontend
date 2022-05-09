@@ -13,18 +13,10 @@ export const EntryModeScreen = () => {
 
     useEffect(() => {
         async function loadData(){
-            setData([{}])
-            if(valFilterEntry === 'allData'){
-                const response = await getData('entryMode');
-                if(response.status === 200){
-                    setData(response.data);
-                }
-            }
-            else{
-                const responseFilter = await postData('entryModeFilter', { entryMode: valFilterEntry })
-                if(responseFilter.status === 200){
-                    setData(responseFilter.data);
-                }
+            setData([{}]);
+            const responseFilter = await postData('entryModeFilter', { entryMode: valFilterEntry })
+            if(responseFilter.status === 200){
+                setData(responseFilter.data);
             }
         }
         loadData();
@@ -34,7 +26,6 @@ export const EntryModeScreen = () => {
         <div className="entry-mode">
             <h2><BsBarChart size={20}/> Análisis por Entry Mode</h2>
             <div className="entry-mode-content">
-                <h4>Filtrar por:</h4>
                 <FilterDataEntryMode />
                 <BarGraphEntryMode />
                 <h2><BsPercent size={20}/> de Entry Mode</h2>

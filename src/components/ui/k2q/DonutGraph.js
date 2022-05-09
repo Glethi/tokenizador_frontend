@@ -87,13 +87,13 @@ export const DonutGraphK2q = () => {
 
     return (
       <div className='graphDonut row w-100'>
-        <div className='row p-3'> 
+        <div className='row w-100 p-3'> 
             <Doughnut
             data={dataAccepted}
             options={optionsAccepted}
             />
         </div>
-        <div className='row p-3'>
+        <div className='row w-100 p-3'>
             <Doughnut
             data={dataRejected} 
             options={optionsRejected}

@@ -4,6 +4,14 @@
         max-height: 550px;
         display: block;
     }
+    .data{
+        padding: 1.5rem;
+        ul{
+            margin-left: auto;
+            column-count: 3;
+            list-style: none;
+        }
+    } 
 }
 
 .graphDonut{ 

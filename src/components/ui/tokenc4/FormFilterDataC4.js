@@ -4,31 +4,30 @@ import { FilterContext } from '../../../services/FilterContext';
 import { FilterDataCodeResp } from '../codeResponse/FilterDataCodeResp';
 import { FilterDataEntryMode } from '../entryMode/FilterDataEntryMode';
 import { FilterData } from '../k2q/FilterData';
+import Select from 'react-select';
 
 export const FormFilterDataC4 = () => {
 
-  const { filterC4, setFilterC4, valFilterKq2, valFilterCR, valFilterEntry, setEndpointToken } = useContext(FilterContext);
-
+  const { setFilterC4, valFilterKq2, valFilterCR, valFilterEntry, setEndpointToken } = useContext(FilterContext);
   const [data, setData] = useState([{}]);
 
   const [filter, setFilter] = useState({
-    ID_Terminal_Attended: 'NonValue',
-    ID_Terminal: 'NonValue',
-    Terminal_Location: 'NonValue',
-    ID_Cardholder_Presence: 'NonValue',
-    ID_Card_Presence: 'NonValue',
-    ID_Card_Capture: 'NonValue',
-    ID_Status: 'NonValue',
-    Security_Level: 'NonValue',
-    Routing_Indicator: 'NonValue',
-    Terminal_Activation_Cardholder: 'NonValue',
-    ID_Terminal_Data_Transfer: 'NonValue',
-    ID_Cardholder_Method: 'NonValue'
+    ID_Terminal_Attended: [],
+    ID_Terminal: [],
+    Terminal_Location: [],
+    ID_Cardholder_Presence: [],
+    ID_Card_Presence: [],
+    ID_Card_Capture: [],
+    ID_Status: [],
+    Security_Level: [],
+    Routing_Indicator: [],
+    Terminal_Activation_Cardholder: [],
+    ID_Terminal_Data_Transfer: [],
+    ID_Cardholder_Method: []
   })
 
   useEffect(() => {
     async function loadData() {
-      console.log(filterC4);
       const response = await postData('tokenC4', {Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
       if (response.status === 200) {
         setData(response.data);
@@ -81,143 +80,157 @@ export const FormFilterDataC4 = () => {
         <h5>Filtros Token C4</h5>
         <div className='col'>
           <label>KC4_TERM_ATTEND_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Terminal_Attended') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_Term_At.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              onChange={ev => synChanges(ev.map(e => e.value), 'ID_Terminal_Attended')}
+              options={ID_Term_At.map((e) => {
+                return(
+                  { value:`${e}`, label:`${e}`}
                 )
-              })
-            }
-          </select>
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_TERM_OPER_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Terminal') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_Term.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              onChange={ev => synChanges(ev.map(e => e.value), 'ID_Terminal')}
+              options={ID_Term.map((e) => {
+                return(
+                  { value:`${e}`, label:`${e}`}
                 )
-              })
-            }
-          </select>
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_TERM_LOC_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'Terminal_Location') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              Term_Loc.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
+            <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={Term_Loc.map((e) => {
+                return(
+                  { value:`${e}`, label:`${e}`}
                 )
-              })
-            }
-          </select>
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esa opción'}/>
         </div>
         <div className='col'>
           <label>KC4_CRDHLDR_PRESENT_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Cardholder_Presence') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_CH_Pre.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+            <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={ID_CH_Pre.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_CRD_PRESENT_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Card_Presence') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_CardPres.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={ID_CardPres.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_CRD_CAPTR_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Card_Capture') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_Card_Cap.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={ID_Card_Cap.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
         </div>
         <div className='col'>
           <label>KC4_TXN_STAT_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Status') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_Sts.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={ID_Sts.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_TXN_SEC_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'Security_Level') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              Sec_Lvl.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={Sec_Lvl.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_TXN_RTN_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'Routing_Indicator') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              Rot_Ind.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={Rot_Ind.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
         </div>
         <div className='col'>
           <label>KC4_CRDHLDR_ACTVT_TERM_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'Terminal_Activation_Cardholder') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              Term_Act_CH.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={Term_Act_CH.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_TERM_INPUT_CAP_IND</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Terminal_Data_Transfer') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_Term_DT.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={ID_Term_DT.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
           <label>KC4_CRDHLDR_ID_METHOD</label>
-          <select onChange={(ev) => { synChanges(ev.target.value, 'ID_Cardholder_Method') }}>
-            <option value={"NonValue"}>Sin filtrar</option>
-            {
-              ID_CH_Met.map((e, index) => {
-                return (
-                  <option value={e} key={index}>{e}</option>
-                )
-              })
-            }
-          </select>
+          <Select 
+            closeMenuOnSelect={false}
+            isMulti
+            options={ID_CH_Met.map((e) => {
+              return(
+                { value:`${e}`, label:`${e}`}
+              )
+            })}
+            className={'select-filter'}
+            placeholder={'Seleccione una opcion'}
+            noOptionsMessage={() => 'No existe esa opción'}/>
         </div>
       </div>
       <div className='row w-100'>

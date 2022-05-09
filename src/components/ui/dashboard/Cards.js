@@ -1,14 +1,15 @@
 import React, { useContext } from 'react'
 import { Card } from './Card'
 import numeral from 'numeral'
-import { FilterContext } from '../../services/FilterContext'
+import { FilterContext } from '../../../services/FilterContext'
 
 export const Cards = () => { 
 
     const { data } = useContext(FilterContext);
     
-    var total_TX = 0, total_Amount = 0, tx_Accepted = 0, amount_Accepted = 0;
-    var tx_Rejected = 0, amount_Rejected = 0;
+    let total_TX = 0, total_Amount = 0, tx_Accepted = 0, amount_Accepted = 0;
+    let tx_Rejected = 0, amount_Rejected = 0;
+
     data.map((e) => {
         total_TX += parseInt(e.tx);
         total_Amount += parseInt(e.amount);
@@ -44,6 +45,7 @@ export const Cards = () => {
             color: 'danger',
         }
     ]
+
 
     return ( 
         <div className='container'>

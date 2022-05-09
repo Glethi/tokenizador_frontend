@@ -1,8 +1,7 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
-import { getData, postData } from '../../services/dashService';
-import { FilterContext } from '../../services/FilterContext';
+import { FilterContext } from '../../../services/FilterContext';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
@@ -12,6 +11,7 @@ export const DonutGraph = () => {
   const { data } = useContext(FilterContext);
 
   var percenAccepted = 0, percenRejected = 0, total_TX = 0;
+
   data.map((e) => {
     total_TX += e.tx;
     if(e.code_Response < '010'){
@@ -21,10 +21,10 @@ export const DonutGraph = () => {
     }
   })
 
-  const accepted = (parseFloat(((percenAccepted / total_TX) * 100)).toFixed(2))
-  const rejected = parseFloat(((percenRejected / total_TX) * 100)).toFixed(2)
+  let accepted = (parseFloat(((percenAccepted / total_TX) * 100)).toFixed(2))
+  let rejected = parseFloat(((percenRejected / total_TX) * 100)).toFixed(2)
 
-  const dataDonut = {
+  let dataDonut = {
       labels:['Aceptadas: '+accepted+ '%', 'Rechazadas: '+rejected+ '%'],
       datasets:[{
           data:[accepted, rejected],
@@ -33,7 +33,7 @@ export const DonutGraph = () => {
       }]
   };
 
-  const optionsDonut = {
+  let optionsDonut = {
       responsive: true,
       plugins: {
         legend: {
@@ -57,11 +57,18 @@ export const DonutGraph = () => {
     }
   };
 
+  //En caso de que no haya datos, mostrar este mensaje en el canvas de la gráfica.
+  if(data.length === 0){
+    dataDonut.datasets = [];
+    optionsDonut.plugins.legend.title.text = 'No hay datos para mostrar'; 
+  }
+
     return (
       <div className='graphDonut row w-100'> 
           <Doughnut
           data={dataDonut}
-          options={optionsDonut}/>
+          options={optionsDonut}
+          />
       </div>
     )
 }

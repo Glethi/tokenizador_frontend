@@ -17,17 +17,17 @@ export const TokenApp = () => {
         data: true,
         sesion: false,
     });
-    //Estados para dashboard
-    const [valEndpoint, setValEndpoint] = useState('dashboard');
-    const [options, setOptions] = useState('');
     //Estado para la data General en Graficos y Tablas
     const [data, setData] = useState([{}]);
     //Estado para Medio Accesso
-    const [valFilterKq2, setValFilterKq2] = useState('allData');
+    const [valFilterKq2, setValFilterKq2] = useState([]);
+    const [optionsKq2, setOptionsKq2] = useState(null);
     //Estado para Codigo de Respuesta
-    const [valFilterCR, setValFilterCR] = useState('allData');
+    const [valFilterCR, setValFilterCR] = useState([]);
+    const [optionsCR, setOptionsCR] = useState(null);
     //Estado para Entry Mode
-    const [valFilterEntry, setValFilterEntry] = useState('allData');
+    const [valFilterEntry, setValFilterEntry] = useState([]);
+    const [optionsEntry, setOptionsEntry] = useState(null);
 
     //TOKENS
     //Estado para tablas en token's
@@ -56,21 +56,23 @@ export const TokenApp = () => {
     return (
         <FilterContext.Provider value={{
             user,
-            setUser, //usuario
+            setUser, //Datos del usuario
             loading,
-            setLoading,
-            valEndpoint,
-            setValEndpoint, //Dashboard
-            options,
-            setOptions, //Filtro dashboard
+            setLoading, //Estado para la pantalla de carga y cerrar sesión
             data,
             setData, //Data de los graficos, tablas y formularios de kq2, codigo respuesta, entry mode
             valFilterKq2,
-            setValFilterKq2, //Filtro para kq2
+            setValFilterKq2, //Valores de ID del filtro para medio de acceso
+            optionsKq2, 
+            setOptionsKq2, //Lista de las opciones de medio de acceso que han sido seleccionadas
             valFilterCR,
-            setValFilterCR, //Filtro para codigo de respuesta
+            setValFilterCR, //Valores de ID del filtro para código de respuesta
+            optionsCR,
+            setOptionsCR, //Lista de opciones de código de respuesta
             valFilterEntry,
-            setValFilterEntry, //Filtro para entry mode
+            setValFilterEntry, //Valores de ID del filtro para entry mode
+            optionsEntry,
+            setOptionsEntry, //Lista de opciones de entry mode
             dat,
             setDat, //Data para tablas y formularios de cada uno de los tokens
             filterC4,

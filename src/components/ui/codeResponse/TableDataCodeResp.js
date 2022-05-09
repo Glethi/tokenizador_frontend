@@ -87,7 +87,7 @@ export const TableDataCodeResp = () => {
             exportHeaders = {true}>
                 <DataTable 
                 fixedHeader = {true}
-                fixedHeaderScrollHeight = "200px"
+                fixedHeaderScrollHeight = "600px"
                 pagination
                 highlightOnHover
                 />

@@ -101,7 +101,7 @@ export const TableDataEntryMode = () => {
             >
                 <DataTable 
                 fixedHeader = {true}
-                fixedHeaderScrollHeight = "200px"
+                fixedHeaderScrollHeight = "600px"
                 pagination
                 highlightOnHover/>
             </DataTableExtensions>
