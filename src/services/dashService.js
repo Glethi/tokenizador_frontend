@@ -1,13 +1,13 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const hostProd = "http://pyjcproas.duckdns.org/tokenizador_backend/public"
+const hostProd = "https://tokenizador-backend.up.railway.app"
 const hostLocal = "http://localhost:8000"
 
 export async function getData (controller) {
     try{
         const response = await axios({
-            url: hostLocal+"/api/"+controller,
+            url: hostProd+"/api/"+controller,
             method: 'GET'
         })
     return response;
@@ -24,7 +24,7 @@ export async function getData (controller) {
 export async function postData(controller, objectData){
     try{
         const response = await axios({
-            url: hostLocal+"/api/"+controller,
+            url: hostProd+"/api/"+controller,
             method: 'POST',
             data: objectData,
             headers: {

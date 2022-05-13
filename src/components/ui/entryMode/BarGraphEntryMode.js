@@ -165,15 +165,17 @@ export const BarGraphEntryMode = () => {
                 options = {optionsTX}/>
             </div>
             <div className='data row w-100'>
-                <ul className='dataList'>
-                {
-                    data.map((e) => {
-                        return (
-                            <li>{e.ID} - {e.Description}</li>
-                        )
-                    })
-                }
-                </ul>
+                <div className='list col'>
+                    <ul>
+                    {
+                        data.map((e) => {
+                            return (
+                                <li>{e.ID} - {e.Description}</li>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
             </div>
             <div className='col p-3'>
                 <Bar 
@@ -181,15 +183,17 @@ export const BarGraphEntryMode = () => {
                 options = {optionsAmount}/>
             </div>
             <div className='data row w-100'>
-                <ul className='dataList'>
-                {
-                    data.map((e) => {
-                        return (
-                            <li>{e.ID} - {e.Description}</li>
-                        )
-                    })
-                }
-                </ul>
+                <div className='list col'>
+                    <ul>
+                    {
+                        data.map((e) => {
+                            return (
+                                <li>{e.ID} - {e.Description}</li>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
             </div>
         </div>
     )

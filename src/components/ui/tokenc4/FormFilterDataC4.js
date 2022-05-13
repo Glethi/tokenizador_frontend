@@ -8,7 +8,7 @@ import Select from 'react-select';
 
 export const FormFilterDataC4 = () => {
 
-  const { setFilterC4, valFilterKq2, valFilterCR, valFilterEntry, setEndpointToken } = useContext(FilterContext);
+  const { setFilterC4, valFilterKq2, valFilterCR, valFilterEntry, setEndpointToken, endpointToken }  = useContext(FilterContext);
   const [data, setData] = useState([{}]);
 
   const [filter, setFilter] = useState({
@@ -26,7 +26,11 @@ export const FormFilterDataC4 = () => {
     ID_Cardholder_Method: []
   })
 
-  useEffect(() => {
+  const [f, setF] = useState({
+    ID_Terminal_Attended: []
+  })
+
+  useEffect(() => { 
     async function loadData() {
       const response = await postData('tokenC4', {Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
       if (response.status === 200) {
@@ -51,7 +55,7 @@ export const FormFilterDataC4 = () => {
   const ID_CH_Met = [...new Set(data.map((e) => e.ID_Cardholder_Method))].sort()
 
   function synChanges(value, prop) {
-    var state = { ...filter }
+    let state = { ...filter }
     state[prop] = value;
     setFilter(state);
   }
@@ -59,9 +63,9 @@ export const FormFilterDataC4 = () => {
   function sendFilter(ev) {
     ev.preventDefault();
     setFilterC4({...filter, Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry})
-    setEndpointToken('tokenC4Filter');
+    setEndpointToken(...f)
   }
-
+  
   return (
     <form className='form'>
       <div className="filter row">
@@ -83,7 +87,8 @@ export const FormFilterDataC4 = () => {
             <Select
               closeMenuOnSelect={false}
               isMulti
-              onChange={ev => synChanges(ev.map(e => e.value), 'ID_Terminal_Attended')}
+              onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Terminal_Attended'); setEndpointToken({ID_Terminal_Attended: ev})}}
+              value = {endpointToken.ID_Terminal_Attended}
               options={ID_Term_At.map((e) => {
                 return(
                   { value:`${e}`, label:`${e}`}
@@ -109,6 +114,7 @@ export const FormFilterDataC4 = () => {
             <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => synChanges(ev.map(e => e.value), 'Terminal_Location')}
               options={Term_Loc.map((e) => {
                 return(
                   { value:`${e}`, label:`${e}`}
@@ -123,6 +129,7 @@ export const FormFilterDataC4 = () => {
             <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'ID_Cardholder_Presence')}
             options={ID_CH_Pre.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -135,6 +142,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'ID_Card_Presence')}
             options={ID_CardPres.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -147,6 +155,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'ID_Card_Capture')}
             options={ID_Card_Cap.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -161,6 +170,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'ID_Status')}
             options={ID_Sts.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -173,6 +183,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'Security_Level')}
             options={Sec_Lvl.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -185,6 +196,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'Routing_Indicator')}
             options={Rot_Ind.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -199,6 +211,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'Terminal_Activation_Cardholder')}
             options={Term_Act_CH.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -211,6 +224,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'ID_Terminal_Data_Transfer')}
             options={ID_Term_DT.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -223,6 +237,7 @@ export const FormFilterDataC4 = () => {
           <Select 
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => synChanges(ev.map(e => e.value), 'ID_Cardholder_Method')}
             options={ID_CH_Met.map((e) => {
               return(
                 { value:`${e}`, label:`${e}`}
@@ -237,7 +252,7 @@ export const FormFilterDataC4 = () => {
         <div className='col'>
           <button
             className='filter-botton'
-            onClick={(ev) => sendFilter(ev)}>Filtrar</button>
+            onClick={(ev) => sendFilter(ev)}>Enviar</button>
         </div>
       </div>
     </form>

@@ -8,14 +8,14 @@ import { FilterContext } from '../../services/FilterContext';
 
 export const UserManagmentScreen = () => {
 
-    const { dat, setDat, user } = useContext(FilterContext);
+    const { setDataTable, user } = useContext(FilterContext);
 
     useEffect(() => {
-        setDat([{}]);
+        setDataTable([{}]);
         async function loadData(){
             const response = await postData('users', {id: user.id});
             if(response.status === 200){
-                setDat(response.data);
+                setDataTable(response.data);
             }
         }
         loadData();

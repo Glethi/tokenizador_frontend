@@ -94,28 +94,28 @@ export const Sidebar = () => {
                                     Token C4
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem disabled>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenc0">
                                     Token C0
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem disabled>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenb3">
                                     Token B3
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem disabled>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenb4">
                                     Token B4
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem>
+                            <DropdownItem disabled>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenb2">

@@ -19,6 +19,7 @@ export const TokenApp = () => {
     });
     //Estado para la data General en Graficos y Tablas
     const [data, setData] = useState([{}]);
+    const [dataTable, setDataTable] = useState([{}]);
     //Estado para Medio Accesso
     const [valFilterKq2, setValFilterKq2] = useState([]);
     const [optionsKq2, setOptionsKq2] = useState(null);
@@ -30,28 +31,28 @@ export const TokenApp = () => {
     const [optionsEntry, setOptionsEntry] = useState(null);
 
     //TOKENS
-    //Estado para tablas en token's
-    const [dat, setDat] = useState([{}]);
     //Estado para el filtro Token C4
     const [filterC4, setFilterC4] = useState({
-        Kq2: 'allData',
-        Code_Response: 'allData',
-        Entry_Mode: 'allData',
-        ID_Terminal_Attended: 'NonValue',
-        ID_Terminal: 'NonValue',
-        Terminal_Location: 'NonValue',
-        ID_Cardholder_Presence: 'NonValue',
-        ID_Card_Presence: 'NonValue',
-        ID_Card_Capture: 'NonValue',
-        ID_Status: 'NonValue',
-        Security_Level: 'NonValue',
-        Routing_Indicator: 'NonValue',
-        Terminal_Activation_Cardholder: 'NonValue',
-        ID_Terminal_Data_Transfer: 'NonValue',
-        ID_Cardholder_Method: 'NonValue'
+        Kq2: [],
+        Code_Response: [],
+        Entry_Mode: [],
+        ID_Terminal_Attended: [],
+        ID_Terminal: [],
+        Terminal_Location: [],
+        ID_Cardholder_Presence: [],
+        ID_Card_Presence: [],
+        ID_Card_Capture: [],
+        ID_Status: [],
+        Security_Level: [],
+        Routing_Indicator: [],
+        Terminal_Activation_Cardholder: [],
+        ID_Terminal_Data_Transfer: [],
+        ID_Cardholder_Method: []
     });
     //Estado para el endpoint que se requiere en la
-    const [endpointToken, setEndpointToken] = useState('tokenC4Filter');
+    const [endpointToken, setEndpointToken] = useState({
+        ID_Terminal_Attended: []
+    });
 
     return (
         <FilterContext.Provider value={{
@@ -61,6 +62,8 @@ export const TokenApp = () => {
             setLoading, //Estado para la pantalla de carga y cerrar sesión
             data,
             setData, //Data de los graficos, tablas y formularios de kq2, codigo respuesta, entry mode
+            dataTable,
+            setDataTable,
             valFilterKq2,
             setValFilterKq2, //Valores de ID del filtro para medio de acceso
             optionsKq2, 
@@ -73,8 +76,6 @@ export const TokenApp = () => {
             setValFilterEntry, //Valores de ID del filtro para entry mode
             optionsEntry,
             setOptionsEntry, //Lista de opciones de entry mode
-            dat,
-            setDat, //Data para tablas y formularios de cada uno de los tokens
             filterC4,
             setFilterC4,
             endpointToken,

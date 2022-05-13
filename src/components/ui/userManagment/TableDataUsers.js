@@ -6,8 +6,7 @@ import { BiEditAlt, BiTrash } from 'react-icons/bi';
 
 export const TableDataUsers = () => {
 
-    const { dat } = useContext(FilterContext);
-    const data = dat;
+    const { dataTable:data } = useContext(FilterContext);
 
     const columns = [
         {

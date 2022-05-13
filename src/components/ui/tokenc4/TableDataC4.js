@@ -7,13 +7,13 @@ import Swal from 'sweetalert2';
 
 export const TableDataC4 = () => {
 
-    const { filterC4 } = useContext(FilterContext);
-    const [data, setData] = useState([{}]);
+    const { filterC4, setDataTable, dataTable:data } = useContext(FilterContext);
     useEffect(() => {
+        setDataTable([{}]);
         async function loadData(){
             const response = await postData('tokenC4Filter/main', filterC4)
             if(response.status === 200){
-                setData(response.data);
+                setDataTable(response.data);
                 Swal.fire({
                     icon: 'success',
                     title: 'Datos cargados correctamente',
@@ -347,6 +347,17 @@ export const TableDataC4 = () => {
                 {...tableData}
                 exportHeaders={true}>
                 <DataTable
+                    onRowClicked={(row) => {
+                        Swal.fire({
+                            title: 'Datos de la Terminal',
+                            html: 
+                            `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
+                            <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
+                            <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                            <b>Monto:</b> $${row.amount} MXN`,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }}
                     fixedHeader={true}
                     fixedHeaderScrollHeight="500px"
                     pagination

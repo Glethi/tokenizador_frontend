@@ -165,15 +165,17 @@ export const BarGraph = () => {
                     options={optionsTX} />
             </div>
             <div className='data row w-100'>
-                <ul className='dataList'>
-                {
-                    data.map((e) => {
-                        return (
-                            <li>{e.ID} - {e.Description}</li>
-                        )
-                    })
-                }
-                </ul>
+                <div className='list col'>
+                    <ul>
+                    {
+                        data.map((e) => {
+                            return (
+                                <li>{e.ID} - {e.Description}</li>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
             </div>
             <div className='row w-100'>
                 <Bar
@@ -182,15 +184,17 @@ export const BarGraph = () => {
                 />
             </div>
             <div className='data row w-100'>
-                <ul className='dataList'>
-                {
-                    data.map((e) => {
-                        return (
-                            <li>{e.ID} - {e.Description}</li>
-                        )
-                    })
-                }
-                </ul>
+                <div className='list col'>
+                    <ul className='dataList'>
+                    {
+                        data.map((e) => {
+                            return (
+                                <li>{e.ID} - {e.Description}</li>
+                            )
+                        })
+                    }
+                    </ul>
+                </div>
             </div>
         </div>
     )

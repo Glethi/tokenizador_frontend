@@ -6,8 +6,7 @@ import { FilterContext } from '../../../services/FilterContext';
 
 export const FilterTableData = () => {
 
-    const { filterC4, endpointToken } = useContext(FilterContext);
-    const [data, setData] = useState([{}]);
+    const { dataTable:data } = useContext(FilterContext);
 
     const columns = [
         {
@@ -75,13 +74,6 @@ export const FilterTableData = () => {
             wrap: true
         },
         {
-            name: 'R',
-            selector: row => row.R,
-            sortable: true,
-            center: true,
-            wrap: true,
-        },
-        {
             name: 'NUM_SEC',
             selector: row => row.Number_Sec,
             sortable: true,
@@ -96,17 +88,7 @@ export const FilterTableData = () => {
             wrap: true
         },
     ]
-
-    useEffect(() => {
-        async function loadData() {
-            const responseFilter = await postData(endpointToken, filterC4);
-            if (responseFilter.status === 200) {
-                setData(responseFilter.data);
-            }
-        }
-        loadData();
-    }, [filterC4]);
-
+    
     const tableData = {
         columns,
         data
