@@ -14,14 +14,20 @@ export const TableDataEntryMode = () => {
             selector: 'ID',
             sortable: true,
             center: true,
-            wrap: true
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(24, 143, 254 )'
+            }
         },
         {
             name: 'Entry Mode',
             selector: 'Description',
             sortable: true,
             center: true,
-            wrap: true
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(70, 166, 255)'
+            }
         },
         {
             name: 'TXs',

@@ -14,7 +14,10 @@ export const TableData = () => {
       selector: 'ID',
       sortable: true,
       center: true,
-      wrap: true
+      wrap: true,
+      style: {
+        backgroundColor: 'rgb(24, 143, 254 )'
+      }
     },
     {
       name: 'Descripción',
@@ -22,6 +25,9 @@ export const TableData = () => {
       sortable: true,
       center: true,
       wrap: true,
+      style: {
+        backgroundColor: 'rgb(104, 182, 255 )'
+      }
     },
     {
       name: 'Transacciones',

@@ -7,18 +7,18 @@ export const Cards = () => {
 
     const { data } = useContext(FilterContext);
     
-    let total_TX = 0, total_Amount = 0, tx_Accepted = 0, amount_Accepted = 0;
+    let total_TX = 0, total_Amount = 0.0, tx_Accepted = 0, amount_Accepted = 0;
     let tx_Rejected = 0, amount_Rejected = 0;
 
     data.map((e) => {
         total_TX += parseInt(e.tx);
-        total_Amount += parseInt(e.amount);
+        total_Amount += parseFloat(e.amount);
         if(e.code_Response < '010'){
             tx_Accepted += parseInt(e.tx);
-            amount_Accepted += parseInt(e.amount);
+            amount_Accepted += parseFloat(e.amount);
         }else{
             tx_Rejected += parseInt(e.tx);
-            amount_Rejected += parseInt(e.amount);
+            amount_Rejected += parseFloat(e.amount);
         }
     })
 

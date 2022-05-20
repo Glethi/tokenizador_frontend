@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 export const TableDataC4 = () => {
 
     const { filterC4, setDataTable, dataTable:data } = useContext(FilterContext);
+    
     useEffect(() => {
         setDataTable([{}]);
         async function loadData(){
@@ -354,6 +355,7 @@ export const TableDataC4 = () => {
                             `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
                             <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
                             <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                            <b>Numero de Serie: </b> ${row.Number_Sec} <br />
                             <b>Monto:</b> $${row.amount} MXN`,
                             confirmButtonText: 'Aceptar'
                         })

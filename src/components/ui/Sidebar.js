@@ -94,7 +94,7 @@ export const Sidebar = () => {
                                     Token C4
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem disabled>
+                            <DropdownItem>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenc0">

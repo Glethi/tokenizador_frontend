@@ -31,7 +31,7 @@ export const TokenApp = () => {
     const [optionsEntry, setOptionsEntry] = useState(null);
 
     //TOKENS
-    //Estado para el filtro Token C4
+    //Estado para el filtro Token C4 (petición a API)
     const [filterC4, setFilterC4] = useState({
         Kq2: [],
         Code_Response: [],
@@ -49,9 +49,37 @@ export const TokenApp = () => {
         ID_Terminal_Data_Transfer: [],
         ID_Cardholder_Method: []
     });
-    //Estado para el endpoint que se requiere en la
-    const [endpointToken, setEndpointToken] = useState({
-        ID_Terminal_Attended: []
+    //Estado para el formulario del token c4
+    const [c4FormValue, setC4FormValue] = useState({
+        ID_Terminal_Attended: [],
+        ID_Terminal: [],
+        Terminal_Location: [],
+        ID_Cardholder_Presence: [],
+        ID_Card_Presence: [],
+        ID_Card_Capture: [],
+        ID_Status: [],
+        Security_Level: [],
+        Routing_Indicator: [],
+        Terminal_Activation_Cardholder: [],
+        ID_Terminal_Data_Transfer: [],
+        ID_Cardholder_Method: []
+    });
+
+    //Estdo para el filtro Token C0 (petición API)
+    const [filterC0, setFilterC0] = useState({
+        Kq2: [],
+        Code_Response: [],
+        Entry_Mode: [],
+        ID_Ecommerce: [],
+        Card_Type: [],
+        ID_CVV2: [],
+        ID_Information: []
+    });
+    const [c0FormValue, setC0FormValue] = useState({
+        ID_Ecommerce: [],
+        Card_Type: [],
+        ID_CVV2: [],
+        ID_Information: []
     });
 
     return (
@@ -78,8 +106,12 @@ export const TokenApp = () => {
             setOptionsEntry, //Lista de opciones de entry mode
             filterC4,
             setFilterC4,
-            endpointToken,
-            setEndpointToken
+            c4FormValue,
+            setC4FormValue,
+            filterC0,
+            setFilterC0,
+            c0FormValue,
+            setC0FormValue
         }}>
             <AppRouter />
         </FilterContext.Provider>

@@ -1,107 +1,161 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
+import { postData } from '../../../services/dashService';
 import { FilterContext } from '../../../services/FilterContext';
+import Swal from 'sweetalert2';
 
 
 export const TableDataC0 = () => {
 
-    const { dat } = useContext(FilterContext);
-    const data = dat;
+    const { filterC0, dataTable:data, setDataTable } = useContext(FilterContext);
 
+    useEffect(() => {
+        setDataTable([{}]);
+        async function loadData(){
+            const response = await postData('tokenC0Filter/main', filterC0);
+            if(response.status == 200){
+                setDataTable(response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Datos cargados correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+        loadData();
+    }, [filterC0]);
+
+    
     const columns = [
         {
-            name: 'KC0_INDICADOR_DE_COMERCIO_ELEC',
-            selector: 'ID_Ecommerce',
+            name: 'KQ2_ID_MEDIO_ACCESO',
+            selector: row => row.ID_Access_Mode,
             sortable: true,
-            center: true,
+            right: true,
             wrap: true,
-            conditionalCellStyles:[
+            style: {
+                backgroundColor: 'rgb(24, 143, 254 )'
+            }
+        },
+        {
+            name: 'CODIGO_RESPUESTA',
+            selector: row => row.ID_Code_Response,
+            sotable: true,
+            right: true,
+            wrap: true,
+            conditionalCellStyles: [
                 {
-                    when: row => row.ID_Ecommerce != '0' || row.ID_Ecommerce != ' ' || row.ID_Ecommerce != '1' ||
-                                row.ID_Ecommerce != '5' || row.ID_Ecommerce != '6' || row.ID_Ecommerce != '7',
+                    when: row => row.ID_Code_Response <= '010',
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.ID_Code_Response > '010',
                     style: {
                         backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
-                },
+                }
+            ]
+        },
+        {
+            name: 'ENTRY_MODE',
+            selector: row => row.ID_Entry_Mode,
+            sortable: true,
+            right: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(150, 24, 254)',
+                color: 'white'
+            }
+        },
+        {
+            name: 'KC0_INDICADOR_DE_COMERCIO_ELEC',
+            selector: row => row.ID_Ecommerce,
+            sortable: true,
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
                 {
-                    when: row => row.ID_Ecommerce == '0' || row.ID_Ecommerce == '' || row.ID_Ecommerce == '1' ||
-                                row.ID_Ecommerce == '5' || row.ID_Ecommerce == '6' || row.ID_Ecommerce == '7',
+                    when: row => row.flagEcommerce == 1,
                     style: {
                         backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.flagEcommerce == 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
                     }
                 }
             ]
         },
         {
             name: 'KC0_TIPO_DE_TARJETA',
-            selector: 'Card_Type',
+            selector: row => row.Card_Type,
             sortable: true,
             center: true,
             wrap: true,
-            conditionalCellStyles:[
+            conditionalCellStyles: [
                 {
-                    when: row => row.Card_Type != 'B' || row.Card_Type != 'R' || row.Card_Type != 'S' ||
-                                row.Card_Type != '',
-                    styles: {
-                        backgroundColor: 'rgb(255, 27, 27)',
-                        color: 'white'
+                    when: row => row.flagCardType == 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 },
                 {
-                    when: row => row.Card_Type == 'B' || row.Card_Type == 'R' || row.Card_Type == 'S' ||
-                                row.Card_Type == '',
+                    when: row => row.flagCardType == 0,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
                     }
                 }
             ]
         },
         {
             name: 'KC0_INDICADOR_DE_CVV2_CVC2_PRE',
-            selector: 'ID_CVV2',
-            sortable: true,
-            center: true,
-            wrap: true,
-            conditionalCellStyles:[
-                {
-                    when: row => row.ID_CVV2 != '0' || row.ID_CVV2 != '1' || row.ID_CVV2 != '2' ||
-                                row.ID_CVV2 != '9' || row.ID_CVV2 != '',
-                    styles: {
-                        backgroundColor: 'rgb(187, 1, 1)',
-                        color: 'white'
-                    }
-                },
-                {
-                    when: row => row.ID_CVV2 == '0' || row.ID_CVV2 == '1' || row.ID_CVV2 == '2' ||
-                                row.ID_CVV2 == '9' || row.ID_CVV2 == '',
-                    style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
-                    }
-                }
-            ]
-        },
-        {
-            name: 'KC0_INDICADOR_DE_INFORMACION_A',
-            selector: 'ID_Information',
+            selector: row => row.ID_CVV2,
             sortable: true,
             center: true,
             wrap: true,
             conditionalCellStyles: [
                 {
-                    when: row => row.ID_Information != '0' || row.ID_Information != '1' || 
-                                row.ID_Information != '',
-                    styles: {
-                        backgroundColor: 'rgb(187, 1, 1)',
-                        color: 'white'
+                    when: row => row.flagCVV2 == 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 },
                 {
-                    when: row => row.ID_Information == '0' || row.ID_Information == '1' || 
-                                row.ID_Information == '',
+                    when: row => row.flagCVV2 == 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
+        },
+        {
+            name: 'KC0_SAF',
+            selector: row => row.ID_Information,
+            sortable: true,
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.flagInfo == 1,
                     style: {
                         backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.flagInfo == 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
                     }
                 }
             ]
@@ -119,6 +173,18 @@ export const TableDataC0 = () => {
             {...tableData}
             exportHeaders = {true}>
                 <DataTable 
+                onRowClicked={row => {
+                    Swal.fire({
+                        title: 'Datos de la Terminal',
+                        html: 
+                        `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
+                        <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
+                        <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                        <b>Numero de Serie: </b> ${row.Number_Sec} <br />
+                        <b>Monto:</b> $${row.amount} MXN`,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }}
                 fixedHeader = {true}
                 fixedHeaderScrollHeight = "500px"
                 pagination

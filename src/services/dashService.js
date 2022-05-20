@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const hostProd = "https://tokenizador-backend.up.railway.app"
 const hostLocal = "http://localhost:8000"
+const hostProd = "http://pyjcproas.duckdns.org/tokenizador_backend/public"
 
 export async function getData (controller) {
     try{
