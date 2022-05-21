@@ -1,186 +1,224 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { postData } from '../../../services/dashService';
 import { FilterContext } from '../../../services/FilterContext';
+import Select from 'react-select';
+import { Kq2Select } from '../dashboard/filters/Kq2Select';
+import { CodeResponseSelect } from '../dashboard/filters/CodeResponseSelect';
+import { EntryModeSelect } from '../dashboard/filters/EntryModeSelect';
 
 export const FormFilterDataB3 = () => {
 
-  const { dat, setFlag, setFilter = ({}) } = useContext(FilterContext);
+  const { valFilterKq2, valFilterCR, valFilterEntry } = useContext(FilterContext);
+  const [data, setData] = useState([{}]);
 
-  const [filterB3, setFilterB3] = useState({
-    Bit_Map: 'NonValue',
-    Terminal_Serial_Number: 'NonValue',
-    Check_Cardholder: 'NonValue',
-    User_Field_One: 'NonValue',
-    User_Field_Two: 'NonValue',
-    Terminal_Type_EMV: 'NonValue',
-    App_Version_Number: 'NonValue',
-    CVM_Result: 'NonValue',
-    File_Name_Length: 'NonValue',
-    File_Name: 'NonValue'
+  useEffect(() => {
+    async function loadData(){
+      const response = await postData('tokenB3', {Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry})
+      if(response.status === 200){
+        setData(response.data);
+      }
+    }
+    loadData();
+  }, [valFilterKq2, valFilterCR, valFilterEntry]);
+  
+
+  const [filter, setFilter] = useState({
+    Bit_Map: [],
+    Terminal_Serial_Number: [],
+    Check_Cardholder: [],
+    User_Field_One: [],
+    User_Field_Two: [],
+    Terminal_Type_EMV: [],
+    App_Version_Number: [],
+    CVM_Result: [],
+    File_Name_Length: [],
+    File_Name: []
   });
 
-  const BitM = [...new Set(dat.map((e) => e.Bit_Map))]
-  const Term_SN = [...new Set(dat.map((e) => e.Terminal_Serial_Number))]
-  const Check_CH = [...new Set(dat.map((e) => e.Check_CardHolder))]
-  const User_FO = [...new Set(dat.map((e) => e.User_Field_One))]
-  const User_FT = [...new Set(dat.map((e) => e.User_Field_Two))]
-  const Term_TEMV = [...new Set(dat.map((e) => e.Terminal_Type_EMV))]
-  const App_VN = [...new Set(dat.map((e) => e.App_Version_Number))]
-  const CVM_Res = [...new Set(dat.map((e) => e.CVM_Result))]
-  const FN_Length = [...new Set(dat.map((e) => e.File_Name_Length))]
-  const FN = [...new Set(dat.map((e) => e.File_Name))]
+  const BitM = [...new Set(data.map((e) => e.Bit_Map))].sort()
+  const Term_SN = [...new Set(data.map((e) => e.Terminal_Serial_Number))].sort()
+  const Check_CH = [...new Set(data.map((e) => e.Check_Cardholder))].sort()
+  const User_FO = [...new Set(data.map((e) => e.User_Field_One))].sort()
+  const User_FT = [...new Set(data.map((e) => e.User_Field_Two))].sort()
+  const Term_TEMV = [...new Set(data.map((e) => e.Terminal_Type_EMV))].sort()
+  const App_VN = [...new Set(data.map((e) => e.App_Version_Number))].sort()
+  const CVM_Res = [...new Set(data.map((e) => e.CVM_Result))].sort()
+  const FN_Length = [...new Set(data.map((e) => e.File_Name_Length))].sort()
+  const FN = [...new Set(data.map((e) => e.File_Name))].sort()
 
   function sysChanges(value, prop){
-    var state = {...filterB3}
+    var state = {...filter}
     state[prop] = value
-    setFilterB3(state)
+    setFilter(state)
   }
 
-  function sysFlag(f){
-    if(f === 'tokenB3Filter'){
-      setFilter(filterB3);
-      setFlag(f);
-    }else{
-      setFilter({});
-      setFlag(f);
-    }
-  }
 
   return (
     <div className='form'>
+      <div className='filter row'>
+        <h5>Principales Filtros</h5>
+        <div className='col'>
+          <label>KQ2 Medio de Acceso</label>
+          <Kq2Select />
+        </div>
+        <div className='col'>
+          <label>Código de Respuesta</label>
+          <CodeResponseSelect />
+        </div>
+        <div className='col'>
+          <label>Entry Mode</label>
+          <EntryModeSelect />
+        </div>
+      </div>
         <div className='row p-2 m-1'>
-            <div className='col m-2'>
-                <label>KB3_BIT_MAP</label><br />
-                <select onChange={(ev) => {sysChanges(ev.target.value, 'Bit_Map')}}>
-                  <option value={'NonValue'}>Sin valor</option>
-                  {
-                    BitM.map((e, index) => {
-                      return(
-                        <option value={e} key={index}>{e}</option>
-                      )
-                    })
-                  }
-                  </select><br />
-                  <label>KB3_TERM_SRL_NUM</label><br />
-                  <select onChange={(ev) => {sysChanges(ev.target.value, 'Terminal_Serial_Number')}}>
-                    <option value={'NonValue'}>Sin valor</option>
-                    {
-                      Term_SN.map((e, index) => {
-                        return(
-                          <option value={e} key={index}>{e}</option>
-                        )
-                      })
-                    }
-                  </select><br />
-                  <label>KB3_EMV_TERM_CAP</label><br />
-                  <select onChange={(ev) => {sysChanges(ev.target.value, 'Check_Cardholder')}}>
-                    <option value={'NonValue'}>Sin valor</option>
-                    {
-                      Check_CH.map((e, index) => {
-                        return(
-                          <option value={e} key={index}>{e}</option>
-                        )
-                      })
-                    }
-                  </select>
+          <h5>Filtros Token B3</h5>
+            <div className='col'>
+              <label>KB3_BIT_MAP</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={BitM.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}`}
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
+              <label>KB3_TERM_SRL_NUM</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={Term_SN.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
+              <label>KB3_EMV_TERM_CAP</label>
+              <Select 
+              closeMenuOnSelect={false}
+              isMulti
+              options={Check_CH.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
             </div>
             <div className='col m-2'>
-                  <label>KB3_USR_FLD1</label><br />
-                  <select onChange={(ev) => {sysChanges(ev.target.value, 'User_Field_One')}}>
-                    <option value={'NonValue'}>Sin valor</option>
-                    {
-                      User_FO.map((e, index) =>{
-                        return(
-                          <option value={e} key={index}>{e}</option>
-                        )
-                      })
-                    }
-                  </select><br />
-                  <label>KB3_USR_FLD2</label><br />
-                  <select onChange={(ev) => {sysChanges(ev.target.value, 'User_Field_Two')}}>
-                    <option value={'NonValue'}>Sin valor</option>
-                    {
-                      User_FT.map((e, index) => {
-                        return(
-                          <option value={e} key={index}>{e}</option>
-                        )
-                      })
-                    }
-                  </select><br />
-                  <label>KB3_EMV_TERM_TYPE</label><br />
-                  <select onChange={(ev) => {sysChanges(ev.target.value, 'Terminal_TypeEMV')}}>
-                    <option value={'NonValue'}>Sin valor</option>
-                    {
-                      Term_TEMV.map((e, index) => {
-                        return(
-                          <option value={e} key={index}>{e}</option>
-                        )
-                      })
-                    }
-                  </select>
+              <label>KB3_USR_FLD1</label>
+              <Select 
+              closeMenuOnSelect={false}
+              isMulti
+              options={User_FO.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
+              <label>KB3_USR_FLD2</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={User_FT.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
+              <label>KB3_EMV_TERM_TYPE</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={Term_TEMV.map(e => {
+                return(
+                  { value: `${e}`, value: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
             </div>
             <div className='col m-2'>
-                <label>KB3_APP_VER_NUM</label><br />
-                <select onChange={(ev) => {sysChanges(ev.target.value, 'App_Version_Number')}}>
-                    <option value={'NonValue'}>Sin valor</option>
-                    {
-                      App_VN.map((e, index) => {
-                        return(
-                          <option value={e} key={index}>{e}</option>
-                        )
-                      })
-                    }
-                </select><br />
-                <label>KB3_CVM_RSLTS</label><br />
-                <select onChange={(ev) => {sysChanges(ev.target.value, 'CVM_Result')}}>
-                  <option value={'NonValue'}>Sin valor</option>
-                  {
-                    CVM_Res.map((e, index) =>{
-                      return(
-                        <option value={e} key={index}>{e}</option>
-                      )
-                    })
-                  }
-                </select><br />
-                <label>KB3_DF_NAME_LGTH</label><br />
-                <select onChange={(ev) => {sysChanges(ev.target.value, 'File_Name_Length')}}>
-                  <option value={'NonValue'}>Sin valor</option>
-                  {
-                    FN_Length.map((e, index) => {
-                      return(
-                        <option value={e} key={index}>{e}</option>
-                      )
-                    })
-                  }
-                </select>
+              <label>KB3_APP_VER_NUM</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={App_VN.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
+              <label>KB3_CVM_RSLTS</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={CVM_Res.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
+              <label>KB3_DF_NAME_LGTH</label>
+              <Select
+              closeMenuOnSelect={false}
+              isMulti
+              options={FN_Length.map(e => {
+                return(
+                  { value: `${e}`, label: `${e}` }
+                )
+              })}
+              className={'select-filter'}
+              placeholder={'Seleccione una opción'}
+              noOptionsMessage={() => 'No existe esta opción'}
+              />
             </div>
         </div>
         <div className='row ml-4'>
           <div className='col m-2'>
-            <label>KB3_DF_NAME</label><br/>
-              <select className='extraSelect' onChange={(ev) => {sysChanges(ev.target.value, 'File_Name')}}>
-                <option value={'NonValue'}>Sin valor</option>
-                {
-                  FN.map((e, index) => {
-                    return(
-                      <option value={e} key={index}>{e}</option>
-                    )
-                  })
-                }
-              </select>
+            <label>KB3_DF_NAME</label>
+            <Select
+            closeMenuOnSelect={false}
+            isMulti
+            options={FN.map(e => {
+              return(
+                { value: `${e}`, label: `${e}` }
+              )
+            })}
+            className={'select-filter-extra'}
+            placeholder={'Seleccione una opción'}
+            noOptionsMessage={() => 'No existe esta opción'}
+            />
           </div>
         </div>
         <div className='row'>
           <div className='col'>
-            <button className='button-filter'
+            <button className='filter-botton'
             type='button'
-            onClick={() => sysFlag('tokenB3Filter')}>
+            /*onClick={() => sysFlag('tokenB3Filter')}*/>
             Filtrar</button>
-          </div>
-          <div className='col'>
-            <button className='button-reset'
-            type = 'button'
-            onClick={() => sysFlag('tokenC4DataTable')}>
-            Reset Tabla</button>
           </div>
         </div>
     </div>
