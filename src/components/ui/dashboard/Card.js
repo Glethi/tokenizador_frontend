@@ -1,7 +1,13 @@
 import React from 'react';
 import { BsBarChartFill } from "react-icons/bs"; 
 
-export const Card = ({title, tx, amount, color}) => {
+export const Card = ({title, tx, amount, color, percent}) => {
+
+  let perRender = true;
+  if(percent === undefined){
+    perRender = false;
+  }
+
   return (
     <div className='card'> 
         <div className={"card-body bg-"+color}>
@@ -11,6 +17,15 @@ export const Card = ({title, tx, amount, color}) => {
             <p className='card-title'>{tx}</p>
             <p className='card-title'>Monto</p>
             <p className='card-title'>{amount}</p>
+            {
+              perRender
+              ?
+              <div>
+                <p className='card-title'>Porcentaje</p>
+                <p className='card-title'>{percent}</p>
+              </div>
+              :<></>
+            }
         </div>
     </div>
   )

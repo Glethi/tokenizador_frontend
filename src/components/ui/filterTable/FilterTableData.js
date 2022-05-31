@@ -9,7 +9,7 @@ export const FilterTableData = () => {
 
     const columns = [
         {
-            name: 'Q2_MEDIO_ACCESO',
+            name: 'KQ2_ID_MEDIO_ACCESO',
             selector: row => row.ID_Access_Mode,
             sortable: true,
             right: true,

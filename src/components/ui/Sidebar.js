@@ -91,35 +91,35 @@ export const Sidebar = () => {
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenc4">
-                                    Token C4
+                                    <BsColumnsGap size={20} /> Token C4
                                 </NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenc0">
-                                    Token C0
+                                    <BsColumnsGap size={20} /> Token C0
                                 </NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenb3">
-                                    Token B3
+                                    <BsColumnsGap size={20} /> Token B3
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem disabled>
+                            <DropdownItem>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenb4">
-                                    Token B4
+                                    <BsColumnsGap size={20} /> Token B4
                                 </NavLink>
                             </DropdownItem>
-                            <DropdownItem disabled>
+                            <DropdownItem>
                                 <NavLink
                                     className='text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'
                                     to="/tokenb2">
-                                    Token B2
+                                    <BsColumnsGap size={20} /> Token B2
                                 </NavLink>
                             </DropdownItem>
                         </DropdownMenu>

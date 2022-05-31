@@ -43,6 +43,7 @@ export const FormFilterDataC0 = () => {
     function sendFilter(ev){
         ev.preventDefault();
         setFilterC0({...filter, Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
+        console.log(filterC0);
     }
 
     return (

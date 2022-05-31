@@ -1,26 +1,96 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import DataTableExtension from 'react-data-table-component-extensions';
 import DataTable from 'react-data-table-component';
 import { FilterContext } from '../../../services/FilterContext';
 import { postData } from '../../../services/dashService';
-
+import Swal from 'sweetalert2';
 
 export const TableDataB3 = () => {
 
+    const { filterB3, setDataTable, dataTable:data } = useContext(FilterContext);
+
     useEffect(() => {
         async function loadData(){
-            const response = await postData('tokenB3Filter/main')
+            const response = await postData('tokenB3Filter/main', filterB3);
+            if(response.status === 200){
+                setDataTable(response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Datos cargados correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
         }
-    }, [])
+        loadData()
+    }, [filterB3])
     
 
     const columns = [
+        {
+            name: 'KQ2_ID_MEDIO_ACCESO',
+            selector: row => row.ID_Access_Mode,
+            sortable: true,
+            center: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(24, 143, 254 )'
+            }
+        },
+        {
+            name: 'CODIGO_RESPUESTA',
+            selector: row => row.ID_Code_Response,
+            sortable: true,
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.ID_Code_Response <= '010',
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.ID_Code_Response > '010',
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
+        },
+        {
+            name: 'ENTRY_MODE',
+            selector: row => row.ID_Entry_Mode,
+            sortable: true,
+            center: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(150, 24, 254)',
+                color: 'white'
+            }
+        },
         {
             name: 'KB3_BIT_MAP',
             selector: row => row.Bit_Map,
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.bitMapFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.bitMapFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_TERM_SRL_NUM',
@@ -28,6 +98,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.termSerNumFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.termSerNumFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_EMV_TERM_CAP',
@@ -35,6 +120,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.checkCHFlag == 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.checkCHFlag == 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_USR_FLD1',
@@ -42,6 +142,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.userFoFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.userFoFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_USR_FLD2',
@@ -49,6 +164,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.userFtFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                },
+                {
+                    when: row => row.userFtFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_EMV_TERM_TYPE',
@@ -56,6 +186,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.termTypeFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.termTypeFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_APP_VER_NUM',
@@ -63,6 +208,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.appVersionFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                },
+                {
+                    when: row => row.appVersionFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_CVM_RSLTS',
@@ -70,6 +230,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.cvmResFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.cvmResFlag == 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_DF_NAME_LGTH',
@@ -77,6 +252,21 @@ export const TableDataB3 = () => {
             sortable: true,
             center: true,
             wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.fileNamelenFlag == 1,
+                    style:{
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                },
+                {
+                    when: row => row.fileNamelenFlag == 0,
+                    style:{
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
         },
         {
             name: 'KB3_DF_NAME',
@@ -85,6 +275,21 @@ export const TableDataB3 = () => {
             center: true,
             wrap: true,
             grow: 3,
+            conditionalCellStyles:[
+                {
+                    when: row => row.fileNameFlag == 1,
+                    style: {
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                },
+                {
+                    when: row => row.fileNameFlag == 0,
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                }
+            ]
         }
     ]
 
@@ -99,6 +304,18 @@ export const TableDataB3 = () => {
                 {...tableData}
                 exportHeaders={true}>
                 <DataTable
+                    onRowClicked={row => {
+                        Swal.fire({
+                            title: 'Datos de la Terminal',
+                            html: 
+                            `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
+                            <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
+                            <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                            <b>Numero de Serie: </b> ${row.Number_Sec} <br />
+                            <b>Monto:</b> $${row.amount} MXN`,
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }}
                     fixedHeader={true}
                     fixedHeaderScrollHeight="600px"
                     pagination

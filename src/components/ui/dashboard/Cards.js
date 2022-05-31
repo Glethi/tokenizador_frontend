@@ -12,7 +12,7 @@ export const Cards = () => {
 
     data.map((e) => {
         total_TX += parseInt(e.tx);
-        total_Amount += parseFloat(e.amount);
+        total_Amount += e.amount;
         if(e.code_Response < '010'){
             tx_Accepted += parseInt(e.tx);
             amount_Accepted += parseFloat(e.amount);
@@ -27,25 +27,24 @@ export const Cards = () => {
             id: 1,
             title: 'General',
             tx: numeral(total_TX).format('0,0'),
-            amount: numeral(total_Amount).format('$0,0.00'),
+            amount: numeral(total_Amount).format('$0,0'),
             color: 'primary',
         },
         {
             id: 2,
             title: 'Aprobadas',
             tx: numeral(tx_Accepted).format('0,0'),
-            amount: numeral(amount_Accepted).format('$0,0.00'),
+            amount: numeral(amount_Accepted).format('$0,0'),
             color: 'success', 
         },
         {
             id: 3,
             title: 'Rechazadas',
             tx: numeral(tx_Rejected).format('0,0'),
-            amount: numeral(amount_Rejected).format('$0,0.00'),
+            amount: numeral(amount_Rejected).format('$0,0'),
             color: 'danger',
         }
     ]
-
 
     return ( 
         <div className='container'>
@@ -58,7 +57,7 @@ export const Cards = () => {
                             tx={card.tx}
                             amount={card.amount}
                             color={card.color}
-                            label={card.label}/>
+                            />
                         </div>
                     ))
                 }

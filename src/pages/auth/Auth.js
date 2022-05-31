@@ -58,7 +58,8 @@ export const Auth = () => {
     return (
         <div className='auth'>
             <div className='auth-container'>
-                <h1>SAET Tokenizado</h1>
+                <h1>SAET</h1>
+                <h2>Análisis por Token's</h2>
                 <div className='row p-3 mt-5 w-100'>
                     <div className='logo col p-3'>
                         <img src={logo}></img>

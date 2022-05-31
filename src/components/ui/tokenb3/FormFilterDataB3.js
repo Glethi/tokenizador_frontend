@@ -8,7 +8,7 @@ import { EntryModeSelect } from '../dashboard/filters/EntryModeSelect';
 
 export const FormFilterDataB3 = () => {
 
-  const { valFilterKq2, valFilterCR, valFilterEntry } = useContext(FilterContext);
+  const { valFilterKq2, valFilterCR, valFilterEntry, filterB3, setFilterB3, b3FormValue, setB3FormValue } = useContext(FilterContext);
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
@@ -52,6 +52,10 @@ export const FormFilterDataB3 = () => {
     setFilter(state)
   }
 
+  function sendFilter(ev){
+    ev.preventDefault();
+    setFilterB3({...filter, Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry})
+  }
 
   return (
     <div className='form'>
@@ -72,11 +76,13 @@ export const FormFilterDataB3 = () => {
       </div>
         <div className='row p-2 m-1'>
           <h5>Filtros Token B3</h5>
-            <div className='col'>
+            <div className='col m-2'>
               <label>KB3_BIT_MAP</label>
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'Bit_Map'); setB3FormValue({Bit_Map: ev})}}
+              value={b3FormValue.Bit_Map}
               options={BitM.map(e => {
                 return(
                   { value: `${e}`, label: `${e}`}
@@ -90,6 +96,8 @@ export const FormFilterDataB3 = () => {
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'Terminal_Serial_Number'); setB3FormValue({Terminal_Serial_Number: ev})}}
+              value={b3FormValue.Terminal_Serial_Number}
               options={Term_SN.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -103,6 +111,8 @@ export const FormFilterDataB3 = () => {
               <Select 
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'Check_Cardholder'); setB3FormValue({Check_Cardholder: ev})}}
+              value={b3FormValue.Check_Cardholder}
               options={Check_CH.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -118,6 +128,8 @@ export const FormFilterDataB3 = () => {
               <Select 
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'User_Field_One'); setB3FormValue({User_Field_One: ev})}}
+              value={b3FormValue.User_Field_One}
               options={User_FO.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -131,6 +143,8 @@ export const FormFilterDataB3 = () => {
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'User_Field_Two'); setB3FormValue({User_Field_Two: ev})}}
+              value={b3FormValue.User_Field_Two}
               options={User_FT.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -144,6 +158,8 @@ export const FormFilterDataB3 = () => {
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'Terminal_Type_EMV'); setB3FormValue({Terminal_Type_EMV: ev})}}
+              value={setB3FormValue.Terminal_Type_EMV}
               options={Term_TEMV.map(e => {
                 return(
                   { value: `${e}`, value: `${e}` }
@@ -159,6 +175,8 @@ export const FormFilterDataB3 = () => {
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'App_Version_Number'); setB3FormValue({App_Version_Number: ev})}}
+              value={b3FormValue.App_Version_Number}
               options={App_VN.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -172,6 +190,8 @@ export const FormFilterDataB3 = () => {
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'CVM_Result'); setB3FormValue({CVM_Result: ev})}}
+              value={b3FormValue.CVM_Result}
               options={CVM_Res.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -185,6 +205,8 @@ export const FormFilterDataB3 = () => {
               <Select
               closeMenuOnSelect={false}
               isMulti
+              onChange={ev => {sysChanges(ev.map(e => e.value), 'File_Name_Length'); setB3FormValue({File_Name_Length: ev})}}
+              value={b3FormValue.File_Name_Length}
               options={FN_Length.map(e => {
                 return(
                   { value: `${e}`, label: `${e}` }
@@ -202,6 +224,8 @@ export const FormFilterDataB3 = () => {
             <Select
             closeMenuOnSelect={false}
             isMulti
+            onChange={ev => {sysChanges(ev.map(e => e.value), 'File_Name'); setB3FormValue({File_Name: ev})}}
+            value={b3FormValue.File_Name}
             options={FN.map(e => {
               return(
                 { value: `${e}`, label: `${e}` }
@@ -217,7 +241,7 @@ export const FormFilterDataB3 = () => {
           <div className='col'>
             <button className='filter-botton'
             type='button'
-            /*onClick={() => sysFlag('tokenB3Filter')}*/>
+            onClick={ev => sendFilter(ev)}>
             Filtrar</button>
           </div>
         </div>

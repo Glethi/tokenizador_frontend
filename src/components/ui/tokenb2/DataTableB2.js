@@ -1,14 +1,75 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
+import { postData } from '../../../services/dashService';
 import { FilterContext } from '../../../services/FilterContext';
+import Swal from 'sweetalert2';
 
 export const DataTableB2 = () => {
 
-    const { dat } = useContext(FilterContext);
-    const data = dat;
+    const { dataTable:data, setDataTable, filterB2} = useContext(FilterContext);
+
+    useEffect(() => {
+        async function loadData(){
+            const response = await postData('tokenB2Filter/main', filterB2);
+            if(response.status === 200){
+                setDataTable(response.data)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Datos cargados correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+        loadData()
+    }, [filterB2])
+    
 
     const columns = [
+        {
+            name: 'KQ2_ID_MEDIO_ACCESO',
+            selector: row => row.ID_Access_Mode,
+            sortable: true,
+            center: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(24, 143, 254 )'
+            }
+        },
+        {
+            name: 'CODIGO_RESPUESTA',
+            selector: row => row.ID_Code_Response,
+            sortable: true,
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.ID_Code_Response <= '010',
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                },
+                {
+                    when: row => row.ID_Code_Response > '010',
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                }
+            ]
+        },
+        {
+            name: 'ENTRY_MODE',
+            selector: row => row.ID_Entry_Mode,
+            sortable: true,
+            center: true,
+            wrap: true,
+            style: {
+                backgroundColor: 'rgb(150, 24, 254)',
+                color: 'white'
+            }
+        },
         {
             name: 'KB2_BIT_MAP',
             selector: row => row.Bit_Map,
@@ -339,7 +400,19 @@ export const DataTableB2 = () => {
             <DataTableExtension 
             {...tableData}
             exportHeaders = {true}>
-                <DataTable  
+                <DataTable 
+                onRowClicked={row => {
+                    Swal.fire({
+                        title: 'Datos de la Terminal',
+                        html: 
+                        `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
+                        <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
+                        <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                        <b>Numero de Serie: </b> ${row.Number_Sec} <br />
+                        <b>Monto:</b> $${row.amount} MXN`,
+                        confirmButtonText: 'Aceptar'
+                    })
+                }}
                 fixedHeader = {true}
                 fixedHeaderScrollHeight = "500px"
                 pagination
