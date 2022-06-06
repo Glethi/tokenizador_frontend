@@ -7,7 +7,7 @@ const hostProd = "http://pyjcproas.duckdns.org/tokenizador_backend/public"
 export async function getData (controller) {
     try{
         const response = await axios({
-            url: hostProd+"/api/"+controller,
+            url: hostLocal+"/api/"+controller,
             method: 'GET'
         })
     return response;
@@ -24,7 +24,7 @@ export async function getData (controller) {
 export async function postData(controller, objectData){
     try{
         const response = await axios({
-            url: hostProd+"/api/"+controller,
+            url: hostLocal+"/api/"+controller,
             method: 'POST',
             data: objectData,
             headers: {

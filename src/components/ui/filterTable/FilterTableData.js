@@ -10,7 +10,7 @@ export const FilterTableData = () => {
     const columns = [
         {
             name: 'KQ2_ID_MEDIO_ACCESO',
-            selector: row => row.ID_Access_Mode,
+            selector: 'ID_Access_Mode',
             sortable: true,
             right: true,
             wrap: true,
@@ -20,7 +20,7 @@ export const FilterTableData = () => {
         },
         {
             name: 'CODIGO_RESPUESTA',
-            selector: row => row.ID_Code_Response,
+            selector: 'ID_Code_Response',
             sortable: true,
             right: true,
             wrap: true,
@@ -42,7 +42,7 @@ export const FilterTableData = () => {
         },
         {
             name: 'ENTRY_MODE',
-            selector: row => row.ID_Entry_Mode,
+            selector: 'ID_Entry_Mode',
             sortable: true,
             right: true,
             wrap: true,
@@ -52,36 +52,71 @@ export const FilterTableData = () => {
             }
         },
         {
-            name: 'FIID_TARJ',
-            selector: row => row.Fiid_Card,
+            name: 'ID_COMER',
+            selector: 'ID_Comer',
             sortable: true,
-            center: true,
+            right: true,
+            wrap: true
+        },
+        {
+            name: 'TERM_COMER',
+            selector: 'Term_Comer',
+            sortable: true,
+            right: true,
             wrap: true
         },
         {
             name: 'FIID_COMER',
-            selector: row => row.Fiid_Comerce,
+            selector: 'Fiid_Comer',
+            sortable: true,
+            right: true,
+            wrap: true
+        },
+        {
+            name: 'FIID_TERM',
+            selector: 'Fiid_Term',
+            sortable: true,
+            right: true,
+            wrap: true
+        },
+        {
+            name: 'LN_TERM',
+            selector: 'Ln_Term',
+            sortable: true,
+            right: true,
+            wrap: true
+        },
+        {
+            name: 'FIID_TARJ',
+            selector: 'Fiid_Card',
             sortable: true,
             center: true,
             wrap: true
         },
         {
+            name: 'LN_TARJ',
+            selector: 'Ln_Card',
+            sortable: true,
+            right: true,
+            wrap: true
+        },
+        {
             name: 'NOMBRE_DE_TERMINAL',
-            selector: row => row.Terminal_Name,
+            selector: 'Terminal_Name',
             sortable: true,
             center: true,
             wrap: true
         },
         {
             name: 'NUM_SEC',
-            selector: row => row.Number_Sec,
+            selector: 'Number_Sec',
             sortable: true,
             right: true,
             wrap: true
         },
         {
             name: 'MONTO',
-            selector: row => row.amount,
+            selector: 'amount',
             sortable: true,
             right: true,
             wrap: true

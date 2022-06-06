@@ -5,6 +5,8 @@ import Select from 'react-select';
 import { FilterData } from '../k2q/FilterData';
 import { FilterDataCodeResp } from '../codeResponse/FilterDataCodeResp';
 import { FilterDataEntryMode } from '../entryMode/FilterDataEntryMode';
+import { FormTerminal } from '../FormTerminal';
+import { FilterFormC0 } from './FilterFormC0';
 
 export const FormFilterDataC0 = () => {
 
@@ -14,7 +16,15 @@ export const FormFilterDataC0 = () => {
         ID_Ecommerce: [],
         Card_Type: [],
         ID_CVV2: [],
-        ID_Information: []
+        ID_Information: [],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     }); 
 
     useEffect(() => {
@@ -29,10 +39,18 @@ export const FormFilterDataC0 = () => {
     
 
 
-    const ID_Ecom = [...new Set(data.map((e) => e.ID_Ecommerce))].sort()
-    const Card_T = [...new Set(data.map((e) => e.Card_Type))].sort()
-    const CVV2 = [...new Set(data.map((e) => e.ID_CVV2))].sort()
-    const Info = [...new Set(data.map((e) => e.ID_Information))].sort()
+    const ID_Ecom = [...new Set(data.map(e => e.ID_Ecommerce))].sort()
+    const Card_T = [...new Set(data.map(e => e.Card_Type))].sort()
+    const CVV2 = [...new Set(data.map(e => e.ID_CVV2))].sort()
+    const Info = [...new Set(data.map(e => e.ID_Information))].sort()
+    const ID_Com = [...new Set(data.map(e => e.ID_Comer))].sort()
+    const Term_Com = [...new Set(data.map(e => e.Term_Comer))].sort()
+    const Fiid_Com = [...new Set(data.map(e => e.Fiid_Comer))].sort()
+    const Fiid_Tem = [...new Set(data.map(e => e.Fiid_Term))].sort()
+    const Ln_Com = [...new Set(data.map(e => e.Ln_Comer))].sort()
+    const Ln_Tem = [...new Set(data.map(e => e.Ln_Term))].sort()
+    const Fiid_Ca = [...new Set(data.map(e => e.Fiid_Card))].sort()
+    const Ln_Ca = [...new Set(data.map(e => e.Ln_Card))].sort()
 
     function sysChanges(value, prop){
         var state = {...filter};
@@ -43,13 +61,12 @@ export const FormFilterDataC0 = () => {
     function sendFilter(ev){
         ev.preventDefault();
         setFilterC0({...filter, Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
-        console.log(filterC0);
     }
 
     return (
         <div className='form'>
             <div className='filter row'>
-                <h5>Principales Filtros</h5>
+                <h5>Filtros Principales</h5>
                 <div className='col'>
                     <FilterData />
                 </div>
@@ -60,72 +77,37 @@ export const FormFilterDataC0 = () => {
                     <FilterDataEntryMode />
                 </div>
             </div>
+            <hr />
+            <div className='row p-2 m-1'>
+                <h5>Filtros Terminales</h5>
+                <FormTerminal 
+                formValue={c0FormValue}
+                ID_Com={ID_Com}
+                Term_Com={Term_Com}
+                Fiid_Com={Fiid_Com}
+                Fiid_Tem={Fiid_Tem}
+                Ln_Com={Ln_Com}
+                Ln_Tem={Ln_Tem}
+                Fiid_Ca={Fiid_Ca}
+                Ln_Ca={Ln_Ca}
+                synChanges={sysChanges}
+                setFormValue={setC0FormValue}
+                />
+            </div>
+            <hr />
             <div className='row p-2 m-1'>
                 <h5>Filtros Token C0</h5>
-                <div className='col'>
-                    <label>KC0_INDICADOR_DE_COMERCIO_ELEC</label>
-                    <Select
-                    closeMenuOnSelect={false}
-                    isMulti
-                    onChange={ev => {sysChanges(ev.map(e => e.value), 'ID_Ecommerce'); setC0FormValue({ID_Ecommerce: ev})}}
-                    value={c0FormValue.ID_Ecommerce}
-                    options={ID_Ecom.map((e) => {
-                        return(
-                            { value: `${e}`, label: `${e}` }
-                        )
-                    })}
-                    className={'select-filter'}
-                    placeholder={'Selecione una opción'}
-                    noOptionsMessage={() => 'No existe esta opción'}
-                    />
-                    <label>KC0_TIPO_DE_TARJETA</label>
-                    <Select
-                    closeMenuOnSelect ={false}
-                    isMulti
-                    onChange={ev => {sysChanges(ev.map(e => e.value), 'Card_Type'); setC0FormValue({Card_Type: ev})}}
-                    value={c0FormValue.Card_Type}
-                    options={Card_T.map((e) => {
-                        return(
-                            { value: `${e}`, label: `${e}`}
-                        )
-                    })}
-                    className={'select-filter'}
-                    placeholder={'Seleccione una opción'}
-                    noOptionsMessage={() => 'No existe esta opción'}
-                    />
-                </div>
-                <div className='col'>
-                    <label>KC0_INDICADOR_DE_CVV2_CVC2_PRE</label>
-                    <Select 
-                    closeMenuOnSelect={false}
-                    isMulti
-                    onChange={ev => {sysChanges(ev.map(e => e.value), 'ID_CVV2'); setC0FormValue({ID_CVV2: ev})}}
-                    value={c0FormValue.ID_CVV2}
-                    options={CVV2.map((e) => {
-                        return(
-                            { value: `${e}`, label: `${e}` }
-                        )
-                    })}
-                    className={'select-filter'}
-                    placeholder={'Seleccione una opción'}
-                    noOptionsMessage={() => 'No existe esta opción'}
-                    />
-                    <label>KC0_SAF</label>
-                    <Select
-                    closeMenuOnSelect={false}
-                    isMulti
-                    onChange={ev => {sysChanges(ev.map(e => e.value), 'ID_Information'); setC0FormValue({ID_Information: ev})}}
-                    value={c0FormValue.ID_Information}
-                    options={Info.map((e) => {
-                        return(
-                            { value: `${e}`, label: `${e}` }
-                        )
-                    })}
-                    className={'select-filter'}
-                    placeholder={'Seleccione una opción'}
-                    noOptionsMessage={() => 'No existe esta opción'}
-                    />
-                </div>
+                <FilterFormC0
+                c0FormValue={c0FormValue}
+                sysChanges={sysChanges}
+                setC0FormValue={setC0FormValue}
+                ID_Ecom={ID_Ecom}
+                Card_T={Card_T}
+                CVV2={CVV2}
+                Info={Info}
+                />
+            </div>
+                <hr />
                 <div className='row'>
                     <div className='col'>
                         <button className='filter-botton'
@@ -134,7 +116,6 @@ export const FormFilterDataC0 = () => {
                         Filtrar</button>
                     </div>
                 </div>
-            </div>
         </div>
     )
 }

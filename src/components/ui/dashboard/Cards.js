@@ -7,13 +7,13 @@ export const Cards = () => {
 
     const { data } = useContext(FilterContext);
     
-    let total_TX = 0, total_Amount = 0.0, tx_Accepted = 0, amount_Accepted = 0;
-    let tx_Rejected = 0, amount_Rejected = 0;
+    let total_TX = 0, total_Amount = 0.0, tx_Accepted = 0, amount_Accepted = 0.0;
+    let tx_Rejected = 0, amount_Rejected = 0.0;
 
     data.map((e) => {
         total_TX += parseInt(e.tx);
-        total_Amount += e.amount;
-        if(e.code_Response < '010'){
+        total_Amount += parseFloat(e.amount);
+        if(e.code_Response < '011'){
             tx_Accepted += parseInt(e.tx);
             amount_Accepted += parseFloat(e.amount);
         }else{
@@ -27,21 +27,21 @@ export const Cards = () => {
             id: 1,
             title: 'General',
             tx: numeral(total_TX).format('0,0'),
-            amount: numeral(total_Amount).format('$0,0'),
+            amount: numeral(total_Amount).format('$0,0.00'),
             color: 'primary',
         },
         {
             id: 2,
             title: 'Aprobadas',
             tx: numeral(tx_Accepted).format('0,0'),
-            amount: numeral(amount_Accepted).format('$0,0'),
+            amount: numeral(amount_Accepted).format('$0,0.00'),
             color: 'success', 
         },
         {
             id: 3,
             title: 'Rechazadas',
             tx: numeral(tx_Rejected).format('0,0'),
-            amount: numeral(amount_Rejected).format('$0,0'),
+            amount: numeral(amount_Rejected).format('$0,0.00'),
             color: 'danger',
         }
     ]

@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { postData } from '../../../services/dashService';
 import { FilterContext } from '../../../services/FilterContext';
-import Select from 'react-select';
 import { Kq2Select } from '../dashboard/filters/Kq2Select';
 import { CodeResponseSelect } from '../dashboard/filters/CodeResponseSelect';
 import { EntryModeSelect } from '../dashboard/filters/EntryModeSelect';
+import { FormTerminal } from '../FormTerminal';
+import { FilterTokenB3 } from './FilterTokenB3';
 
 export const FormFilterDataB3 = () => {
 
-  const { valFilterKq2, valFilterCR, valFilterEntry, filterB3, setFilterB3, b3FormValue, setB3FormValue } = useContext(FilterContext);
+  const { valFilterKq2, valFilterCR, valFilterEntry, setFilterB3, b3FormValue, setB3FormValue } = useContext(FilterContext);
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
@@ -32,19 +33,35 @@ export const FormFilterDataB3 = () => {
     App_Version_Number: [],
     CVM_Result: [],
     File_Name_Length: [],
-    File_Name: []
+    File_Name: [],
+    ID_Comer: [],
+    Term_Comer: [],
+    Fiid_Comer: [],
+    Fiid_Term: [],
+    Ln_Comer: [],
+    Ln_Term: [],
+    Fiid_Card: [],
+    Ln_Card:[]
   });
 
-  const BitM = [...new Set(data.map((e) => e.Bit_Map))].sort()
-  const Term_SN = [...new Set(data.map((e) => e.Terminal_Serial_Number))].sort()
-  const Check_CH = [...new Set(data.map((e) => e.Check_Cardholder))].sort()
-  const User_FO = [...new Set(data.map((e) => e.User_Field_One))].sort()
-  const User_FT = [...new Set(data.map((e) => e.User_Field_Two))].sort()
-  const Term_TEMV = [...new Set(data.map((e) => e.Terminal_Type_EMV))].sort()
-  const App_VN = [...new Set(data.map((e) => e.App_Version_Number))].sort()
-  const CVM_Res = [...new Set(data.map((e) => e.CVM_Result))].sort()
-  const FN_Length = [...new Set(data.map((e) => e.File_Name_Length))].sort()
-  const FN = [...new Set(data.map((e) => e.File_Name))].sort()
+  const BitM = [...new Set(data.map(e => e.Bit_Map))].sort()
+  const Term_SN = [...new Set(data.map(e => e.Terminal_Serial_Number))].sort()
+  const Check_CH = [...new Set(data.map(e => e.Check_Cardholder))].sort()
+  const User_FO = [...new Set(data.map(e => e.User_Field_One))].sort()
+  const User_FT = [...new Set(data.map(e => e.User_Field_Two))].sort()
+  const Term_TEMV = [...new Set(data.map(e => e.Terminal_Type_EMV))].sort()
+  const App_VN = [...new Set(data.map(e => e.App_Version_Number))].sort()
+  const CVM_Res = [...new Set(data.map(e => e.CVM_Result))].sort()
+  const FN_Length = [...new Set(data.map(e => e.File_Name_Length))].sort()
+  const FN = [...new Set(data.map(e => e.File_Name))].sort()
+  const ID_Com = [...new Set(data.map(e => e.ID_Comer))].sort()
+  const Term_Com = [...new Set(data.map(e => e.Term_Comer))].sort()
+  const Fiid_Com = [...new Set(data.map(e => e.Fiid_Comer))].sort()
+  const Fiid_Tem = [...new Set(data.map(e => e.Fiid_Term))].sort()
+  const Ln_Com = [...new Set(data.map(e => e.Ln_Comer))].sort()
+  const Ln_Tem = [... new Set(data.map(e => e.Ln_Term))].sort()
+  const Fiid_Ca = [... new Set(data.map(e => e.Fiid_Card))].sort()
+  const Ln_Ca = [...new Set(data.map(e => e.Ln_Card))].sort()
 
   function sysChanges(value, prop){
     var state = {...filter}
@@ -59,8 +76,8 @@ export const FormFilterDataB3 = () => {
 
   return (
     <div className='form'>
-      <div className='filter row'>
-        <h5>Principales Filtros</h5>
+      <div className='row p-2 m-1'>
+        <h5>Filtros Principales</h5>
         <div className='col'>
           <label>KQ2 Medio de Acceso</label>
           <Kq2Select />
@@ -74,169 +91,43 @@ export const FormFilterDataB3 = () => {
           <EntryModeSelect />
         </div>
       </div>
+      <hr />
+      <div className='row p-2 m-1'>
+        <h5>Filtros Terminal</h5>
+        <FormTerminal
+        formValue={b3FormValue}
+        ID_Com={ID_Com}
+        Term_Com={Term_Com}
+        Fiid_Com={Fiid_Com}
+        Fiid_Tem={Fiid_Tem}
+        Ln_Com={Ln_Com}
+        Ln_Tem={Ln_Tem}
+        Fiid_Ca={Fiid_Ca}
+        Ln_Ca={Ln_Ca}
+        setFormValue={setB3FormValue}
+        synChanges={sysChanges}
+        />
+      </div>
+      <hr />
         <div className='row p-2 m-1'>
           <h5>Filtros Token B3</h5>
-            <div className='col m-2'>
-              <label>KB3_BIT_MAP</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'Bit_Map'); setB3FormValue({Bit_Map: ev})}}
-              value={b3FormValue.Bit_Map}
-              options={BitM.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}`}
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-              <label>KB3_TERM_SRL_NUM</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'Terminal_Serial_Number'); setB3FormValue({Terminal_Serial_Number: ev})}}
-              value={b3FormValue.Terminal_Serial_Number}
-              options={Term_SN.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-              <label>KB3_EMV_TERM_CAP</label>
-              <Select 
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'Check_Cardholder'); setB3FormValue({Check_Cardholder: ev})}}
-              value={b3FormValue.Check_Cardholder}
-              options={Check_CH.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-            </div>
-            <div className='col m-2'>
-              <label>KB3_USR_FLD1</label>
-              <Select 
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'User_Field_One'); setB3FormValue({User_Field_One: ev})}}
-              value={b3FormValue.User_Field_One}
-              options={User_FO.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-              <label>KB3_USR_FLD2</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'User_Field_Two'); setB3FormValue({User_Field_Two: ev})}}
-              value={b3FormValue.User_Field_Two}
-              options={User_FT.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-              <label>KB3_EMV_TERM_TYPE</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'Terminal_Type_EMV'); setB3FormValue({Terminal_Type_EMV: ev})}}
-              value={setB3FormValue.Terminal_Type_EMV}
-              options={Term_TEMV.map(e => {
-                return(
-                  { value: `${e}`, value: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-            </div>
-            <div className='col m-2'>
-              <label>KB3_APP_VER_NUM</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'App_Version_Number'); setB3FormValue({App_Version_Number: ev})}}
-              value={b3FormValue.App_Version_Number}
-              options={App_VN.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-              <label>KB3_CVM_RSLTS</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'CVM_Result'); setB3FormValue({CVM_Result: ev})}}
-              value={b3FormValue.CVM_Result}
-              options={CVM_Res.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-              <label>KB3_DF_NAME_LGTH</label>
-              <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {sysChanges(ev.map(e => e.value), 'File_Name_Length'); setB3FormValue({File_Name_Length: ev})}}
-              value={b3FormValue.File_Name_Length}
-              options={FN_Length.map(e => {
-                return(
-                  { value: `${e}`, label: `${e}` }
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esta opción'}
-              />
-            </div>
-        </div>
-        <div className='row ml-4'>
-          <div className='col m-2'>
-            <label>KB3_DF_NAME</label>
-            <Select
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {sysChanges(ev.map(e => e.value), 'File_Name'); setB3FormValue({File_Name: ev})}}
-            value={b3FormValue.File_Name}
-            options={FN.map(e => {
-              return(
-                { value: `${e}`, label: `${e}` }
-              )
-            })}
-            className={'select-filter-extra'}
-            placeholder={'Seleccione una opción'}
-            noOptionsMessage={() => 'No existe esta opción'}
+            <FilterTokenB3 
+            b3FormValue={b3FormValue}
+            setB3FormValue={setB3FormValue}
+            sysChanges={sysChanges}
+            BitM={BitM}
+            Term_SN={Term_SN}
+            Check_CH={Check_CH}
+            User_FO={User_FO}
+            User_FT={User_FT}
+            Term_TEMV={Term_TEMV}
+            App_VN={App_VN}
+            CVM_Res={CVM_Res}
+            FN_Length={FN_Length}
+            FN={FN}
             />
-          </div>
         </div>
+        <hr />
         <div className='row'>
           <div className='col'>
             <button className='filter-botton'

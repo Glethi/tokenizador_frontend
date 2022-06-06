@@ -7,8 +7,8 @@
     h5{
         text-align: start;
     }
-    .filter{
-        margin: 1rem; 
+    hr{
+        border: 1px solid $gray-strong;
     }
     .tableData{
         margin-left: 1rem;
@@ -22,7 +22,7 @@
         margin: 1rem;
         margin-left: 2rem;
         margin-right: 2rem;
-        padding-top: 2rem;
+        padding: 2rem;
         .filter-botton{
             background-color: #007bff;
             border: none;
@@ -35,11 +35,14 @@
         .select{
             text-align: justify;
         }
-        .select-filter, .select-filter-extra{
+        .select-filter, .select-filter-b3, .select-filter-extra{
             margin-left: auto;
             margin-right: auto; 
             margin-bottom: 1rem;
             width: 20rem;
+        }
+        .select-filter{
+            width: 15rem;
         }
         .select-filter-extra{
             width: 25rem;

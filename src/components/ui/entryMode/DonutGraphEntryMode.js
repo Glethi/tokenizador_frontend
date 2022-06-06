@@ -2,16 +2,18 @@ import React, { useContext } from 'react';
 import { FilterContext } from '../../../services/FilterContext';
 import { Doughnut } from 'react-chartjs-2';
 import randomColor from 'randomcolor';
+import numeral from 'numeral';
 
 export const DonutGraphEntryMode = () => {
 
     const { data } = useContext(FilterContext);
+    console.log(data.map((e) => numeral(e.percenTX_Accepted).value()));
 
     //DATOS Y OPCIONES PARA % ACEPTACIÓN
     const dataAccepted = {
-        labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.percenTX_Accepted+"%"),
+        labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.percenTX_Accepted),
         datasets: [{
-            data: data.map((e) => e.percenTX_Accepted),
+            data: data.map((e) => numeral(e.percenTX_Accepted).value()),
             backgroundColor: randomColor({
                 hue: '#00FF23',
                 count: data.length,
@@ -48,9 +50,9 @@ export const DonutGraphEntryMode = () => {
 
     //DATOS Y OPCIONES PARA % RECHAZADO
     const dataRejected = {
-        labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.percenTX_Rejected+"%"),
+        labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.percenTX_Rejected),
         datasets: [{
-            data: data.map((e) => e.percenTX_Rejected),
+            data: data.map((e) => numeral(e.percenTX_Rejected).value()),
             backgroundColor: randomColor({
                 hue: '#FF0000',
                 count: data.length,

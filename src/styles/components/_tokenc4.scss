@@ -4,6 +4,9 @@
     h2{
         padding: 2rem;
     }
+    hr{
+        border: 1px solid $gray-strong; 
+    }
     .filter{
         margin: 1rem;
     }
@@ -20,7 +23,7 @@
         margin: 1rem;
         margin-left: 2rem;
         margin-right: 2rem;
-        padding-top: 2rem;
+        padding: 1rem;
         .filter-botton{
             background-color: #007bff;
             border: none;

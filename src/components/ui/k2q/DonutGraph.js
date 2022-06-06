@@ -3,6 +3,7 @@ import { FilterContext } from '../../../services/FilterContext';
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import randomColor from 'randomcolor';
+import numeral from 'numeral';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
@@ -11,9 +12,9 @@ export const DonutGraphK2q = () => {
   const { data } = useContext(FilterContext);
 
   const dataAccepted = {
-      labels: data.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Accepted+"%"),
+      labels: data.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Accepted),
       datasets:[{
-          data: data.map((e) => e.percenTX_Accepted),
+          data: data.map((e) => numeral(e.percenTX_Accepted).value()),
           backgroundColor: randomColor({
             hue: '#00FF23', 
             count: data.length,
@@ -23,9 +24,9 @@ export const DonutGraphK2q = () => {
       }]
   };
   const dataRejected = {
-    labels: data.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Rejected+"%"),
+    labels: data.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Rejected),
     datasets:[{
-        data: data.map((e) => e.percenTX_Rejected), 
+        data: data.map((e) => numeral(e.percenTX_Rejected).value()), 
         backgroundColor: randomColor({
           hue: '#3D0101',
           count: data.length,

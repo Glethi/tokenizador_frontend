@@ -47,23 +47,18 @@ export const TokenApp = () => {
         Routing_Indicator: [],
         Terminal_Activation_Cardholder: [],
         ID_Terminal_Data_Transfer: [],
-        ID_Cardholder_Method: []
+        ID_Cardholder_Method: [],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     });
     //Estado para el formulario del token c4
-    const [c4FormValue, setC4FormValue] = useState({
-        ID_Terminal_Attended: [],
-        ID_Terminal: [],
-        Terminal_Location: [],
-        ID_Cardholder_Presence: [],
-        ID_Card_Presence: [],
-        ID_Card_Capture: [],
-        ID_Status: [],
-        Security_Level: [],
-        Routing_Indicator: [],
-        Terminal_Activation_Cardholder: [],
-        ID_Terminal_Data_Transfer: [],
-        ID_Cardholder_Method: []
-    });
+    const [c4FormValue, setC4FormValue] = useState({});
 
     //Estdo para el filtro Token C0 (petición API)
     const [filterC0, setFilterC0] = useState({
@@ -73,15 +68,18 @@ export const TokenApp = () => {
         ID_Ecommerce: [],
         Card_Type: [],
         ID_CVV2: [],
-        ID_Information: []
+        ID_Information: [],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     });
     //Estado para el formulario del token C0
-    const [c0FormValue, setC0FormValue] = useState({
-        ID_Ecommerce: [],
-        Card_Type: [],
-        ID_CVV2: [],
-        ID_Information: []
-    });
+    const [c0FormValue, setC0FormValue] = useState({});
 
     //Estado para el filtro del Token B3
     const [filterB3, setFilterB3] = useState({
@@ -97,21 +95,18 @@ export const TokenApp = () => {
         App_Version_Number: [],
         CVM_Result: [],
         File_Name_Length: [],
-        File_Name: []
+        File_Name: [],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     })
     //Estado para el formulario del token B3
-    const [b3FormValue, setB3FormValue] = useState({
-        Bit_Map: [],
-        Terminal_Serial_Number: [],
-        Check_Cardholder: [],
-        User_Field_One: [],
-        User_Field_Two: [],
-        Terminal_Type_EMV: [],
-        App_Version_Number: [],
-        CVM_Result: [],
-        File_Name_Length: [],
-        File_Name: []
-    })
+    const [b3FormValue, setB3FormValue] = useState({})
 
     //Estado para el filtro del Token B4
     const [filterB4, setFilterB4] = useState({

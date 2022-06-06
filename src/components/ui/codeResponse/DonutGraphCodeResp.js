@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import { Doughnut } from 'react-chartjs-2';
 import randomColor from 'randomcolor';
 import { FilterContext } from '../../../services/FilterContext';
+import numeral from 'numeral';
 
 export const DonutGraphCodeResp = () => {
 
 const { data } = useContext(FilterContext);
 
 const dataDonut = {
-    labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.CodeResp_Percent+"%"),
+    labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.CodeResp_Percent),
     datasets: [{
-        data: data.map((e) => e.CodeResp_Percent),
+        data: data.map((e) => numeral(e.CodeResp_Percent).value()),
         backgroundColor: data.map((e) => {
             if(e.ID < '011'){
                 return randomColor({
@@ -45,7 +46,7 @@ const options = {
             labels:{
                 color: 'black',
                 font:{
-                    size: 15
+                    size: 13.5
                 }
             }
         }
@@ -53,7 +54,7 @@ const options = {
 }
 
 return (
-    <div className='graphDonut row w-100'>
+    <div className='graphDonutCodeResp row w-100'>
         <Doughnut
         data = {dataDonut}
         options = {options}

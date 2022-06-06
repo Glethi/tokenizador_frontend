@@ -4,7 +4,8 @@ import { FilterContext } from '../../../services/FilterContext';
 import { FilterDataCodeResp } from '../codeResponse/FilterDataCodeResp';
 import { FilterDataEntryMode } from '../entryMode/FilterDataEntryMode';
 import { FilterData } from '../k2q/FilterData';
-import Select from 'react-select';
+import { FormTerminal } from '../FormTerminal';
+import { FiltersTokenC4 } from './FiltersTokenC4';
 
 export const FormFilterDataC4 = () => {
 
@@ -23,7 +24,15 @@ export const FormFilterDataC4 = () => {
     Routing_Indicator: [],
     Terminal_Activation_Cardholder: [],
     ID_Terminal_Data_Transfer: [],
-    ID_Cardholder_Method: []
+    ID_Cardholder_Method: [],
+    ID_Comer: [],
+    Term_Comer: [],
+    Fiid_Comer: [],
+    Fiid_Term: [],
+    Ln_Comer: [],
+    Ln_Term: [],
+    Fiid_Card: [],
+    Ln_Card:[]
   })
 
   useEffect(() => { 
@@ -49,6 +58,14 @@ export const FormFilterDataC4 = () => {
   const Term_Act_CH = [...new Set(data.map((e) => e.Terminal_Activation_Cardholder))].sort()
   const ID_Term_DT = [...new Set(data.map((e) => e.ID_Terminal_Data_Transfer))].sort()
   const ID_CH_Met = [...new Set(data.map((e) => e.ID_Cardholder_Method))].sort()
+  const ID_Com = [...new Set(data.map((e) => e.ID_Comer))].sort()
+  const Term_Com = [...new Set(data.map((e) => e.Term_Comer))].sort()
+  const Fiid_Com = [...new Set(data.map((e) => e.Fiid_Comer))].sort()
+  const Fiid_Tem = [...new Set(data.map((e) => e.Fiid_Term))].sort()
+  const Ln_Com = [...new Set(data.map((e) => e.Ln_Comer))].sort()
+  const Ln_Tem = [...new Set(data.map((e) => e.Ln_Term))].sort()
+  const Fiid_Ca = [...new Set(data.map((e) => e.Fiid_Card))].sort()
+  const Ln_Ca = [...new Set(data.map((e) => e.Ln_Card))].sort()
 
   function synChanges(value, prop) {
     let state = { ...filter }
@@ -64,7 +81,7 @@ export const FormFilterDataC4 = () => {
   return (
     <form className='form'>
       <div className='filter row'>
-        <h5>Principales Filtros</h5>
+        <h5>Filtros Principales</h5>
         <div className='col'>
           <FilterData />
         </div>
@@ -75,185 +92,43 @@ export const FormFilterDataC4 = () => {
           <FilterDataEntryMode />
         </div>
       </div>
+      <hr />
+      <div className='row p-2 m-1'>
+        <h5>Filtros Terminales</h5>
+          <FormTerminal 
+          formValue={c4FormValue}
+          ID_Com={ID_Com}
+          Term_Com={Term_Com}
+          Fiid_Com={Fiid_Com}
+          Fiid_Tem={Fiid_Tem}
+          Ln_Com={Ln_Com}
+          Ln_Tem={Ln_Tem}
+          Fiid_Ca={Fiid_Ca}
+          Ln_Ca={Ln_Ca}
+          synChanges={synChanges}
+          setFormValue={setC4FormValue}/>
+      </div>
+      <hr />
       <div className='row p-2 m-1'>
         <h5>Filtros Token C4</h5>
-        <div className='col'>
-          <label>KC4_TERM_ATTEND_IND</label>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Terminal_Attended'); setC4FormValue({ID_Terminal_Attended: ev})}}
-              value = {c4FormValue.ID_Terminal_Attended}
-              options={ID_Term_At.map((e) => {
-                return(
-                  { value:`${e}`, label:`${e}`}
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_TERM_OPER_IND</label>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Terminal'); setC4FormValue({ID_Terminal: ev})}}
-              value={c4FormValue.ID_Terminal}
-              options={ID_Term.map((e) => {
-                return(
-                  { value:`${e}`, label:`${e}`}
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_TERM_LOC_IND</label>
-            <Select
-              closeMenuOnSelect={false}
-              isMulti
-              onChange={ev => {synChanges(ev.map(e => e.value), 'Terminal_Location'); setC4FormValue({Terminal_Location: ev})}}
-              value={c4FormValue.ID_Cardholder_Presence}
-              options={Term_Loc.map((e) => {
-                return(
-                  { value:`${e}`, label:`${e}`}
-                )
-              })}
-              className={'select-filter'}
-              placeholder={'Seleccione una opción'}
-              noOptionsMessage={() => 'No existe esa opción'}/>
-        </div>
-        <div className='col'>
-          <label>KC4_CRDHLDR_PRESENT_IND</label>
-            <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Cardholder_Presence'); setC4FormValue({ID_Cardholder_Presence: ev})}}
-            value={c4FormValue.ID_Cardholder_Presence}
-            options={ID_CH_Pre.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_CRD_PRESENT_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Card_Presence'); setC4FormValue({ID_Card_Presence: ev})}}
-            value={c4FormValue.ID_Card_Presence}
-            options={ID_CardPres.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_CRD_CAPTR_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Card_Capture'); setC4FormValue({ID_Card_Capture: ev})}}
-            value={c4FormValue.ID_Card_Capture}
-            options={ID_Card_Cap.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-        </div>
-        <div className='col'>
-          <label>KC4_TXN_STAT_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Status'); setC4FormValue({ID_Status: ev})}}
-            value={c4FormValue.ID_Status}
-            options={ID_Sts.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_TXN_SEC_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'Security_Level'); setC4FormValue({Security_Level: ev})}}
-            value={c4FormValue.Security_Level}
-            options={Sec_Lvl.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_TXN_RTN_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'Routing_Indicator'); setC4FormValue({Routing_Indicator: ev})}}
-            value={c4FormValue.Routing_Indicator}
-            options={Rot_Ind.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-        </div>
-        <div className='col'>
-          <label>KC4_CRDHLDR_ACTVT_TERM_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'Terminal_Activation_Cardholder'); setC4FormValue({Terminal_Activation_Cardholder: ev})}}
-            value={c4FormValue.Terminal_Activation_Cardholder}
-            options={Term_Act_CH.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_TERM_INPUT_CAP_IND</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Terminal_Data_Transfer'); setC4FormValue({ID_Terminal_Data_Transfer: ev})}}
-            value={c4FormValue.ID_Terminal_Data_Transfer}
-            options={ID_Term_DT.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-          <label>KC4_CRDHLDR_ID_METHOD</label>
-          <Select 
-            closeMenuOnSelect={false}
-            isMulti
-            onChange={ev => {synChanges(ev.map(e => e.value), 'ID_Cardholder_Method'); setC4FormValue({ID_Cardholder_Method: ev})}}
-            value={c4FormValue.ID_Cardholder_Method}
-            options={ID_CH_Met.map((e) => {
-              return(
-                { value:`${e}`, label:`${e}`}
-              )
-            })}
-            className={'select-filter'}
-            placeholder={'Seleccione una opcion'}
-            noOptionsMessage={() => 'No existe esa opción'}/>
-        </div>
+          <FiltersTokenC4
+          c4FormValue={c4FormValue}
+          synChanges={synChanges}
+          setC4FormValue={setC4FormValue}
+          ID_Term_At={ID_Term_At}
+          ID_Term={ID_Term}
+          Term_Loc={Term_Loc}
+          ID_CH_Pre={ID_CH_Pre}
+          ID_CardPres={ID_CardPres}
+          ID_Card_Cap={ID_Card_Cap}
+          ID_Sts={ID_Sts}
+          Sec_Lvl={Sec_Lvl}
+          Rot_Ind={Rot_Ind}
+          Term_Act_CH={Term_Act_CH}
+          ID_Term_DT={ID_Term_DT}
+          ID_CH_Met={ID_CH_Met}/>
       </div>
+      <hr />
       <div className='row w-100'>
         <div className='col'>
           <button
