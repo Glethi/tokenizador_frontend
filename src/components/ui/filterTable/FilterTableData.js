@@ -112,7 +112,8 @@ export const FilterTableData = () => {
             selector: 'Number_Sec',
             sortable: true,
             right: true,
-            wrap: true
+            wrap: true,
+            grow: 1.2
         },
         {
             name: 'MONTO',

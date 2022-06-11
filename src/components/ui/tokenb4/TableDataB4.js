@@ -10,6 +10,7 @@ export const TableDataB4 = () => {
     const { filterB4, setDataTable, dataTable:data } = useContext(FilterContext);
 
     useEffect(() => {
+        setDataTable([{}]);
         async function loadData(){
             const response = await postData('tokenB4Filter/main', filterB4);
             if(response.status === 200){
@@ -272,13 +273,22 @@ export const TableDataB4 = () => {
                 <DataTable 
                 onRowClicked={row => {
                     Swal.fire({
-                        title: 'Datos de la Terminal',
+                        title: 'Detalle de la Transacción',
                         html: 
-                        `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
-                        <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
+                        `<b>ID Comercio: </b> ${row.ID_Comer} <br />
+                        <b>Terminal Comercio:</b> ${row.Term_Comer} <br />
+                        <b>FIID Comercio:</b> ${row.Fiid_Comer} <br />
+                        <b>Red Lógica Comercio:</b> ${row.Ln_Comer} <br />
+                        <hr>
                         <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                        <b>FIID Terminal:</b> ${row.Fiid_Term} <br />
+                        <b>Red Lógica Terminal:</b> ${row.Ln_Term} <br />
                         <b>Numero de Serie: </b> ${row.Number_Sec} <br />
-                        <b>Monto:</b> $${row.amount} MXN`,
+                        <hr>
+                        <b>FIID Tarjeta:</b> ${row.Fiid_Card} <br />
+                        <b>Red Lógica Tarjeta:</b> ${row.Ln_Card}
+                        <hr>
+                        <b>Monto:</b> ${row.amount}`,
                         confirmButtonText: 'Aceptar'
                     })
                 }}

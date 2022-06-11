@@ -29,14 +29,53 @@
         }
         
     }
+
     .userDrop{
-        float: right;
+        float: right; 
     }
-    .drapToken, .drapUser{
+    .drapToken, .drapUser, .drapFilter{
         margin: 0.5rem !important;
         color: white !important;
         background-color: $gray-strong !important;
         border-color: transparent !important;
+    }
+    .drapFilter{
+        margin: 0rem !important;
+    }
+    .drapFilter-menu{
+        margin-top: 30px !important;
+        width: 94vw !important;
+        padding: 2rem !important;
+        background-color: $gray-strong;
+        .select{
+            color: black;
+            text-align: start;
+        }
+        .select-filter{
+            margin: 0.5rem;
+            color: black;
+        }
+        .filter-botton{
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            margin: 2rem;
+            width: 8rem; 
+            font-size: 1.2rem;
+        }
+        .filter-botton:hover{
+            opacity: 0.7;
+        }
+        .item{
+            background-color: $gray-strong !important;
+        }
+        hr{
+            border: 1px solid white;
+        }
+        h5{
+            text-align: start !important;
+        }
     }
     .drapUser{
         margin: 0px !important;

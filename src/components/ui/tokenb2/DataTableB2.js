@@ -10,6 +10,7 @@ export const DataTableB2 = () => {
     const { dataTable:data, setDataTable, filterB2} = useContext(FilterContext);
 
     useEffect(() => {
+        setDataTable([{}]);
         async function loadData(){
             const response = await postData('tokenB2Filter/main', filterB2);
             if(response.status === 200){
@@ -86,7 +87,7 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.bitMapFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -113,6 +114,27 @@ export const DataTableB2 = () => {
             ]
         },
         {
+            name: 'KB2_CRYPTO_INFO_DATA',
+            selector: 'Crypto_Data',
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.cryptoFlag == 0,
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.cryptoFlag == 1,
+                    style: {
+                        backgroundColor: 'rgb(47, 164, 11)',
+                    }
+                }
+            ]
+        },
+        {
             name: 'KB2_ARQC',
             selector: row => row.ARQC,
             center: true,
@@ -121,14 +143,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.arqcFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.arqcFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -142,14 +164,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.amtAuthFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(255, 27, 27)',
+                        backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.amtAuthFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -163,14 +185,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.amtOtherFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.amtOtherFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -184,14 +206,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.atcFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(255, 27, 27)',
+                        backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.atcFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -205,14 +227,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.termConFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.termConFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -226,14 +248,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.termCurrFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(255, 27, 27)',
+                        backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.termCurrFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -247,14 +269,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.transDateFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.transDateFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -268,14 +290,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.transTypeFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(255, 27, 27)',
+                        backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.transTypeFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -289,14 +311,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.umpNumFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.umpNumFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -310,14 +332,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.appDataLenFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(255, 27, 27)',
+                        backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.appDataLenFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -332,14 +354,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.appDataFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.appDataFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -354,14 +376,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.tvrFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(255, 27, 27)',
+                        backgroundColor: 'rgb(187, 1, 1)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.tvrFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(100, 236, 57)'
+                        backgroundColor: 'rgb(47, 164, 11)',
                     }
                 }
             ]
@@ -375,14 +397,14 @@ export const DataTableB2 = () => {
                 {
                     when: row => row.aipFlag == 0,
                     style: {
-                        backgroundColor: 'rgb(187, 1, 1)',
+                        backgroundColor: 'rgb(255, 27, 27)',
                         color: 'white'
                     }
                 },
                 {
                     when: row => row.aipFlag == 1,
                     style: {
-                        backgroundColor: 'rgb(47, 164, 11)'
+                        backgroundColor: 'rgb(100, 236, 57)'
                     }
                 }
             ]
@@ -403,13 +425,22 @@ export const DataTableB2 = () => {
                 <DataTable 
                 onRowClicked={row => {
                     Swal.fire({
-                        title: 'Datos de la Terminal',
+                        title: 'Detalle de la Transacción',
                         html: 
-                        `<b>Fiid Tarjeta:</b> ${row.Fiid_Card} <br />
-                        <b>Fiid Comercio:</b> ${row.Fiid_Comerce} <br />
+                        `<b>ID Comercio: </b> ${row.ID_Comer} <br />
+                        <b>Terminal Comercio:</b> ${row.Term_Comer} <br />
+                        <b>FIID Comercio:</b> ${row.Fiid_Comer} <br />
+                        <b>Red Lógica Comercio:</b> ${row.Ln_Comer} <br />
+                        <hr>
                         <b>Nombre de Terminal:</b> ${row.Terminal_Name} <br />
+                        <b>FIID Terminal:</b> ${row.Fiid_Term} <br />
+                        <b>Red Lógica Terminal:</b> ${row.Ln_Term} <br />
                         <b>Numero de Serie: </b> ${row.Number_Sec} <br />
-                        <b>Monto:</b> $${row.amount} MXN`,
+                        <hr>
+                        <b>FIID Tarjeta:</b> ${row.Fiid_Card} <br />
+                        <b>Red Lógica Tarjeta:</b> ${row.Ln_Card}
+                        <hr>
+                        <b>Monto:</b> ${row.amount}`,
                         confirmButtonText: 'Aceptar'
                     })
                 }}

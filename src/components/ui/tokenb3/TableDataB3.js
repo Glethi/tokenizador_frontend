@@ -10,6 +10,7 @@ export const TableDataB3 = () => {
     const { filterB3, setDataTable, dataTable:data } = useContext(FilterContext);
 
     useEffect(() => {
+        setDataTable([{}]);
         async function loadData(){
             const response = await postData('tokenB3Filter/main', filterB3);
             if(response.status === 200){

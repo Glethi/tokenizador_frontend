@@ -1,19 +1,25 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
-import { BsBarChart, BsColumnsGap, BsTable } from "react-icons/bs";
+import { BsBarChart, BsColumnsGap, BsTable, BsList, BsX } from "react-icons/bs";
 import logo from '../../resources/logo.png';
 import { FilterContext } from '../../services/FilterContext';
 import { BiUserCircle, BiLogOutCircle, BiUser, BiUserPin } from 'react-icons/bi';
-
+import { FilterData } from './k2q/FilterData';
+import { FilterDataCodeResp } from './codeResponse/FilterDataCodeResp';
+import { FilterDataEntryMode } from './entryMode/FilterDataEntryMode';
+import { FormTerminal } from './FormTerminal';
 
 export const Sidebar = () => {
 
+    const location = useLocation();
     const { setUser, user, setLoading } = useContext(FilterContext);
-
     const [dropdownToken, setDropdownToken] = useState(false);
     const [dropdownUser, setDropdownUser] = useState(false);
+    const [dropdownFilters, setDropdownFilters] = useState(false);
+
     let userType = false;
+    let locationFilter = true;
 
     const handleDropdownToken = () => {
         setDropdownToken(!dropdownToken);
@@ -21,6 +27,10 @@ export const Sidebar = () => {
 
     const handleDropdownUser = () => {
         setDropdownUser(!dropdownUser);
+    }
+
+    const handleDropdownFilters = () => {
+        setDropdownFilters(!dropdownFilters)
     }
 
     const handleLogout = () => {
@@ -41,10 +51,59 @@ export const Sidebar = () => {
         userType = true;
     }
 
+    switch (location.pathname) {
+        case '/dashboard': locationFilter = false; break;
+        case '/kq2': locationFilter = false; break;
+        case '/codigorespuesta': locationFilter = false; break;
+        case '/entrymode': locationFilter = false; break;
+    }
+    
+
     return (
         <div className='sidebar'>
             <div className='sidebar-content'>
                 <ul>
+                    {
+                        locationFilter ?
+                            <li>
+                                <Dropdown
+                                    isOpen={dropdownFilters}
+                                    toggle={handleDropdownFilters}>
+                                    <DropdownToggle className='drapFilter'>
+                                        {
+                                            !dropdownFilters ? <BsList size={30} /> : <BsX size={30} />
+                                        }
+                                    </DropdownToggle>
+                                    <DropdownMenu className='drapFilter-menu'>
+                                        <DropdownItem className='item text-center text-white' toggle={!handleDropdownFilters}>
+                                            <div className='row'>
+                                                <h5>Filtros Principales</h5>
+                                                <div className='col'>
+                                                    <FilterData />
+                                                </div>
+                                                <div className='col'>
+                                                    <FilterDataCodeResp />
+                                                </div>
+                                                <div className='col'>
+                                                    <FilterDataEntryMode />
+                                                </div>
+                                            </div>
+                                        </DropdownItem>
+                                        <hr />
+                                        <DropdownItem className='item text-center text-white' toggle={!handleDropdownFilters}>
+                                            <div className='row'>
+                                                <h5>Filtros Terminales</h5>
+                                                <div className='col'>
+                                                    <FormTerminal />
+                                                </div>
+                                            </div>
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </li>
+                            :
+                            <></>
+                    }
                     <li>
                         <img src={logo} />
                     </li>
@@ -122,20 +181,27 @@ export const Sidebar = () => {
                                     <BsColumnsGap size={20} /> Token B2
                                 </NavLink>
                             </DropdownItem>
+                            <DropdownItem>
+                                <NavLink
+                                className={'text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'}
+                                to={'/tokenB5'}>
+                                    <BsColumnsGap size={20}/> Token B5
+                                </NavLink>
+                        </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     {
-                        userType 
-                        ? 
-                        <li>
-                        <NavLink
-                            className='text-center text-white rounded py-2 w-100 d-inline-block px-4'
-                            activeClassName={({ isActive }) => " " + (isActive ? 'active' : '')}
-                            to="/users">
-                            <BiUserPin size={20} /> Gestión Usuarios
-                        </NavLink>
-                        </li>
-                        :<></>
+                        userType
+                            ?
+                            <li>
+                                <NavLink
+                                    className='text-center text-white rounded py-2 w-100 d-inline-block px-4'
+                                    activeClassName={({ isActive }) => " " + (isActive ? 'active' : '')}
+                                    to="/users">
+                                    <BiUserPin size={20} /> Usuarios
+                                </NavLink>
+                            </li>
+                            : <></>
                     }
                 </ul>
                 <ul className='userDrop'>
@@ -151,7 +217,7 @@ export const Sidebar = () => {
                                     <BiUser size={20} /> Nombre: {user.name + ' ' + user.fisrtname + ' ' + user.secondname}
                                 </DropdownItem>
                                 <DropdownItem disabled className='text-white'>
-                                    <BiUserCircle size={20}/> Nombre de Usuario: {user.username}
+                                    <BiUserCircle size={20} /> Nombre de Usuario: {user.username}
                                 </DropdownItem>
                                 <DropdownItem disabled className='text-white'>
                                     <BiUserPin size={20} /> Rol: {user.type}

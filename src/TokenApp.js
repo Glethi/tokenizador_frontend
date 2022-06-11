@@ -29,6 +29,27 @@ export const TokenApp = () => {
     //Estado para Entry Mode
     const [valFilterEntry, setValFilterEntry] = useState([]);
     const [optionsEntry, setOptionsEntry] = useState(null);
+    //Estado para los filtros terminales
+    const [filterTerm, setFilterTerm] = useState({
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
+    });
+    const [filterTermValue, setFilterTermValue] = useState({
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
+    });
 
     //TOKENS
     //Estado para el filtro Token C4 (petición a API)
@@ -58,7 +79,8 @@ export const TokenApp = () => {
         Ln_Card:[]
     });
     //Estado para el formulario del token c4
-    const [c4FormValue, setC4FormValue] = useState({});
+    const [c4FormValue, setC4FormValue] = useState({
+    });
 
     //Estdo para el filtro Token C0 (petición API)
     const [filterC0, setFilterC0] = useState({
@@ -121,19 +143,18 @@ export const TokenApp = () => {
         Device_Info: [],
         Online_Code: [],
         ARQC_Verification: [],
-        ID_Response_ISO: []
+        ID_Response_ISO: [],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     })
     //Estado para el formulario del token B4
     const [b4FormValue, setB4FormValue] = useState({
-        Service_EntryMode: [],
-        Capacity_Terminal: [],
-        EVM_Status: [],
-        Data_Suspect: [],
-        PAN_Number: [],
-        Device_Info: [],
-        Online_Code: [],
-        ARQC_Verification: [],
-        ID_Response_ISO: []
     })
 
     //Estado para el filtro del Token B2
@@ -155,25 +176,40 @@ export const TokenApp = () => {
         Issuing_App_Data_Length: [],
         Issuing_App_Data: [],
         TVR: [],
-        AIP: []
+        AIP: [],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     })
     //Estado para el formulario del token B2
-    const [b2FormValue, setB2FormValue] = useState({
-        User_Field_One: [],
-        ARQC: [],
-        AMT_Auth: [],
-        AMT_Other: [],
-        ATC: [],
-        Terminal_Country_Code: [],
-        Terminal_Currency_Code: [],
-        Transaction_Date: [],
-        Transaction_Type: [],
-        Umpedict_Number: [],
-        Issuing_App_Data_Length: [],
-        Issuing_App_Data: [],
-        TVR: [],
-        AIP: []
+    const [b2FormValue, setB2FormValue] = useState({})
+
+    //Estado para el filtro del Token B5
+    const [filterB5, setFilterB5] = useState({
+        Kq2:[],
+        Code_Response:[],
+        Entry_Mode:[],
+        Iss_Auth_Data:[],
+        arpc:[],
+        Card_update:[],
+        Addl_Data:[],
+        Send_Card:[],
+        Send_Data:[],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
     })
+    const [b5FormValue, setB5FormValue] = useState({})
 
     return (
         <FilterContext.Provider value={{
@@ -197,6 +233,10 @@ export const TokenApp = () => {
             setValFilterEntry, //Valores de ID del filtro para entry mode
             optionsEntry,
             setOptionsEntry, //Lista de opciones de entry mode
+            filterTerm,
+            setFilterTerm,
+            filterTermValue, 
+            setFilterTermValue,
             filterC4,
             setFilterC4, //Filtro para el token C4
             c4FormValue,
@@ -216,7 +256,11 @@ export const TokenApp = () => {
             filterB2,
             setFilterB2, //Filtro para el token B2
             b2FormValue,
-            setB2FormValue //Mantener el formulario del token b2
+            setB2FormValue, //Mantener el formulario del token b2
+            filterB5,
+            setFilterB5, //filtro token b5
+            b5FormValue,
+            setB5FormValue //MAntener el formulario del token b5
         }}>
             <AppRouter />
         </FilterContext.Provider>
