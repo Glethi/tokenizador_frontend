@@ -211,6 +211,24 @@ export const TokenApp = () => {
     })
     const [b5FormValue, setB5FormValue] = useState({})
 
+    //Estado para el filtro Token B6
+    const [filterB6, setFilterB6] = useState({
+        Kq2:[],
+        Code_Response:[],
+        Entry_Mode:[],
+        dataL:[],
+        SctData:[],
+        ID_Comer: [],
+        Term_Comer: [],
+        Fiid_Comer: [],
+        Fiid_Term: [],
+        Ln_Comer: [],
+        Ln_Term: [],
+        Fiid_Card: [],
+        Ln_Card:[]
+    })
+    const [b6FormValue, setB6FormValue] = useState({})
+
     return (
         <FilterContext.Provider value={{
             user,
@@ -260,7 +278,11 @@ export const TokenApp = () => {
             filterB5,
             setFilterB5, //filtro token b5
             b5FormValue,
-            setB5FormValue //MAntener el formulario del token b5
+            setB5FormValue, //MAntener el formulario del token b5
+            filterB6,
+            setFilterB6, //Filtro para el token b6
+            b6FormValue,
+            setB6FormValue, //MAantener el formulario del token b6
         }}>
             <AppRouter />
         </FilterContext.Provider>

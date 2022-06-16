@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { BsBarChart, BsTable, BsCreditCard, BsBarChartFill, BsFillPhoneVibrateFill } from 'react-icons/bs';
+import { BsBarChart, BsTable, BsCreditCard, BsBarChartFill } from 'react-icons/bs';
 import { CardsToken } from '../../components/ui/CardsToken';
 import { FilterTableData } from '../../components/ui/filterTable/FilterTableData';
 import { FormFilterDataB5 } from '../../components/ui/tokenb5/FormFilterDataB5';
@@ -26,7 +26,7 @@ export const TokenB5Screen = () => {
         <div className='token-b5'>
             <h2><BsBarChart size={30}/> Análisis por Token B5</h2>
             <div>
-                <FormFilterDataB5 />
+            <FormFilterDataB5 />
                 <h2><BsTable size={30}/> Token B5</h2>
                 <TableDataB5 />
                 <h2><BsBarChartFill size={30}/> Estadísticas</h2>

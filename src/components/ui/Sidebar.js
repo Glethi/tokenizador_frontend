@@ -94,7 +94,7 @@ export const Sidebar = () => {
                                             <div className='row'>
                                                 <h5>Filtros Terminales</h5>
                                                 <div className='col'>
-                                                    <FormTerminal />
+                                                
                                                 </div>
                                             </div>
                                         </DropdownItem>
@@ -184,10 +184,17 @@ export const Sidebar = () => {
                             <DropdownItem>
                                 <NavLink
                                 className={'text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'}
-                                to={'/tokenB5'}>
+                                to={'/tokenb5'}>
                                     <BsColumnsGap size={20}/> Token B5
                                 </NavLink>
-                        </DropdownItem>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <NavLink
+                                className={'text-center text-white text-decoration-none rounded py-2 w-100 d-inline-block px-4'}
+                                to={'/tokenb6'}>
+                                    <BsColumnsGap size={20}/> Token B6
+                                </NavLink>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     {
