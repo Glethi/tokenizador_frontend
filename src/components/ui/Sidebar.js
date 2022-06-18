@@ -94,7 +94,7 @@ export const Sidebar = () => {
                                             <div className='row'>
                                                 <h5>Filtros Terminales</h5>
                                                 <div className='col'>
-                                                
+                                                    <FormTerminal />
                                                 </div>
                                             </div>
                                         </DropdownItem>

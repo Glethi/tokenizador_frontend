@@ -8,18 +8,15 @@ export const FormTerminal = () => {
 
     const ID_Com = [...new Set(data.map(e => e.ID_Comer))].sort()
     const Term_Com = [...new Set(data.map(e => e.Term_Comer))].sort()
-    const Fiid_Com = [...new Set(data.map(e => e.Fiid_Comer))].sort()
+    const Fiid_Com = [... new Set(data.map(e => e.Fiid_Comer))].sort()
     const Fiid_Com_Des = [...new Set(data.map(e => e.Fiid_Comer+' - '+e.Fiid_Comer_Des))].sort()
     const Fiid_Tem = [...new Set(data.map(e => e.Fiid_Term))].sort()
     const Ln_Com = [...new Set(data.map(e => e.Ln_Comer))].sort()
     const Ln_Tem = [...new Set(data.map(e => e.Ln_Term))].sort()
     const Fiid_Ca = [...new Set(data.map(e => e.Fiid_Card))].sort()
-    const Fiid_Ca_Des = [...new Set(data.map(e => e.Fiid_Card_Des))].sort()
     const Ln_Ca = [...new Set(data.map(e => e.Ln_Card))].sort()
     let Fiid_Com_Arr = []
     let Fiid_Tem_Arr = []
-
-    console.log(Fiid_Ca_Des);
 
     //Array nuevo para las opciones de FIID_COMER. 
     //Fiid_Com[i] -> Contiene los valores (ID) del FIID de Comercio
