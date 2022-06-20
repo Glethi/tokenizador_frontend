@@ -10,7 +10,6 @@ import { CardsToken } from '../../components/ui/CardsToken';
 export const TokenC4Screen = () => {
     const { setData, valFilterCR, valFilterEntry, valFilterKq2 } = useContext(FilterContext);
     useEffect(() => {
-        setData([{}])
         async function loadData() {
             const response = await postData('terminalFilter', { Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry })
             if (response.status === 200) {

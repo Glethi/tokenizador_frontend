@@ -80,6 +80,13 @@ export const FilterTableData = () => {
             wrap: true
         },
         {
+            name: 'LN_COMER',
+            selector: 'Ln_Comer',
+            sortable: true,
+            right: true,
+            wrap: true
+        },
+        {
             name: 'LN_TERM',
             selector: 'Ln_Term',
             sortable: true,
