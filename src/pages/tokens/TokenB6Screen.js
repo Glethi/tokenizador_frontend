@@ -1,28 +1,32 @@
-import React, { useContext, useEffect } from 'react';
-import { BsBarChart, BsTable, BsCreditCard, BsBarChartFill } from 'react-icons/bs';
+import React,{ useState, useContext, useEffect }  from 'react';
 import { postData } from '../../services/dashService';
 import { FilterContext } from '../../services/FilterContext';
+import { BsBarChart, BsTable, BsCreditCard, BsBarChartFill } from 'react-icons/bs';
 import { FormFilterDataB6 } from '../../components/ui/tokenb6/FormFilterDataB6';
-import { FilterFormB6 } from '../../components/ui/tokenb6/FilterFormB6';
 import { TableDataB6 } from '../../components/ui/tokenb6/TableDataB6';
 import { CardsToken } from '../../components/ui/CardsToken';
 import { FilterTableData } from '../../components/ui/filterTable/FilterTableData';
+import Swal from 'sweetalert2';
 
 export const TokenB6Screen = () => {
-
-    const { valFilterKq2, valFilterCR, valFilterEntry, setData } = useContext(FilterContext);
-
+    const { filterB6 } = useContext(FilterContext);
+    const [data, setData] = useState([{}]);
+    
     useEffect(() => {
-        setData([{}]);
         async function loadData(){
-            const response = await postData('terminalFilter', {Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry});
+            const response = await postData('tokenB6Filter/main', filterB6);
             if(response.status === 200){
                 setData(response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Datos cargados correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         }
         loadData();
-    }, [valFilterKq2, valFilterCR, valFilterEntry])
-    
+    }, [filterB6]);
 
     return (
         <div className='token-b6'>
@@ -30,11 +34,11 @@ export const TokenB6Screen = () => {
             <div>
                 <FormFilterDataB6 />
                 <h2><BsTable size={30}/> Token B6</h2>
-                <TableDataB6 />
+                <TableDataB6 data={data}/>
                 <h2><BsBarChartFill size={30}/> Estadísticas</h2>
-                <CardsToken />
+                <CardsToken data={data}/>
                 <h2><BsCreditCard size={30}/> Terminales</h2>
-                <FilterTableData />
+                <FilterTableData data={data}/>
             </div>
         </div>
     )

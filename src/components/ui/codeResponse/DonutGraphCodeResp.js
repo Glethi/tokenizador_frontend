@@ -4,9 +4,7 @@ import randomColor from 'randomcolor';
 import { FilterContext } from '../../../services/FilterContext';
 import numeral from 'numeral';
 
-export const DonutGraphCodeResp = () => {
-
-const { data } = useContext(FilterContext);
+export const DonutGraphCodeResp = ({data}) => {
 
 const dataDonut = {
     labels: data.map((e) => e.ID+" - "+e.Description+" - "+e.CodeResp_Percent),

@@ -9,17 +9,37 @@ import { FilterData } from './k2q/FilterData';
 import { FilterDataCodeResp } from './codeResponse/FilterDataCodeResp';
 import { FilterDataEntryMode } from './entryMode/FilterDataEntryMode';
 import { FormTerminal } from './FormTerminal';
+import { routes } from './userManagment/routesCatalog';
+import { postData } from '../../services/dashService';
 
 export const Sidebar = () => {
+
+    const { valFilterKq2, valFilterCR, valFilterEntry } = useContext(FilterContext);
+    const [data, setData] = useState([{}])
+    
+    useEffect(() => {
+        async function loadData() {
+            const response = await postData('terminalFilter', { Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry })
+            if (response.status === 200) {
+                setData(response.data);
+            }
+        }
+        loadData();
+    }, [valFilterKq2, valFilterCR, valFilterEntry])
 
     const location = useLocation();
     const { setUser, user, setLoading } = useContext(FilterContext);
     const [dropdownToken, setDropdownToken] = useState(false);
     const [dropdownUser, setDropdownUser] = useState(false);
     const [dropdownFilters, setDropdownFilters] = useState(false);
-
-    let userType = false;
-    let locationFilter = true;
+    let locations = {
+        locationFilter: true,
+        locationDashboard: true,
+        locationKq2: true,
+        locationCodeResponse: true,
+        locationEntry: true
+    }
+    let userType = true
 
     const handleDropdownToken = () => {
         setDropdownToken(!dropdownToken);
@@ -52,10 +72,11 @@ export const Sidebar = () => {
     }
 
     switch (location.pathname) {
-        case '/dashboard': locationFilter = false; break;
-        case '/kq2': locationFilter = false; break;
-        case '/codigorespuesta': locationFilter = false; break;
-        case '/entrymode': locationFilter = false; break;
+        case routes.dashboard: locations.locationDashboard = false; break
+        case routes.users: locations.locationFilter = false; break;
+        case routes.kq2: locations.locationKq2 = false; break
+        case routes.codeResponse: locations.locationCodeResponse = false; break
+        case routes.entry: locations.locationEntry = false; break
     }
     
 
@@ -64,7 +85,7 @@ export const Sidebar = () => {
             <div className='sidebar-content'>
                 <ul>
                     {
-                        locationFilter ?
+                        locations.locationFilter ?
                             <li>
                                 <Dropdown
                                     isOpen={dropdownFilters}
@@ -75,29 +96,47 @@ export const Sidebar = () => {
                                         }
                                     </DropdownToggle>
                                     <DropdownMenu className='drapFilter-menu'>
-                                        <DropdownItem className='item text-center text-white' toggle={!handleDropdownFilters}>
-                                            <div className='row'>
-                                                <h5>Filtros Principales</h5>
-                                                <div className='col'>
-                                                    <FilterData />
-                                                </div>
-                                                <div className='col'>
-                                                    <FilterDataCodeResp />
-                                                </div>
-                                                <div className='col'>
-                                                    <FilterDataEntryMode />
-                                                </div>
-                                            </div>
-                                        </DropdownItem>
+                                        {
+                                            locations.locationDashboard ?
+                                                <><hr />
+                                                <DropdownItem className='item text-center text-white' toggle={!handleDropdownFilters}>
+                                                    <div className='row'>
+                                                        <h5>Filtros Principales</h5>
+                                                        {
+                                                            locations.locationKq2 ?
+                                                            <div className='col'>
+                                                            <FilterData />
+                                                            </div>
+                                                            :<></>
+                                                        }
+                                                        {
+                                                            locations.locationCodeResponse ?
+                                                            <div className='col'>
+                                                            <FilterDataCodeResp />
+                                                            </div>
+                                                            :<></>
+                                                        }
+                                                        {
+                                                            locations.locationEntry ?
+                                                            <div className='col'>
+                                                            <FilterDataEntryMode />
+                                                            </div>
+                                                            :<></>
+                                                        }
+                                                    </div>
+                                                </DropdownItem></>
+                                            : <></>
+                                        }
                                         <hr />
                                         <DropdownItem className='item text-center text-white' toggle={!handleDropdownFilters}>
                                             <div className='row'>
                                                 <h5>Filtros Terminales</h5>
                                                 <div className='col'>
-                                                    <FormTerminal />
+                                                    <FormTerminal data={data}/>
                                                 </div>
                                             </div>
                                         </DropdownItem>
+                                        <hr />
                                     </DropdownMenu>
                                 </Dropdown>
                             </li>

@@ -5,27 +5,7 @@ import { FilterContext } from '../../../services/FilterContext';
 import { postData } from '../../../services/dashService';
 import Swal from 'sweetalert2';
 
-export const TableDataC4 = () => {
-
-    const { filterC4, setDataTable, dataTable:data } = useContext(FilterContext);
-    
-    useEffect(() => {
-        setDataTable([{}]);
-        async function loadData(){
-            const response = await postData('tokenC4Filter/main', filterC4)
-            if(response.status === 200){
-                setDataTable(response.data);
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Datos cargados correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        }
-        loadData()
-    }, [filterC4])
-    
+export const TableDataC4 = ({data}) => {
 
     const columns = [
         {

@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Bar } from 'react-chartjs-2';
 import numeral from 'numeral';
-import { FilterContext } from '../../../services/FilterContext';
 
-export const BarGraphCodeResp = () => {
-
-    const { data } = useContext(FilterContext);
+export const BarGraphCodeResp = ({data}) => {
 
     //DATOS PARA GRÁFICO DE TRANSACCIONES
     const dataCodeRespTX = {

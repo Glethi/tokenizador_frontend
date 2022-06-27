@@ -1,23 +1,9 @@
-import React, { useContext, useEffect } from 'react'
-import { FilterContext } from '../../../services/FilterContext'
+import React from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
 import Swal from 'sweetalert2';
-import { postData } from '../../../services/dashService';
 
-export const TableDataB6 = () => {
-    
-    const { filterB6, setDataTable, dataTable:data } = useContext(FilterContext);
-    useEffect(() => {
-        setDataTable([{}]);
-        async function loadData(){
-            const response = await postData('tokenB6Filter/main', filterB6);
-            if(response.status === 200){
-                setDataTable(response.data);
-            }
-        }
-        loadData();
-    }, [filterB6]);
+export const TableDataB6 = ({data}) => {
 
     const columns = [
         {

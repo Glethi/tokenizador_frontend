@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react';
+import { postData } from '../../services/dashService';
 import Select from 'react-select';
 import { FilterContext } from '../../services/FilterContext';
 
-export const FormTerminal = () => {
+export const FormTerminal = ({data}) => {
 
-    const { data, setFilterTerm, setFilterTermValue, filterTermValue, filterTerm } = useContext(FilterContext);
+    const { setFilterTerm, setFilterTermValue, filterTermValue, filterTerm} = useContext(FilterContext);
 
     //Extraer la data del ID_COMER
     const ID_COMER = data.filter(e => e.ID_Comer);

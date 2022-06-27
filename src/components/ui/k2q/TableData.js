@@ -4,9 +4,7 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 import { FilterContext } from '../../../services/FilterContext';
 
-export const TableData = () => {
-
-  const { data } = useContext(FilterContext);
+export const TableData = ({data}) => {
 
   const columns = [
     {

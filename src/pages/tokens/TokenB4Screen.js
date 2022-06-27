@@ -1,26 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { postData } from '../../services/dashService';
+import { FilterContext } from '../../services/FilterContext';
 import { BsBarChart, BsFillBarChartFill, BsTable, BsCreditCard } from 'react-icons/bs';
 import { FilterTableData } from '../../components/ui/filterTable/FilterTableData';
 import { FormFilterDataB4 } from '../../components/ui/tokenb4/FormFilterDataB4';
 import { TableDataB4 } from '../../components/ui/tokenb4/TableDataB4';
 import { CardsToken } from '../../components/ui/CardsToken';
-import { postData } from '../../services/dashService';
-import { FilterContext } from '../../services/FilterContext';
+import Swal from 'sweetalert2';
 
 export const TokenB4Screen = () => {
-
-    const { valFilterKq2, valFilterCR, valFilterEntry, setData } = useContext(FilterContext);
+    const { filterB4 } = useContext(FilterContext);
+    const [data, setData] = useState([{}]);
 
     useEffect(() => {
         async function loadData(){
-            const response = await postData('terminalFilter', {Kq2: valFilterKq2, Code_Response: valFilterCR, Entry_Mode: valFilterEntry})
-                if(response.status === 200){
-                    setData(response.data);
+            const response = await postData('tokenB4Filter/main', filterB4);
+            if(response.status === 200){
+                setData(response.data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Datos cargados correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             }
         }
         loadData()
-    }, [valFilterKq2, valFilterEntry, valFilterCR]);
-    
+    }, [filterB4]);
 
     return (
         <div className="token-b4">
@@ -28,11 +34,11 @@ export const TokenB4Screen = () => {
             <div className='token-b4-content'>
                 <FormFilterDataB4 />
                 <h2><BsTable size={30}/> Token B4</h2>
-                <TableDataB4 />
+                <TableDataB4 data={data}/>
                 <h2><BsFillBarChartFill size={30}/> Estadísticas</h2>
-                <CardsToken />
+                <CardsToken data={data}/>
                 <h2><BsCreditCard size={30}/> Terminales</h2>
-                <FilterTableData />
+                <FilterTableData data={data}/>
             </div>
         </div>
     )

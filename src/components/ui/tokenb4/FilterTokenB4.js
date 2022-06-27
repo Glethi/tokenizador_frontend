@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import { findValueTokenB4 } from '../../../catalogs/anexo4i/tokenB4/catalogTokenB4';
 
 export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, Cap_Term, EVM_S, Data_S, PAN_N, Dev_Info, Onl_Code, ARQC_Vr, ID_Resp_ISO}) => {
     return (
@@ -12,8 +13,9 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                     onChange={ev => { sysChanges(ev.map(e => e.value), 'Service_EntryMode'); setB4FormValue({ Service_EntryMode: ev }) }}
                     value={b4FormValue.Service_EntryMode}
                     options={Ser_EM.map(e => {
+                        const descrip = findValueTokenB4('Ser_EM', e)
                         return (
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-b4'}
@@ -27,8 +29,9 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                     onChange={ev => { sysChanges(ev.map(e => e.value), 'Capacity_Terminal'); setB4FormValue({ Capacity_Terminal: ev }) }}
                     value={b4FormValue.Capacity_Terminal}
                     options={Cap_Term.map(e => {
+                        const descrip = findValueTokenB4('Cap_Term', e)
                         return (
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-b4'}
@@ -42,8 +45,9 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                     onChange={ev => { sysChanges(ev.map(e => e.value), 'EVM_Status'); setB4FormValue({ EVM_Status: ev }) }}
                     value={b4FormValue.EVM_Status}
                     options={EVM_S.map(e => {
+                        const descrip = findValueTokenB4('EVM_S', e)
                         return (
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-b4'}
@@ -57,8 +61,9 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                     onChange={ev => { sysChanges(ev.map(e => e.value), 'Data_Suspect'); setB4FormValue({ Data_Suspect: ev }) }}
                     value={b4FormValue.Data_Suspect}
                     options={Data_S.map(e => {
+                        const descrip = findValueTokenB4('Data_S', e)
                         return (
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-b4'}
@@ -74,8 +79,9 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                     onChange={ev => { sysChanges(ev.map(e => e.value), 'PAN_Number'); setB4FormValue({ PAN_Number: ev }) }}
                     value={b4FormValue.PAN_Number}
                     options={PAN_N.map(e => {
+                        const descrip = findValueTokenB4('PAN_N', e)
                         return (
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-b4'}
@@ -119,8 +125,10 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                     onChange={ev => { sysChanges(ev.map(e => e.value), 'ARQC_Verification'); setB4FormValue({ ARQC_Verification: ev }) }}
                     value={b4FormValue.ARQC_Verification}
                     options={ARQC_Vr.map(e => {
+                        const descrip = findValueTokenB4('ARQC_Vr', e)
+                        console.log(e);
                         return (
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-b4'}
@@ -137,8 +145,9 @@ export const FilterTokenB4 = ({sysChanges, setB4FormValue, b4FormValue, Ser_EM, 
                         onChange={ev => { sysChanges(ev.map(e => e.value), 'ID_Response_ISO'); setB4FormValue({ ID_Response_ISO: ev }) }}
                         value={b4FormValue.ID_Response_ISO}
                         options={ID_Resp_ISO.map(e => {
+                            const descrip = findValueTokenB4('ID_Resp_Iso', e)
                             return (
-                                { value: `${e}`, label: `${e}` }
+                                { value: `${e}`, label: `${e+' - '+descrip}` }
                             )
                         })}
                         className={'select-filter-b4'}

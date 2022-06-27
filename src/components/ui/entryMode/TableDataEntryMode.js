@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import DataTableExtensions from 'react-data-table-component-extensions';
 import DataTable from 'react-data-table-component';
-import { FilterContext } from '../../../services/FilterContext';
 
-export const TableDataEntryMode = () => {
-
-    const { data } = useContext(FilterContext);
+export const TableDataEntryMode = ({data}) => {
 
     const columns = [
         {

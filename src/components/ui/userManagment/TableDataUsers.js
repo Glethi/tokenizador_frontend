@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
-import { FilterContext } from '../../../services/FilterContext';
+import React from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
 import { BiEditAlt, BiTrash } from 'react-icons/bi';
 
-export const TableDataUsers = () => {
-
-    const { dataTable:data } = useContext(FilterContext);
+export const TableDataUsers = ({data}) => {
 
     const columns = [
         {

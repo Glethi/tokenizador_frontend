@@ -1,12 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Bar } from 'react-chartjs-2';
 import numeral from 'numeral';
-import { FilterContext } from '../../../services/FilterContext';
 
-
-export const BarGraphEntryMode = () => {
-
-    const { data } = useContext(FilterContext);
+export const BarGraphEntryMode = ({data}) => {
 
     //DATOS Y OPCIONES PARA GRAFICOS DE TRANSACCIONES
     const dataTX_Accepted = {

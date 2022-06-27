@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import { findValueTokenC0 } from '../../../catalogs/anexo4i/tokenC0/catalogTokenC0'
 
 export const FilterFormC0 = ({c0FormValue, sysChanges, setC0FormValue, ID_Ecom, Card_T, CVV2, Info}) => {
     return (
@@ -12,8 +13,9 @@ export const FilterFormC0 = ({c0FormValue, sysChanges, setC0FormValue, ID_Ecom, 
                     onChange={ev => {sysChanges(ev.map(e => e.value), 'ID_Ecommerce'); setC0FormValue({ID_Ecommerce: ev})}}
                     value={c0FormValue.ID_Ecommerce}
                     options={ID_Ecom.map((e) => {
+                        const descrip = findValueTokenC0('ID_Ecom', e)
                         return(
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-c0'}
@@ -27,8 +29,9 @@ export const FilterFormC0 = ({c0FormValue, sysChanges, setC0FormValue, ID_Ecom, 
                     onChange={ev => {sysChanges(ev.map(e => e.value), 'Card_Type'); setC0FormValue({Card_Type: ev})}}
                     value={c0FormValue.Card_Type}
                     options={Card_T.map((e) => {
+                        const descrip = findValueTokenC0('Card_T', e)
                         return(
-                            { value: `${e}`, label: `${e}`}
+                            { value: `${e}`, label: `${e+' - '+descrip}`}
                         )
                     })}
                     className={'select-filter-c0'}
@@ -44,8 +47,9 @@ export const FilterFormC0 = ({c0FormValue, sysChanges, setC0FormValue, ID_Ecom, 
                     onChange={ev => {sysChanges(ev.map(e => e.value), 'ID_CVV2'); setC0FormValue({ID_CVV2: ev})}}
                     value={c0FormValue.ID_CVV2}
                     options={CVV2.map((e) => {
+                        const descrip = findValueTokenC0('CVV2', e)
                         return(
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-c0'}
@@ -59,8 +63,9 @@ export const FilterFormC0 = ({c0FormValue, sysChanges, setC0FormValue, ID_Ecom, 
                     onChange={ev => {sysChanges(ev.map(e => e.value), 'ID_Information'); setC0FormValue({ID_Information: ev})}}
                     value={c0FormValue.ID_Information}
                     options={Info.map((e) => {
+                        const descrip = findValueTokenC0('Info', e)
                         return(
-                            { value: `${e}`, label: `${e}` }
+                            { value: `${e}`, label: `${e+' - '+descrip}` }
                         )
                     })}
                     className={'select-filter-c0'}

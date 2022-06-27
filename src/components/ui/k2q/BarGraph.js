@@ -3,9 +3,7 @@ import { FilterContext } from '../../../services/FilterContext';
 import { Bar } from 'react-chartjs-2';
 import numeral from 'numeral';
 
-export const BarGraph = () => {
-
-    const { data } = useContext(FilterContext);
+export const BarGraph = ({data}) => {
 
     //DATOS Y OPCIONES PARA GRÁFICO DE TRANSACCIONES
     const dataTX_Accepted = {

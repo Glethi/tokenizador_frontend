@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
-import { FilterContext } from '../../../services/FilterContext';
+import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import randomColor from 'randomcolor';
 import numeral from 'numeral';
 
-export const DonutGraphEntryMode = () => {
+export const DonutGraphEntryMode = ({data}) => {
 
-    const { data } = useContext(FilterContext);
     console.log(data.map((e) => numeral(e.percenTX_Accepted).value()));
 
     //DATOS Y OPCIONES PARA % ACEPTACIÓN

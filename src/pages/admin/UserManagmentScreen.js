@@ -8,14 +8,14 @@ import { FilterContext } from '../../services/FilterContext';
 
 export const UserManagmentScreen = () => {
 
-    const { setDataTable, user } = useContext(FilterContext);
+    const { user } = useContext(FilterContext);
+    const [data, setData] = useState([{}]);
 
     useEffect(() => {
-        setDataTable([{}]);
         async function loadData(){
             const response = await postData('users', {id: user.id});
             if(response.status === 200){
-                setDataTable(response.data);
+                setData(response.data);
             }
         }
         loadData();
@@ -27,7 +27,7 @@ export const UserManagmentScreen = () => {
             <h2><BiUserPin size={30}/> Gestión de Usuarios</h2>
             <h3><BiUserPlus size={30}/> Registrar Usuario</h3>
             <FormUser />
-            <TableDataUsers />
+            <TableDataUsers data={data}/>
         </div>
     )
 }

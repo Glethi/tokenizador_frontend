@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { FilterContext } from '../../../services/FilterContext';
+import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import randomColor from 'randomcolor';
@@ -7,9 +6,7 @@ import numeral from 'numeral';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
-export const DonutGraphK2q = () => {
-
-  const { data } = useContext(FilterContext);
+export const DonutGraphK2q = ({data}) => {
 
   const dataAccepted = {
       labels: data.map((e) => e.ID +" - "+ e.Description+" - "+e.percenTX_Accepted),

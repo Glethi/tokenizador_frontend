@@ -6,9 +6,9 @@ Chart.register(...registerables);
 Chart.register(ArcElement);
 
 
-export const DonutGraph = () => {
+export const DonutGraph = ({data}) => {
 
-  const { data } = useContext(FilterContext);
+  //const { data } = useContext(FilterContext);
 
   var percenAccepted = 0, percenRejected = 0, total_TX = 0;
 

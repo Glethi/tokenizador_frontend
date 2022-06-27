@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Card } from './Card'
 import numeral from 'numeral'
-import { FilterContext } from '../../../services/FilterContext'
 
-export const Cards = () => { 
-
-    const { data } = useContext(FilterContext);
+export const Cards = ({data}) => { 
     
     let total_TX = 0, total_Amount = 0.0, tx_Accepted = 0, amount_Accepted = 0.0;
     let tx_Rejected = 0, amount_Rejected = 0.0;

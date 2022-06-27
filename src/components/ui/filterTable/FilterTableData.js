@@ -3,9 +3,7 @@ import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
 import { FilterContext } from '../../../services/FilterContext';
 
-export const FilterTableData = () => {
-
-    const { dataTable:data } = useContext(FilterContext);
+export const FilterTableData = ({data}) => {
 
     const columns = [
         {

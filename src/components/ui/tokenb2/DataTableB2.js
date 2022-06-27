@@ -1,31 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
-import { postData } from '../../../services/dashService';
-import { FilterContext } from '../../../services/FilterContext';
 import Swal from 'sweetalert2';
 
-export const DataTableB2 = () => {
-
-    const { dataTable:data, setDataTable, filterB2} = useContext(FilterContext);
-
-    useEffect(() => {
-        setDataTable([{}]);
-        async function loadData(){
-            const response = await postData('tokenB2Filter/main', filterB2);
-            if(response.status === 200){
-                setDataTable(response.data)
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Datos cargados correctamente',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        }
-        loadData()
-    }, [filterB2])
-    
+export const DataTableB2 = ({data}) => {
 
     const columns = [
         {

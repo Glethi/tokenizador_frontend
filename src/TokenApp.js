@@ -17,9 +17,6 @@ export const TokenApp = () => {
         data: true,
         sesion: false,
     });
-    //Estado para la data General en Graficos y Tablas
-    const [data, setData] = useState([{}]);
-    const [dataTable, setDataTable] = useState([{}]);
     //Estado para Medio Accesso
     const [valFilterKq2, setValFilterKq2] = useState([]);
     const [optionsKq2, setOptionsKq2] = useState(null);
@@ -235,10 +232,6 @@ export const TokenApp = () => {
             setUser, //Datos del usuario
             loading,
             setLoading, //Estado para la pantalla de carga y cerrar sesión
-            data,
-            setData, //Data de los graficos, tablas y formularios de kq2, codigo respuesta, entry mode
-            dataTable,
-            setDataTable,
             valFilterKq2,
             setValFilterKq2, //Valores de ID del filtro para medio de acceso
             optionsKq2, 

@@ -1,4 +1,4 @@
-import { types } from "./types"
+import { types } from "./typesTokenC4"
 
 export const findValueTokenC4 = (prop, data) => {
     let descrip = '';
@@ -9,6 +9,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '0': descrip = 'Terminal atendida'; break
                 case '1': descrip = 'Terminal no atendida'; break
                 case '2': descrip = 'No se usa terminal'; break
+                default : descrip = 'Desconocido'; break;
             }
             break;
         }
@@ -16,6 +17,7 @@ export const findValueTokenC4 = (prop, data) => {
             switch(data){
                 case '': descrip = 'Espacio en blanco'; break
                 case '0': descrip = 'Reservado'; break
+                default : descrip = 'Desconocido'; break;
             }
             break;
         }
@@ -26,6 +28,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '1': descrip = 'Terminal remota'; break
                 case '2': descrip = 'Terminal en ubicación de Tarjetahabiente'; break
                 case '3': descrip = 'No se usó terminal'; break
+                default : descrip = 'Desconocido'; break;
             }
             break;
         }
@@ -37,7 +40,8 @@ export const findValueTokenC4 = (prop, data) => {
                 case '2': descrip = 'Tarjetahabiente no presente (correo o fax)'; break
                 case '3': descrip = 'Tarjetahabiente no presente (voz)'; break
                 case '4': descrip = 'Tarjetahabiente no presente (recurrente)'; break
-                case '5': descrip = 'Tarjetahabiente no presente (orden electronica)'; break;
+                case '5': descrip = 'Tarjetahabiente no presente (orden electronica)'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -46,6 +50,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '': descrip = 'Espacio en blanco'; break
                 case '0': descrip = 'Tarjeta presente'; break
                 case '1': descrip = 'Tarjeta no presente'; break;
+                default : descrip = 'Desconocido'; break
 
             }
             break;
@@ -53,8 +58,9 @@ export const findValueTokenC4 = (prop, data) => {
         case types.ID_Card_Cap: {
             switch(data){
                 case '': descrip = 'Espacio en blanco'; break
-                case '0': descrip = 'No captura tarjetas'; break;
-                case '1': descrip = 'Captura tarjetas'; break;
+                case '0': descrip = 'No captura tarjetas'; break
+                case '1': descrip = 'Captura tarjetas'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -63,6 +69,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '': descrip = 'Espacio en blanco'; break
                 case '0': descrip = 'Requerimiento normal'; break
                 case '4': descrip = 'Requerimiento preautorizado'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -72,6 +79,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '0': descrip = 'Sin seguridad'; break
                 case '1': descrip = 'Sospechoso de fraude'; break
                 case '2': descrip = 'Identificación verificada'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -81,6 +89,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '0': descrip = 'EMV Early'; break
                 case '1': descrip = 'EMV Full'; break
                 case '3': descrip = 'No EMV'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -96,6 +105,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '7': descrip = 'Contactless'; break
                 case '8': descrip = 'Uso futuro'; break;
                 case '9': descrip = 'mPOS'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -112,6 +122,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '7': descrip = 'Lector banda y entrada manual'; break
                 case '8': descrip = 'Lector banda, entrada manual y chip EMV'; break
                 case '9': descrip = 'Solo chip EMV'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }
@@ -125,6 +136,7 @@ export const findValueTokenC4 = (prop, data) => {
                 case '4': descrip = 'Orden por correo electrónico'; break
                 case '5': descrip = 'Transacción QPS'; break
                 case '9': descrip = 'Desconocido (default)'; break
+                default : descrip = 'Desconocido'; break
             }
             break;
         }

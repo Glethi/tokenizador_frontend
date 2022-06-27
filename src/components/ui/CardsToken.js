@@ -3,9 +3,7 @@ import React, { useContext } from 'react'
 import { FilterContext } from '../../services/FilterContext'
 import { Card } from './dashboard/Card';
 
-export const CardsToken = () => {
-
-    const { dataTable: data } = useContext(FilterContext);
+export const CardsToken = ({data}) => {
 
     let total_tx = 0, total_amount = 0.0
     let tx_Accepted = 0, amount_Accepted = 0.0
