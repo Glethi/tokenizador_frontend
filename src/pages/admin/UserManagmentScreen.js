@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BiUserPin, BiUserPlus } from "react-icons/bi";
+import { BiUserPin } from "react-icons/bi";
 import { FormUser } from '../../components/ui/userManagment/FormUser';
 import { TableDataUsers } from '../../components/ui/userManagment/TableDataUsers';
 import { postData } from '../../services/dashService';
@@ -25,7 +25,6 @@ export const UserManagmentScreen = () => {
     return (
         <div className='user-managment'>
             <h2><BiUserPin size={30}/> Gestión de Usuarios</h2>
-            <h3><BiUserPlus size={30}/> Registrar Usuario</h3>
             <FormUser />
             <TableDataUsers data={data}/>
         </div>

@@ -13,10 +13,23 @@
         padding: 1rem;
         h5{
             text-align: start;
+            margin-bottom: 1rem;
         }
-        input, select{
-            margin: 0.5rem;
-            width: 20rem;
+        .personalData, .profileData{
+            text-align: start;
+        }
+        input, .select{
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        input{
+            padding: 0.3rem;
+            border: 1.5px solid #CDCDCD;
+            border-radius: 5px;
+        }
+        input:focus{
+            outline: none;
+            border: 1.5px solid $normalButton;
         }
         p{
             text-align: right;

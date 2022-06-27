@@ -11,7 +11,7 @@ import { TokenB5Screen } from '../pages/tokens/TokenB5Screen';
 
 export const UserRouter = () => {
 
-    const { loading, setLoading, user, setUser } = useContext(FilterContext);
+    const { loading, setLoading, setUser } = useContext(FilterContext);
 
     useEffect(() => {
         setTimeout(() => setLoading({ data: false, sesion: true }), 3000);
