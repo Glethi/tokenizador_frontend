@@ -10,6 +10,7 @@ export const UserManagmentScreen = () => {
 
     const { user } = useContext(FilterContext);
     const [data, setData] = useState([{}]);
+    const [flag, setFlag] = useState(false);
 
     useEffect(() => {
         async function loadData(){
@@ -19,14 +20,14 @@ export const UserManagmentScreen = () => {
             }
         }
         loadData();
-    }, [])
+    }, [flag])
     
 
     return (
         <div className='user-managment'>
             <h2><BiUserPin size={30}/> Gestión de Usuarios</h2>
             <FormUser />
-            <TableDataUsers data={data}/>
+            <TableDataUsers data={data} flag={flag} setFlag={setFlag}/>
         </div>
     )
 }

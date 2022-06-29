@@ -2,9 +2,10 @@ import React from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
 import { BiEditAlt, BiTrash } from 'react-icons/bi';
+import { deleteUser } from './deleteUser';
 import { editUser } from './editUser';
 
-export const TableDataUsers = ({data}) => {
+export const TableDataUsers = ({data, flag, setFlag}) => {
 
     const columns = [
         {
@@ -78,24 +79,24 @@ export const TableDataUsers = ({data}) => {
             ]
         },
         {
-            name: 'Editar Usuario',
+            name: 'Editar',
             cell: (row) => 
                 <button
                 className='edit-button' 
-                onClick={() => editUser(row)}>
-                    <BiEditAlt size={20}/>
+                onClick={() => editUser(row, flag, setFlag)}>
+                    <BiEditAlt size={25} color={'#0013FF'} />
                 </button>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true
         },
         {
-            name: 'Eliminar Usuario',
+            name: 'Eliminar',
             cell: (row) => 
                 <button
                 className='erase-button' 
-                onClick={() => console.log('boton borrar jala')}>
-                    <BiTrash size={20}/>
+                onClick={() => deleteUser(row, flag, setFlag)}>
+                    <BiTrash size={25} color={'red'}/>
                 </button>,
             ignoreRowClick: true,
             allowOverflow: true,

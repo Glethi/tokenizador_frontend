@@ -53,6 +53,13 @@
         .edit-button, .erase-button{
             border: none;
             border-radius: 4px;
+            width: 2rem;
+        }
+        .edit-button{
+            background-color: #aeb4fa;
+        }
+        .erase-button{
+            background-color: #fdcdcd;
         }
     }
 }

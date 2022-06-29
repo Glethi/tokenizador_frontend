@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { postData } from "../../../services/dashService";
 
-export const editUser = (row) => {
+export const editUser = (row, flag, setFlag) => {
     Swal.fire({
         title: 'Editar Registro',
         html: 
@@ -28,9 +28,9 @@ export const editUser = (row) => {
                 <input value=${row.username} id="username" class="form-control m-1">
 
                 <label class="mt-2 text-left"><b>Rol*:</b></label>
-                <select value=${row.type} class="form-select m-1" id="type">
-                    <option value="admin">Adminstrador</option>
-                    <option value="op">Operador</option>
+                <select class="form-select m-1" id="type">
+                    <option value="admin" ${row.type == "admin" ? `selected` : ``}>Adminstrador</option>
+                    <option value="op" ${row.type == "op" ? `selected` : ``}>Operador</option>
                 </select>
             </div>
         </div>
@@ -43,12 +43,13 @@ export const editUser = (row) => {
         //Boton para actualizar
         confirmButtonText: 'Actualizar',
         showConfirmButton: true,
-        confirmButtonColor: '#1271F1',
+        confirmButtonColor: 'green',
         //Boton para cancelar la acción 
         cancelButtonText: 'Cancelar',
         showCancelButton: true,
         cancelButtonColor: 'red',
-        //función para la actualización del usuario
+        width: '70%',
+        //Función para la actualización del usuario
         preConfirm: () => {
             const id = Swal.getPopup().querySelector('#id').value
             const name = Swal.getPopup().querySelector('#name').value
@@ -68,22 +69,7 @@ export const editUser = (row) => {
                     userName: username,
                     type: type
                 }
-                const response = updateUser(userUpdateData);
-                if(response === 1){
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Registro actualizado correctamente',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Hubo un error en la actualización, intente de nuevo',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+                updateUser(userUpdateData, flag, setFlag);
             }else{
                 Swal.showValidationMessage('Ingrese los campos obligatorios')
             }
@@ -95,13 +81,28 @@ const validateData = (name, firstname, username) => {
     if(name == "" || firstname == "" || username == ""){
         return false;
     }else{
-        return true
+        return true;
     }
 }
 
-async function updateUser(userUpdateData){
+async function updateUser(userUpdateData, flag, setFlag){
     const response = await postData('updateUser', userUpdateData);
     if(response.status === 200){
-        return response.data
+        if(response.data == 1){
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro actualizado correctamente',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setFlag(!flag);
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Hubo un error en la actualización, intente de nuevo',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
     }
 }

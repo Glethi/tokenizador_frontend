@@ -15,6 +15,7 @@ export const TokenC4Screen = () => {
 
     useEffect(() => {
         async function loadData(){
+            setData([{}]);
             const response = await postData('tokenC4Filter/main', filterC4)
             if(response.status === 200){
                 setData(response.data);
