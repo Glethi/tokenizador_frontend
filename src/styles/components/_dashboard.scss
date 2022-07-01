@@ -4,6 +4,10 @@
     h2{
         padding: 2rem;
     }
+    h3{
+        text-align: justify;
+        margin-left: 6.5%;
+    }
     .form{
         margin-bottom: 2rem;
         margin-left: 8rem;
@@ -29,5 +33,47 @@
     }
     .card-info{
         color: black;
+        font-size: 0.8rem;
+        h4, h5{
+            font-size: 0.9rem;
+        }
+    }
+    .pagination{
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        .btn-pag{
+            background-color: rgba(0, 46, 255, 0.4);
+            color: white;
+            border: none;
+        }
+        .btn-pag{
+            &.active{
+                background-color: $normalButton;
+            }
+        }
+    }
+    .cont-carousel{
+        border: 3px solid $normalButton;
+        padding: 1rem;
+    }
+    //Carousel
+    .rec.rec-arrow {
+        background-color: transparent;
+    }
+    .rec.rec-arrow:hover, .rec.rec-arrow:focus:enabled {
+        background-color: $normalButton;
+        box-shadow: 0 0 2px 3px rgba(0, 46, 255, 0.2);
+        color: white;
+    }
+    .rec.rec-arrow:disabled {
+        visibility: hidden;
+    }
+    .rec.rec-dot {
+        box-shadow: 0 0 2px 3px rgba(0, 46, 255, 0.2);
+    }
+    .rec.rec-dot_active{
+        background-color: $normalButton;
+        opacity: 0.7;
     }
 }
