@@ -3,6 +3,7 @@ import logo from '../../resources/logoLogin.png';
 import { postData } from '../../services/dashService';
 import { FilterContext } from '../../services/FilterContext';
 import Swal from 'sweetalert2';
+import { Spinner } from 'reactstrap';
 
 export const Auth = () => {
 
@@ -12,6 +13,7 @@ export const Auth = () => {
         username: '',
         password: ''
     });
+    const [btnFlag, setBtnFlag] = useState(false);
 
     function handleForm (value, prop){
         var state = {...formValue}
@@ -20,9 +22,11 @@ export const Auth = () => {
     }
 
     async function findUser(){
+        setBtnFlag(!btnFlag)
         if(formValue.username !== '' && formValue.password !== ''){
             const response = await postData('userLogin', formValue);
             if(response.status === 200){
+                setBtnFlag(!btnFlag)
                 switch(response.data){
                     case -2: {
                         Swal.fire({
@@ -30,6 +34,7 @@ export const Auth = () => {
                             title: 'No existe el usuario '+formValue.username,
                             text: 'El registro del usuario no existe dentro de la base de datos',
                         })
+                        
                         break;
                     }
                     case -1: {
@@ -47,6 +52,7 @@ export const Auth = () => {
                 
             }
         }else{
+            setBtnFlag(!btnFlag)
             Swal.fire({
                 icon: 'warning',
                 title: 'Campos vacíos',
@@ -83,7 +89,7 @@ export const Auth = () => {
                         <button
                             className='btn btn-primary'
                             onClick={findUser}
-                            >Ingresar</button>
+                            >{btnFlag ? <Spinner color='ligth' className='spinner'/> : 'Ingresar'}</button>
                         </div>
                     </div>
                 </div>

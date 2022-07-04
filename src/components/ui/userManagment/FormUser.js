@@ -58,7 +58,7 @@ export const FormUser = () => {
                         onChange={(ev) => sysChanges(ev.target.value, ev.target.name)} />
                     <label>Rol:*</label><br />
                     <Select
-                        onChange={(ev) => sysChanges(ev.target.value, 'type')}
+                        onChange={(ev) => sysChanges(ev.value ,'type')}
                         options={[
                             { value: 'admin', label: 'Administrador' },
                             { value: 'op', label: 'Operador' }

@@ -24,3 +24,24 @@
         }
     }
 }
+
+.loading-page-data{
+    text-align: center;
+    height: 100vh;
+    .container{
+        margin: 0px;
+        height: 100vh;
+        max-width: 100%;
+        padding: 7rem;
+        h1, h2{
+            color: white;
+            padding: 1rem;
+        }
+        .spinner{
+            width: 10rem;
+            height: 10rem;
+            border: 10px solid currentColor;
+            border-right-color: transparent;
+        }
+    }
+}

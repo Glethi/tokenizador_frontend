@@ -5,11 +5,20 @@
     height: 60px;
     width: 100%;
     z-index: 10;
-    ul, .userDrop{
+    font-size: 0.9rem;
+    label{
+        font-size: 0.9rem;
+    }
+    ul{
         list-style: none;
-        float: left;
+        float: right;
         display: flex;
         text-align: center;
+        .some{
+            float: left;
+            display: flex;
+            margin-right: 10vw;
+        }
         li{
             margin: 0.5rem;
             a{ 
@@ -27,11 +36,6 @@
                 padding-bottom: 0.7rem;
             }
         }
-        
-    }
-
-    .userDrop{
-        float: right; 
     }
     .drapToken, .drapUser, .drapFilter{
         margin: 0.5rem !important;

@@ -3,11 +3,12 @@ import { Route, Routes } from 'react-router-dom';
 import { DashboardScreen } from "../pages/main/DashboardScreen";
 import { CodeResponseScreen, EntryModeScreen, Kq2Screen, TokenB2Screen, TokenB3Screen, TokenB4Screen, TokenB6Screen, TokenC0Screen, TokenC4Screen, } from "../pages/tokens";
 import { UserManagmentScreen } from '../pages/admin/UserManagmentScreen';
-import { Sidebar } from "../components/ui/Sidebar";
+import { Sidebar } from "../components/ui/sidebar/Sidebar";
 import { LoadingScreen } from '../pages/ui/LoadingScreen';
 import { FilterContext } from '../services/FilterContext';
 import { useIdleTimer } from 'react-idle-timer';
 import { TokenB5Screen } from '../pages/tokens/TokenB5Screen';
+import { BreakerScreen } from '../pages/breaker/BreakerScreen';
 
 export const UserRouter = () => {
 
@@ -43,6 +44,7 @@ export const UserRouter = () => {
                     <Route path="/tokenb5" element={<TokenB5Screen />}/>
                     <Route path="/tokenb6" element={<TokenB6Screen />}/>
                     <Route path="/users" element={<UserManagmentScreen />} />
+                    <Route path="/desglosador" element={<BreakerScreen />}/>
                 </Routes>
             </div>
         </>
