@@ -18,8 +18,7 @@ export const uploadFile = () => {
             const reader = new FileReader()
             reader.onload = (e) => {
                 const message = e.target.result;
-                const breaks = sendMessage(message)
-                return breaks;
+                sendMessage(message);
             }
             reader.readAsText(file);
         }
@@ -27,9 +26,9 @@ export const uploadFile = () => {
 }
 
 async function sendMessage(message) {
-    console.log('mensaje', message);
     const response = await postData('breaker', {message: message});
     if(response.status === 200){
+        console.log(response.data);
         return response.data;
     }
 }

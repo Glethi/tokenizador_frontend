@@ -7,8 +7,8 @@ export const BreakerScreen = () => {
     const [flagData, setFlagData] = useState(false);
 
     const handleClick = () => {
-        let a = uploadFile();
-        console.log(a);
+        const response = uploadFile();
+        console.log(response);
     }
     return (
         <div className='breaker'>
