@@ -19,6 +19,7 @@ export const DashboardScreen = () => {
 
     const { valFilterKq2, valFilterCR, valFilterEntry, filterTerm } = useContext(FilterContext);
     const [data, setData] = useState([{}]);
+    const [dataFalg, setDataFlag] = useState(true);
     const [showDetails, setShowDetails] = useState(false);
     const [catalog, setCatalog] = useState([{}]);
     const [pagination, setPagination] = useState(0);
@@ -26,9 +27,11 @@ export const DashboardScreen = () => {
     //Obtener objetos para el dashboard
     useEffect(() => {
         async function loadData() {
+        setDataFlag(true);
         const response = await postData('dashboard', { kq2: valFilterKq2, codeResponse: valFilterCR, entryMode: valFilterEntry, ...filterTerm});
         if (response.status === 200) {
-            setData(response.data) 
+            setData(response.data)
+            setDataFlag(false)
         }
     }
     loadData();
@@ -51,7 +54,7 @@ return (
         <h2><BsCardText size={20} /> Dashboard del Sector Financiero</h2>
         <div className="dashboard-content">
             <FormFilterDashboard/>
-            <Cards data = {data}/>
+            <Cards data = {data} flag={dataFalg}/>
             {
                 <button
                 onClick={() => setShowDetails(!showDetails)}

@@ -3,5 +3,6 @@ export const routes = {
     kq2: '/kq2',
     codeResponse: '/codigorespuesta',
     entry: '/entrymode',
-    users: '/users'
+    users: '/users',
+    breaker: '/desglosador',
 }

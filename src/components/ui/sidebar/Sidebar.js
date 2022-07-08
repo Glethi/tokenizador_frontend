@@ -70,6 +70,7 @@ export const Sidebar = () => {
     switch (location.pathname) {
         case routes.dashboard: locations.locationDashboard = false; break
         case routes.users: locations.locationFilter = false; break;
+        case routes.breaker: locations.locationFilter = false; break;
         case routes.kq2: locations.locationKq2 = false; break
         case routes.codeResponse: locations.locationCodeResponse = false; break
         case routes.entry: locations.locationEntry = false; break

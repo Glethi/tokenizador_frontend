@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { postData } from "../../services/dashService";
 
-export const uploadFile = () => {
+export const uploadFile = (setData, setFlagData) => {
     Swal.fire({
         title: 'Desglosador de Mensajes',
         html:
@@ -18,17 +18,17 @@ export const uploadFile = () => {
             const reader = new FileReader()
             reader.onload = (e) => {
                 const message = e.target.result;
-                sendMessage(message);
+                sendMessage(message, setData, setFlagData);
             }
             reader.readAsText(file);
         }
     })
 }
 
-async function sendMessage(message) {
+async function sendMessage(message, setData, setFlagData) {
     const response = await postData('breaker', {message: message});
     if(response.status === 200){
-        console.log(response.data);
-        return response.data;
+        setData(response.data);
+        setFlagData(true);
     }
 }

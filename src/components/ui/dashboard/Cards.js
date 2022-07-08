@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from './Card'
 import numeral from 'numeral'
 
-export const Cards = ({data}) => { 
+export const Cards = ({data, flag}) => { 
     
     let total_TX = 0, total_Amount = 0.0, tx_Accepted = 0, amount_Accepted = 0.0;
     let tx_Rejected = 0, amount_Rejected = 0.0;
@@ -54,6 +54,7 @@ export const Cards = ({data}) => {
                             tx={card.tx}
                             amount={card.amount}
                             color={card.color}
+                            flag={flag}
                             />
                         </div>
                     ))
