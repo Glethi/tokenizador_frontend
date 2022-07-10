@@ -1,7 +1,6 @@
 .breaker{
     text-align: center;
     background-color: $background;
-    height: 90vh;
     h2, h3{
         padding: 2rem;
     }
@@ -9,14 +8,21 @@
         text-align: center;
     }
     .breaker-container{
-        margin: 5%;
+        margin-top: 5%;
+        height: 61vh;
     }
-    .breaker-container-info{
+    .breaker-info{
         text-align: justify;
         margin-left: 5%;
         margin-right: 5%;
+        height: auto
         label{
             font-size: 1.2rem;
+        }
+        .tableData{
+            margin: 1rem;
+            background-color: $gray-strong;
+            padding: 1rem;
         }
         .text-message, .text-subField{
             width: 100%;
