@@ -6,8 +6,11 @@ import { postData } from '../../services/dashService';
 export const DataTableBreaker = ({msm}) => {
 
     const [catalog, setCatalog] = useState([{}]);
-    const values = Object.values(msm);
+    const values = Object.values(msm)
+    const keys = Object.keys(msm);
     const data = [];
+    const labels = [];
+    const valuesOutCatalog = [];
     const positions = values[values.length-1];
 
     //Se obtiene el catalogo de la data de los mensajes
@@ -25,7 +28,7 @@ export const DataTableBreaker = ({msm}) => {
     catalog.map((e, index) => {
         if(positions[index] == e.id){
             data.push({
-                number: i-3,
+                number: i,
                 field: e.field,
                 name: e.name,
                 type: e.type,
@@ -36,8 +39,31 @@ export const DataTableBreaker = ({msm}) => {
         i++;
     })
 
-    console.log(data);
-    
+    for(let x = data.length+5; x < keys.length-1; x++){
+        labels.push(keys[x]);
+        valuesOutCatalog.push(values[x]);
+    }
+    for(let j = 0; j < labels.length; j++){
+        if(j %2 != 0){
+            data.push({
+                number: j+labels.length+6,
+                field: 'P-63',
+                name: labels[j],
+                type: 'Numerico',
+                len: '4',
+                value: valuesOutCatalog[j]
+            })
+        }else{
+            data.push({
+                number: j+labels.length+6,
+                field: 'P-63',
+                name: labels[j],
+                type: 'Numerico',
+                len: '4',
+                value: valuesOutCatalog[j]
+            })
+        }
+    }
 
     const columns = [
         {
@@ -82,6 +108,7 @@ export const DataTableBreaker = ({msm}) => {
             sortable: true,
             left: true,
             wrap: true,
+            grow: 3
         }
     ]
 
