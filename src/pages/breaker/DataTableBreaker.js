@@ -96,13 +96,6 @@ export const DataTableBreaker = ({msm}) => {
             wrap: true,
         },
         {
-            name: 'Longitud',
-            selector: 'len',
-            sortable: true,
-            center: true,
-            wrap: true,
-        },
-        {
             name: 'Valor',
             selector: 'value',
             sortable: true,
