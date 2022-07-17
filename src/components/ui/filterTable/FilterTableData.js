@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import DataTable from 'react-data-table-component';
 import DataTableExtension from 'react-data-table-component-extensions';
+import { Spinner } from 'reactstrap';
 import { FilterContext } from '../../../services/FilterContext';
 
-export const FilterTableData = ({data}) => {
+export const FilterTableData = ({data, flagData}) => {
 
     const columns = [
         {
@@ -136,7 +137,14 @@ export const FilterTableData = ({data}) => {
 
     return (
         <div className='tableData table-responsive'>
-            <DataTableExtension
+            {
+                flagData ? 
+                <>
+                <h3 className='text-white'>Cargando...</h3>
+                <Spinner color='light'/>
+                </>
+                :
+                <DataTableExtension
                 {...tableData}
                 exportHeaders={true}>
                 <DataTable
@@ -147,6 +155,7 @@ export const FilterTableData = ({data}) => {
                     dense
                 />
             </DataTableExtension>
+            }
         </div>
     )
 }

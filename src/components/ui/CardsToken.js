@@ -1,9 +1,10 @@
+import { type } from '@testing-library/user-event/dist/type';
 import numeral from 'numeral';
 import React, { useContext } from 'react'
 import { FilterContext } from '../../services/FilterContext'
 import { Card } from './dashboard/Card';
 
-export const CardsToken = ({data}) => {
+export const CardsToken = ({data, flagData}) => {
 
     let total_tx = 0, total_amount = 0.0
     let tx_Accepted = 0, amount_Accepted = 0.0
@@ -31,7 +32,8 @@ export const CardsToken = ({data}) => {
             tx: numeral(total_tx).format('0,0'),
             amount: numeral(total_amount).format('$0,0.00'),
             percent: totalPercent.toFixed(2)+"%",
-            color: 'primary'
+            color: 'primary',
+            type: 'general'
         },
         {
             id: 2,
@@ -39,7 +41,8 @@ export const CardsToken = ({data}) => {
             tx: numeral(tx_Accepted).format('0,0'),
             amount: numeral(amount_Accepted).format('$0,0.00'),
             percent: percentAccepted.toFixed(2)+"%",
-            color: 'success'
+            color: 'success',
+            type: 'ok'
         },
         {
             id: 3,
@@ -47,7 +50,8 @@ export const CardsToken = ({data}) => {
             tx: numeral(tx_Rejected).format('0,0'),
             amount: numeral(amount_Rejected).format('$0,0.00'),
             percent: percentRejected.toFixed(2)+"%",
-            color: 'danger'
+            color: 'danger',
+            type: 'error'
         }
     ]
     return (
@@ -62,6 +66,8 @@ export const CardsToken = ({data}) => {
                             amount={card.amount}
                             color={card.color}
                             percent={card.percent}
+                            flag={flagData}
+                            type={card.type}
                             />
                         </div>
                     ))

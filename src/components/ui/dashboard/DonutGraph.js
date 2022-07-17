@@ -2,15 +2,14 @@ import React, { useContext } from 'react'
 import {Doughnut} from 'react-chartjs-2';
 import { Chart, registerables, ArcElement } from "chart.js";
 import { FilterContext } from '../../../services/FilterContext';
+import { Spinner } from 'reactstrap';
 Chart.register(...registerables);
 Chart.register(ArcElement);
 
 
-export const DonutGraph = ({data}) => {
+export const DonutGraph = ({data, flagData}) => {
 
-  //const { data } = useContext(FilterContext);
-
-  var percenAccepted = 0, percenRejected = 0, total_TX = 0;
+  let percenAccepted = 0, percenRejected = 0, total_TX = 0;
 
   data.map((e) => {
     total_TX += e.tx;
@@ -24,7 +23,7 @@ export const DonutGraph = ({data}) => {
   let accepted = (parseFloat(((percenAccepted / total_TX) * 100)).toFixed(2))
   let rejected = parseFloat(((percenRejected / total_TX) * 100)).toFixed(2)
 
-  let dataDonut = {
+  const dataDonut = {
       labels:['Aceptadas: '+accepted+ '%', 'Rechazadas: '+rejected+ '%'],
       datasets:[{
           data:[accepted, rejected],
@@ -33,7 +32,7 @@ export const DonutGraph = ({data}) => {
       }]
   };
 
-  let optionsDonut = {
+  const optionsDonut = {
       responsive: true,
       plugins: {
         legend: {
@@ -64,11 +63,19 @@ export const DonutGraph = ({data}) => {
   }
 
     return (
-      <div className='graphDonut row w-100'> 
+      <div className='graphDonut row w-100'>
+        {
+          flagData ? 
+          <div className='col'>
+            <h4 className='text-center'>Cargando...</h4>
+            <p><Spinner /></p>
+          </div>
+          :
           <Doughnut
           data={dataDonut}
           options={optionsDonut}
           />
+        }
       </div>
     )
 }

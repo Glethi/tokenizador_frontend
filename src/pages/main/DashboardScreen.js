@@ -104,7 +104,7 @@ return (
                 :pagination === 5 && showDetails ? <CardsLnTarj data={data} catalog={catalog}/> : <></>
             }
             <h2><BsPercent /> de Aprobación General</h2>
-            <DonutGraph data = {data}/>
+            <DonutGraph data = {data} flagData={dataFalg}/>
         </div>
     </div>
 )

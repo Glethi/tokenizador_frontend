@@ -7,7 +7,9 @@ export const LoadingScreen = () => {
         <div className='container'>
             <h1>Iniciando Sesión</h1>
             <h2>Cargando datos del perfil...</h2>
-            <Spinner color='light' className='spinner' />
+            <Spinner color='light' type='grow' className='m-2'/>
+            <Spinner color='light' type='grow' className='m-2'/>
+            <Spinner color='light' type='grow' className='m-2'/>
         </div>
     </div>
   )

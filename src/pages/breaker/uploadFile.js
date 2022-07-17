@@ -15,12 +15,17 @@ export const uploadFile = (setData, setFlagData) => {
         confirmButtonColor: 'green',
         preConfirm: () => {
             const file = Swal.getPopup().querySelector('#file').files[0]
-            const reader = new FileReader()
-            reader.onload = (e) => {
-                const message = e.target.result;
-                sendMessage(message, setData, setFlagData);
+            if(file !== undefined){
+                const reader = new FileReader()
+                reader.onload = (e) => {
+                    const message = e.target.result;
+                    sendMessage(message, setData, setFlagData);
+                }
+                reader.readAsText(file);
+            }else{
+                Swal.showValidationMessage('Elija un archivo válido')
             }
-            reader.readAsText(file);
+            
         }
     })
 }

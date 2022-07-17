@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FilterContext } from '../../../services/FilterContext';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import numeral from 'numeral';
 
 export const BarGraph = ({data}) => {
@@ -9,13 +9,22 @@ export const BarGraph = ({data}) => {
     const dataTX_Accepted = {
         label: "TX's Aceptadas",
         data: data.map((e) => numeral(e.TX_Accepted).value()),
-        backgroundColor: ['#2FA40B'],
+        backgroundColor: ['#7af259'],
+        borderColor:['#2FA40B'],
+        pointStyle: 'circle',
+        pointRadius: 5,
+        pointHoverRadius: 10
     };
 
     const dataTX_Rejected = {
         label: "TX's Rechazadas",
         data: data.map((e) => numeral(e.TX_Rejected).value()),
-        backgroundColor: ['#FF0000'],
+        backgroundColor: ['#ff6565'],
+        borderColor: ['#FF0000'],
+        pointStyle: 'circle',
+        pointRadius: 5,
+        pointHoverRadius: 10
+
     };
 
     const dataTX = {
@@ -84,13 +93,21 @@ export const BarGraph = ({data}) => {
     const dataAmount_Accepted = {
         label: "Monto Aceptado",
         data: data.map((e) => numeral(e.accepted_Amount).value()),
-        backgroundColor: ['#2FA40B']
+        backgroundColor: ['#7af259'],
+        borderColor:['#2FA40B'],
+        pointStyle: 'circle',
+        pointRadius: 5,
+        pointHoverRadius: 10
     }
 
     const dataAmount_Rejected = {
         label: "Monto Rechazado",
         data: data.map((e) => numeral(e.rejected_Amount).value()),
-        backgroundColor: ['#FF0000']
+        backgroundColor: ['#ff6565'],
+        borderColor: ['#FF0000'],
+        pointStyle: 'circle',
+        pointRadius: 5,
+        pointHoverRadius: 10
     }
 
     const dataAmount = {
@@ -158,7 +175,7 @@ export const BarGraph = ({data}) => {
     return (
         <div className='graphBar row w-100'>
             <div className='row w-100'>
-                <Bar
+                <Line
                     data={dataTX}
                     options={optionsTX} />
             </div>
@@ -176,7 +193,7 @@ export const BarGraph = ({data}) => {
                 </div>
             </div>
             <div className='row w-100'>
-                <Bar
+                <Line
                     data={dataAmount}
                     options={optionsAmount}
                 />

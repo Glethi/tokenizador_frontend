@@ -6,7 +6,9 @@ export const SesionScreen = () => {
     <div className='sesion-page'>
         <div className='container'>
             <h1>Cerrando sesión</h1>
-            <Spinner color='light' className='spinner'/>
+            <Spinner color='light' type='grow' className='m-2'/>  
+            <Spinner color='light' type='grow' className='m-2'/>  
+            <Spinner color='light' type='grow' className='m-2'/>
         </div>
     </div> 
   )

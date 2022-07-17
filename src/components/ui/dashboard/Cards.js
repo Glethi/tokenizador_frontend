@@ -26,6 +26,7 @@ export const Cards = ({data, flag}) => {
             tx: numeral(total_TX).format('0,0'),
             amount: numeral(total_Amount).format('$0,0.00'),
             color: 'primary',
+            type: 'general'
         },
         {
             id: 2,
@@ -33,6 +34,7 @@ export const Cards = ({data, flag}) => {
             tx: numeral(tx_Accepted).format('0,0'),
             amount: numeral(amount_Accepted).format('$0,0.00'),
             color: 'success', 
+            type: 'ok'
         },
         {
             id: 3,
@@ -40,6 +42,7 @@ export const Cards = ({data, flag}) => {
             tx: numeral(tx_Rejected).format('0,0'),
             amount: numeral(amount_Rejected).format('$0,0.00'),
             color: 'danger',
+            type: 'error'
         }
     ]
 
@@ -55,6 +58,7 @@ export const Cards = ({data, flag}) => {
                             amount={card.amount}
                             color={card.color}
                             flag={flag}
+                            type={card.type}
                             />
                         </div>
                     ))

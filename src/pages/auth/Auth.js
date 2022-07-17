@@ -89,7 +89,7 @@ export const Auth = () => {
                         <button
                             className='btn btn-primary'
                             onClick={findUser}
-                            >{btnFlag ? <Spinner color='ligth' className='spinner'/> : 'Ingresar'}</button>
+                            >{btnFlag ? <Spinner color='light'/> : 'Ingresar'}</button>
                         </div>
                     </div>
                 </div>

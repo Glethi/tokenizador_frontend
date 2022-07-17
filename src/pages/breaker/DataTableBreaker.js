@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DataTableExtension from 'react-data-table-component-extensions';
 import DataTable from 'react-data-table-component';
 import { postData } from '../../services/dashService';
+import { breakerValidator } from './breakerValidator/breakerValidator';
 
 export const DataTableBreaker = ({msm}) => {
 
@@ -25,54 +26,58 @@ export const DataTableBreaker = ({msm}) => {
     }, []);
 
     let i = 4; //Control de las posiciones de 'values' en la tabla
+    let flag = '0';
     catalog.map((e, index) => {
         if(positions[index] == e.id){
+            flag = breakerValidator(e.field, values[i])
+            if(flag !== '1'){ flag = '0' }
             data.push({
                 number: i,
                 field: e.field,
                 name: e.name,
                 type: e.type,
-                len: e.len,
-                value: values[i]
+                len: values[i].length,
+                value: values[i],
+                flag: flag
             })
+            i++;
         }
-        i++;
     })
 
     for(let x = data.length+5; x < keys.length-1; x++){
         labels.push(keys[x]);
         valuesOutCatalog.push(values[x]);
     }
+
+    let fieldController = 2, numberField = 'P-63', counter = 0, type = '-'
     for(let j = 0; j < labels.length; j++){
-        if(j %2 != 0){
-            data.push({
-                number: j+labels.length+6,
-                field: 'P-63',
-                name: labels[j],
-                type: 'Numerico',
-                len: '4',
-                value: valuesOutCatalog[j]
-            })
+        fieldController++;
+        if(fieldController === 3){
+            counter++;
+            numberField = 'P-63'+'.'+counter;
+            fieldController = 0;
+            type = '-'
         }else{
-            data.push({
-                number: j+labels.length+6,
-                field: 'P-63',
-                name: labels[j],
-                type: 'Numerico',
-                len: '4',
-                value: valuesOutCatalog[j]
-            })
+            type = 'AN'
         }
+        data.push({
+            number: j + labels.length+2,
+            field: numberField,
+            name: labels[j],
+            type: type,
+            len: valuesOutCatalog[j].length,
+            value: valuesOutCatalog[j]
+        })
     }
 
     const columns = [
         {
-            name: 'ID',
+            name: 'Número',
             selector: 'number',
             sortable: true,
             center: true,
             wrap: true,
-            grow: -2,
+            grow: -2
         },
         {
             name: 'Campo',
@@ -96,12 +101,49 @@ export const DataTableBreaker = ({msm}) => {
             wrap: true,
         },
         {
+            name: 'Longitud',
+            selector: 'len',
+            sortable: true,
+            center: true,
+            wrap: true,
+            conditionalCellStyles: [
+                {
+                    when: row => row.flag === '0',
+                    style: {
+                        backgroundColor: 'rgb(255, 27, 27)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.flag === '1',
+                    style:{
+                        backgroundColor: 'rgb(100, 236, 57)'
+                    }
+                }
+            ]
+        },
+        {
             name: 'Valor',
             selector: 'value',
             sortable: true,
             left: true,
             wrap: true,
-            grow: 3
+            grow: 3,
+            conditionalCellStyles: [
+                {
+                    when: row => row.flag === '0',
+                    style: {
+                        backgroundColor: 'rgb(187, 1, 1)',
+                        color: 'white'
+                    }
+                },
+                {
+                    when: row => row.flag === '1',
+                    style:{
+                        backgroundColor: 'rgb(47, 164, 11)'
+                    }
+                }
+            ]
         }
     ]
 
