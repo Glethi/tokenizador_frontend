@@ -23,7 +23,10 @@ export const breakerTypes = {
     AcquiringInstitutionCountryCode: 'P-19',
     CountryCodePrimaryAccount: 'P-20',
     ForwardingCountryCode: 'P-21',
-    POSEntryMode: 'P-22'
+    POSEntryMode: 'P-22',
+    CardSequenceNumber: 'P-23',
+    NetworkInternationalIdentifier: 'P-24',
+    POSConditionCode: 'P-25',
 }
 
 export const messageTypes = [

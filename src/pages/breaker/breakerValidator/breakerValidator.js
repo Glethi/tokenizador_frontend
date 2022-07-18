@@ -216,6 +216,20 @@ export const breakerValidator =  (prop, value) => {
             }
             break
         }
+        case breakerTypes.CardSequenceNumber: {
+            if(value.length === 3){ response = '1' }
+            break
+        }
+        case breakerTypes.NetworkInternationalIdentifier: {
+            if(value.length === 3){ response = '1' }
+            break
+        }
+        case breakerTypes.POSConditionCode: {
+            if(value.length === 2){
+                
+            }
+            break
+        }
     }
     return response;
 }
